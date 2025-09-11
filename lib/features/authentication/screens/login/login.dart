@@ -75,7 +75,11 @@ class LoginScreen extends StatelessWidget {
                           ),
 
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(
+                                context,
+                              ).pushNamed('/forget-password');
+                            },
                             child: const Text('Forget Password?'),
                           ),
                         ],
@@ -85,7 +89,9 @@ class LoginScreen extends StatelessWidget {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).pushNamed('/navbar');
+                          },
                           child: Text('Login'),
                         ),
                       ),

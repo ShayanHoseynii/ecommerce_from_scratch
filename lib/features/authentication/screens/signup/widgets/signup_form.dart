@@ -123,7 +123,10 @@ class SignupForm extends StatelessWidget {
             width: double.infinity,
             child: ElevatedButton(
               onPressed: () {
-                MaterialPageRoute(builder: (_) => VerifyEmailScreen());
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => VerifyEmailScreen()),
+                );
               },
               child: const Text('Create Account'),
             ),

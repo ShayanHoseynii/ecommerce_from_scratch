@@ -105,6 +105,6 @@ class TImages {
 
 
   //Profile
-  static const String user = "assets/images/content/user.png";
+  static const String user = "assets/images/profile/user.png";
 
 }

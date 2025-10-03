@@ -4,7 +4,6 @@ import 'package:cwt_starter_template/common/widgets/images/rounded_image.dart';
 import 'package:cwt_starter_template/features/shop/screens/home/controller/Carusoul_cubit.dart';
 import 'package:cwt_starter_template/features/shop/screens/home/controller/carusoul_state.dart';
 import 'package:cwt_starter_template/utils/constants/colors.dart';
-import 'package:cwt_starter_template/utils/constants/image_strings.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

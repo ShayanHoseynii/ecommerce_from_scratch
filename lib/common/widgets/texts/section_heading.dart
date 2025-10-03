@@ -1,4 +1,3 @@
-import 'package:cwt_starter_template/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
 class TSectionHeading extends StatelessWidget {
@@ -18,22 +17,20 @@ class TSectionHeading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: TSizes.defaultSpace),
-      child: Row(
-        children: [
-          Text(
-            title,
-            style: Theme.of(
-              context,
-            ).textTheme.headlineSmall!.apply(color: textColor),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-          if (showActionButton)
-            TextButton(onPressed: onPressed, child: Text(buttonTitle)),
-        ],
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: Theme.of(
+            context,
+          ).textTheme.headlineSmall!.apply(color: textColor),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        if (showActionButton)
+          TextButton(onPressed: onPressed, child: Text(buttonTitle)),
+      ],
     );
   }
 }

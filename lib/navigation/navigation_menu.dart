@@ -1,4 +1,7 @@
+import 'package:cwt_starter_template/features/personalization/screens/settings/settings.dart';
 import 'package:cwt_starter_template/features/shop/screens/home/home.dart';
+import 'package:cwt_starter_template/features/shop/screens/store/store.dart';
+import 'package:cwt_starter_template/features/shop/screens/wishlist/wishlist.dart';
 import 'package:cwt_starter_template/navigation/cubit/navigation_menu__cubit.dart';
 import 'package:cwt_starter_template/navigation/cubit/navigation_menu_state.dart';
 import 'package:cwt_starter_template/utils/constants/colors.dart';
@@ -42,9 +45,9 @@ class NavigationMenu extends StatelessWidget {
               index: state.index,
               children: [
                 HomeScreen(),
-                Container(color: Colors.blue,),
-                Container(color: Colors.red,),
-                Container(color: Colors.green,),
+                Store(),
+                FavouriteItemScreen(),
+                SettingsScreen(),
               ],
             );
         },

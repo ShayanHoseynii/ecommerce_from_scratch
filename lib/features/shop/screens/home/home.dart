@@ -1,6 +1,8 @@
 import 'package:cwt_starter_template/common/widgets/containers/primary_header_container.dart';
 import 'package:cwt_starter_template/common/widgets/containers/search_container.dart';
 import 'package:cwt_starter_template/common/widgets/image_text_widgets.dart/vertical_image_text.dart';
+import 'package:cwt_starter_template/common/widgets/layout/grid_layout.dart';
+import 'package:cwt_starter_template/common/widgets/products_card/products_card_vertical.dart';
 import 'package:cwt_starter_template/common/widgets/texts/section_heading.dart';
 import 'package:cwt_starter_template/features/shop/screens/home/widgets/home_appbar.dart';
 import 'package:cwt_starter_template/features/shop/screens/home/widgets/promo_slider.dart';
@@ -21,19 +23,25 @@ class HomeScreen extends StatelessWidget {
             TPrimaryHeaderContainer(
               child: Column(
                 children: [
+                  // Appbar
                   THomeAppBar(),
 
                   const SizedBox(height: TSizes.spaceBtwSections),
-
+                  // Searchbar
                   TSearchContainer(text: 'Search in Store'),
                   const SizedBox(height: TSizes.spaceBtwSections),
-
-                  TSectionHeading(
-                    title: 'Popular Categories',
-                    showActionButton: false,
-                    textColor: TColors.white,
+                  // Categories
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: TSizes.defaultSpace,
+                    ),
+                    child: TSectionHeading(
+                      title: 'Popular Categories',
+                      showActionButton: false,
+                      textColor: TColors.white,
+                    ),
                   ),
-                  const SizedBox(height: TSizes.spaceBtwSections),
+                  const SizedBox(height: TSizes.spaceBtwItems),
 
                   Padding(
                     padding: const EdgeInsets.only(left: TSizes.defaultSpace),
@@ -54,6 +62,8 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
 
+                  const SizedBox(height: TSizes.spaceBtwSections),
+
                   // Carousel Slider with dots
                 ],
               ),
@@ -61,7 +71,25 @@ class HomeScreen extends StatelessWidget {
 
             Padding(
               padding: EdgeInsets.all(TSizes.defaultSpace),
-              child: TPromoSlider(banners: [TImages.promoBanner1, TImages.promoBanner2, TImages.promoBanner3]),
+              child: Column(
+                children: [
+                  TPromoSlider(
+                    banners: [
+                      TImages.promoBanner1,
+                      TImages.promoBanner2,
+                      TImages.promoBanner3,
+                    ],
+                  ),
+                  const SizedBox(height: TSizes.spaceBtwSections),
+
+                  TSectionHeading(title: 'Popular Products', onPressed: () {}),
+                  const SizedBox(height: TSizes.spaceBtwSections),
+                  GridLayout(
+                    itemCount: 4,
+                    itemBuilder: (_, index) => const ProductCardVertical(),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -69,5 +97,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
-

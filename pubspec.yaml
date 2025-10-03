@@ -43,7 +43,7 @@ dependencies:
   image_picker: ^1.1.2
   url_launcher: ^6.3.1
   carousel_slider: ^5.1.1
-  connectivity_plus: ^6.1.1
+  connectivity_plus: ^7.0.0
   country_code_picker: ^3.3.0
   flutter_native_splash: ^2.4.6
 
@@ -64,6 +64,7 @@ dependencies:
   bloc: ^9.0.0
   flutter_bloc: ^9.1.1
   flutter_svg: ^2.2.0
+  flutter_rating_bar: ^4.0.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

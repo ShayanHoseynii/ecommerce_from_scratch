@@ -6,6 +6,9 @@ import 'package:cwt_starter_template/features/authentication/screens/password_co
 import 'package:cwt_starter_template/features/authentication/screens/signup/sign_up.dart';
 import 'package:cwt_starter_template/features/authentication/screens/signup/success_screen.dart';
 import 'package:cwt_starter_template/features/authentication/screens/signup/verify_email.dart';
+import 'package:cwt_starter_template/features/personalization/screens/profile/profile.dart';
+import 'package:cwt_starter_template/features/shop/screens/product_detail/product_detail.dart';
+import 'package:cwt_starter_template/features/shop/screens/product_reviews/product_reviews.dart';
 import 'package:cwt_starter_template/navigation/cubit/navigation_menu__cubit.dart';
 import 'package:cwt_starter_template/navigation/navigation_menu.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +43,16 @@ class AppRouter {
 
       case '/reset-password':
         return MaterialPageRoute(builder: (_) => ResetPasswordScreen());
+
+      case '/profile':
+        return MaterialPageRoute(builder: (_) => ProfileScreen());
+
+      case '/product-detail':
+        return MaterialPageRoute(builder: (_) => ProductDetailScreen());
+
+      case '/reviews':
+        return MaterialPageRoute(builder: (_) => ProductReviewsScreen());
+
       case '/navbar':
         return MaterialPageRoute(
           builder:

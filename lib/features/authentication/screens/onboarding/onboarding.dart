@@ -1,4 +1,4 @@
-import 'package:cwt_starter_template/features/authentication/cubit/onboarding_cubit.dart';
+import 'package:cwt_starter_template/features/authentication/cubit/onboarding/onboarding_cubit.dart';
 import 'package:cwt_starter_template/features/authentication/screens/onboarding/widgets/onboarding_dot_navigation.dart';
 import 'package:cwt_starter_template/features/authentication/screens/onboarding/widgets/onboarding_next_button.dart';
 import 'package:cwt_starter_template/features/authentication/screens/onboarding/widgets/onboarding_page.dart';

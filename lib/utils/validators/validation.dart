@@ -133,7 +133,7 @@ class TValidator {
     return returnValue;
   }
 
-  static String? validatePhoneNumberFormat(String? value) {
+  static String?validatePhoneNumberFormat(String? value) {
     if (value == null || value.isEmpty) {
       return null;
     }

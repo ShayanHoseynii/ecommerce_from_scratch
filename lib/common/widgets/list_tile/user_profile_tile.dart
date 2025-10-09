@@ -21,7 +21,7 @@ class UserProfileTile extends StatelessWidget {
         padding: 0,
       ),
       title: Text(
-        'Coding with T',
+        'Shayan Hoseyni',
         style: Theme.of(
           context,
         ).textTheme.headlineSmall!.apply(color: TColors.white),

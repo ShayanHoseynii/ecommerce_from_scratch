@@ -53,7 +53,10 @@ class HomeScreen extends StatelessWidget {
                           return TVerticalImageText(
                             image: TImages.shoeIcon,
                             title: 'Shoes',
-                            onTap: () {},
+                            onTap:
+                                () => Navigator.of(
+                                  context,
+                                ).pushNamed('/sub-categories'),
                           );
                         },
                         itemCount: 6,
@@ -82,7 +85,11 @@ class HomeScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: TSizes.spaceBtwSections),
 
-                  TSectionHeading(title: 'Popular Products', onPressed: () {}),
+                  TSectionHeading(
+                    title: 'Popular Products',
+                    onPressed:
+                        () => Navigator.of(context).pushNamed('/all-products'),
+                  ),
                   const SizedBox(height: TSizes.spaceBtwSections),
                   GridLayout(
                     itemCount: 4,

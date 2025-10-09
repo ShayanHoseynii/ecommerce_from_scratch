@@ -1,6 +1,4 @@
-import 'package:cwt_starter_template/common/widgets/chips/choice.dart';
 import 'package:cwt_starter_template/common/widgets/chips/choice_chip.dart';
-import 'package:cwt_starter_template/common/widgets/containers/circular_container.dart';
 import 'package:cwt_starter_template/common/widgets/containers/rounded_container.dart';
 import 'package:cwt_starter_template/common/widgets/texts/product_price_text.dart';
 import 'package:cwt_starter_template/common/widgets/texts/product_title_text.dart';

@@ -1,5 +1,4 @@
 import 'package:cwt_starter_template/common/widgets/containers/circular_container.dart';
-import 'package:cwt_starter_template/utils/constants/colors.dart';
 import 'package:cwt_starter_template/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 

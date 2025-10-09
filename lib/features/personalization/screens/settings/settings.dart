@@ -57,7 +57,7 @@ class SettingsScreen extends StatelessWidget {
                     icon: Iconsax.safe_home,
                     title: 'My Addresses',
                     subtitle: 'Set shopping delivery address',
-                    onTap: () {},
+                    onTap: () => Navigator.of(context).pushNamed('/addresses'),
                   ),
                   TSeetingsMenuTile(
                     icon: Iconsax.shopping_cart,
@@ -69,7 +69,7 @@ class SettingsScreen extends StatelessWidget {
                     icon: Iconsax.bag_tick,
                     title: 'My Orders',
                     subtitle: 'In-progress and Completed Orders',
-                    onTap: () {},
+                    onTap: () => Navigator.of(context).pushNamed('/orders'),
                   ),
                   TSeetingsMenuTile(
                     icon: Iconsax.bank,

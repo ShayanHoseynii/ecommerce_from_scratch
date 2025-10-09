@@ -1,5 +1,5 @@
-import 'package:cwt_starter_template/features/authentication/cubit/onboarding_cubit.dart';
-import 'package:cwt_starter_template/features/authentication/cubit/onboarding_state_cubit.dart';
+import 'package:cwt_starter_template/features/authentication/cubit/onboarding/onboarding_cubit.dart';
+import 'package:cwt_starter_template/features/authentication/cubit/onboarding/onboarding_state_cubit.dart';
 import 'package:cwt_starter_template/utils/constants/colors.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
 import 'package:cwt_starter_template/utils/device/device_utility.dart';

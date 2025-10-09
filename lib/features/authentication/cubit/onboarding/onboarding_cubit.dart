@@ -1,7 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:cwt_starter_template/features/authentication/cubit/onboarding_state_cubit.dart';
+import 'package:cwt_starter_template/features/authentication/cubit/onboarding/onboarding_state_cubit.dart';
 import 'package:cwt_starter_template/features/authentication/screens/login/login.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 
 class OnboardingCubit extends Cubit<OnboardingState> {
   final PageController pageController = PageController();
@@ -31,6 +32,8 @@ class OnboardingCubit extends Cubit<OnboardingState> {
       );
       emit(OnboardingState(next));
     } else {
+      final storage = GetStorage();
+      storage.write('IsFirstTime', false);
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const LoginScreen()),

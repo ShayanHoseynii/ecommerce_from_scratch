@@ -56,7 +56,8 @@ class Store extends StatelessWidget {
                       /// -- Featured Brands
                       TSectionHeading(
                         title: 'Featured Brands',
-                        onPressed: () {},
+                        onPressed:
+                            () => Navigator.of(context).pushNamed('/brands'),
                       ),
                       const SizedBox(height: TSizes.spaceBtwItems / 1.5),
 

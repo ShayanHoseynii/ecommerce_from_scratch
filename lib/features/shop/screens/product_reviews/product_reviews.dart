@@ -1,15 +1,9 @@
 import 'package:cwt_starter_template/common/widgets/appbar/appbar.dart';
 import 'package:cwt_starter_template/common/widgets/products/rating/rating_indicator.dart';
 import 'package:cwt_starter_template/features/shop/screens/product_reviews/widgets/overall_product_rating.dart';
-import 'package:cwt_starter_template/features/shop/screens/product_reviews/widgets/progress_indicator_rating.dart';
 import 'package:cwt_starter_template/features/shop/screens/product_reviews/widgets/user_review_card.dart';
-import 'package:cwt_starter_template/utils/constants/colors.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
-import 'package:cwt_starter_template/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:iconsax/iconsax.dart';
 
 class ProductReviewsScreen extends StatelessWidget {
   const ProductReviewsScreen({super.key});

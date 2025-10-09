@@ -31,7 +31,7 @@ class THomeAppBar extends StatelessWidget {
       ),
       actions: [
         TCartCounterIcon(
-          onPressed: () {},
+          onPressed: () => Navigator.of(context).pushNamed('/shopping-cart'),
           iconColor: TColors.white,
         ),
       ],

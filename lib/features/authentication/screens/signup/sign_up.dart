@@ -8,7 +8,7 @@ import 'package:cwt_starter_template/utils/constants/colors.dart';
 import 'package:cwt_starter_template/utils/constants/image_strings.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
 import 'package:cwt_starter_template/utils/helpers/exports.dart';
-import 'package:cwt_starter_template/utils/popups/full_screen_loader.dart';
+import 'package:cwt_starter_template/utils/popups/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -51,9 +51,17 @@ class SignUpScreen extends StatelessWidget {
                 );
               } else if (state.status == FormStatus.success) {
                 // Navigate on success
+
+                TLoaders.successSnackBar(
+                  context: context,
+                  title: 'Account Successfuly Created!',
+                  message: 'A verification email has been sent to your inbox.',
+                );
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => const VerifyEmailScreen()),
+                  MaterialPageRoute(
+                    builder: (_) => VerifyEmailScreen(email: state.email.trim()),
+                  ),
                 );
               }
             }

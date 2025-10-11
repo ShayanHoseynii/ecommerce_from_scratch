@@ -199,10 +199,10 @@ class _SignupFormState extends State<SignupForm> {
                           : () {
                             if (!state.areTermsAccepted) {
                               TLoaders.errorSnackBar(
+                                context: context,
                                 title: 'Accept Privacy and Policy',
                                 message:
                                     'In order to craete account, you must have to read and accept the Privacy Policy & Terms of Use.',
-                                context: context,
                               );
                               return;
                             }

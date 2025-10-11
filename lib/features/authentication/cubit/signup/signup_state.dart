@@ -1,6 +1,9 @@
+import 'package:equatable/equatable.dart';
+
 enum FormStatus { initial, loading, success, failure }
 
-class SignupState {
+
+class SignupState extends Equatable {
   const SignupState({
     this.firstName = '',
     this.lastName = '',
@@ -54,18 +57,17 @@ class SignupState {
     );
   }
 
-
   @override
   List<Object?> get props => [
-        firstName,
-        lastName,
-        username,
-        email,
-        phoneNumber,
-        password,
-        isPasswordVisible,
-        areTermsAccepted,
-        status,
-        errorMessage,
-      ];
+    firstName,
+    lastName,
+    username,
+    email,
+    phoneNumber,
+    password,
+    isPasswordVisible,
+    areTermsAccepted,
+    status,
+    errorMessage,
+  ];
 }

@@ -66,7 +66,6 @@ class SignupCubit extends Cubit<SignupState> {
         profilePicture: '', // Default profile picture
       );
       await _userRepository.saveUserData(newUser);
-
       // On success
       emit(state.copyWith(status: FormStatus.success));
     } catch (e) {

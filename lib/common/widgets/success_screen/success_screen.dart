@@ -1,7 +1,5 @@
 import 'package:cwt_starter_template/common/styles/spacing_styles.dart';
-import 'package:cwt_starter_template/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class SuccessScreen extends StatelessWidget {
   const SuccessScreen({

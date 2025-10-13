@@ -1,35 +1,23 @@
 import 'package:cwt_starter_template/utils/exceptions/exports.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthenticationRepository {
   final _storage = GetStorage();
   final _auth = FirebaseAuth.instance;
-    User? get currentUser => _auth.currentUser;
-      Stream<User?> get authStateChanges => _auth.authStateChanges();
-
-
+  User? get currentUser => _auth.currentUser;
+  Stream<User?> get authStateChanges => _auth.authStateChanges();
 
   Future<bool> checkFirstTime() async {
-    await GetStorage.init();
-
-    // If 'IsFirstTime' does not exist, set it to true
+    // No need for GetStorage.init() here as it's called in main.dart
     _storage.writeIfNull('IsFirstTime', true);
-
-    // Read value
     final bool isFirstTime = _storage.read('IsFirstTime');
-
-    // Remove splash
-    FlutterNativeSplash.remove();
-
-    // If first time, mark as false so next time user doesn’t see onboarding
     if (isFirstTime) {
-      print(_storage);
       _storage.write('IsFirstTime', false);
     }
-
     return isFirstTime;
   }
 
@@ -72,7 +60,7 @@ class AuthenticationRepository {
     }
   }
 
-   Future<void> signOut() async {
+  Future<void> signOut() async {
     try {
       await _auth.signOut();
     } on FirebaseAuthException catch (e) {
@@ -87,7 +75,8 @@ class AuthenticationRepository {
       throw 'Something went wrong. Please try again.';
     }
   }
-   Future<void> signInWithEmailAndPassword(String email, String password) async {
+
+  Future<void> signInWithEmailAndPassword(String email, String password) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
@@ -102,4 +91,36 @@ class AuthenticationRepository {
       throw 'Something went wrong. Please try again.';
     }
   }
+
+ /// [GoogleAuthentication] - GOOGLE
+Future<UserCredential?> signInWithGoogle() async {
+  try {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth = await userAccount?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    return await _auth.signInWithCredential(credential);
+    
+  } on FirebaseAuthException catch (e) {
+    throw TFirebaseAuthException(e.code).message;
+  } on FirebaseException catch (e) {
+    throw TFirebaseException(e.code).message;
+  } on FormatException catch (_) {
+    throw const TFormatException();
+  } on PlatformException catch (e) {
+    throw TPlatformException(e.code).message;
+  } catch (e) {
+    if (kDebugMode) print('Something went wrong: $e');
+    return null;
+  }
+}
 }

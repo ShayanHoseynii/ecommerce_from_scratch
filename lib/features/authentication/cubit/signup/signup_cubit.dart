@@ -3,8 +3,6 @@ import 'package:cwt_starter_template/data/repositories/authentication/authentica
 import 'package:cwt_starter_template/data/repositories/user/user_repository.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/signup/signup_state.dart';
 import 'package:cwt_starter_template/utils/helpers/exports.dart';
-import 'package:cwt_starter_template/utils/popups/exports.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignupCubit extends Cubit<SignupState> {

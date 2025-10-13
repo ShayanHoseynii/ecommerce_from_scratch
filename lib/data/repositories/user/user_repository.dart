@@ -21,4 +21,16 @@ class UserRepository {
       throw 'Something went wrong. Please try again.';
     }
   }
+   Future<UserModel?> fetchUserRecord(String userId) async {
+    try {
+      final documentSnapshot = await _db.collection("Users").doc(userId).get();
+      if (documentSnapshot.exists) {
+        return UserModel.fromSnapshot(documentSnapshot);
+      }
+      return null;
+    } catch (e) {
+      // Return null or handle the error as needed
+      return null;
+    }
+  }
 }

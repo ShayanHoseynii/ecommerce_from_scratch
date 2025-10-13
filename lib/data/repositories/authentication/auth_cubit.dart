@@ -1,21 +1,32 @@
-import 'dart:async'; // Import async
+import 'dart:async';
+import 'package:cwt_starter_template/data/models/user_model.dart';
 import 'package:cwt_starter_template/data/repositories/authentication/auth_state.dart';
 import 'package:cwt_starter_template/data/repositories/authentication/authentication_repository.dart';
+import 'package:cwt_starter_template/data/repositories/user/user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   final AuthenticationRepository _repository;
-  late final StreamSubscription<User?> _authSubscription;
+  final UserRepository _userRepository;
+  StreamSubscription<User?>? _authSubscription;
+  bool _splashRemoved = false;
 
-  AuthCubit(this._repository) : super(const AuthState(status: AuthStatus.unknown)) {
-    // Subscribe to the authentication stream when the cubit is created
-    _authSubscription = _repository.authStateChanges.listen(_onAuthStateChanged);
+  AuthCubit(this._repository, this._userRepository)
+    : super(const AuthState(status: AuthStatus.unknown)) {
+    // Start listening to auth state changes immediately when the cubit is created.
+    _authSubscription = _repository.authStateChanges.listen(
+      _onAuthStateChanged,
+    );
   }
 
-  /// This private method is called every time the user's auth state changes.
-  void _onAuthStateChanged(User? user) async {
-    // First, check if it's the user's first time. This logic only runs if the user is not logged in.
+    void _onAuthStateChanged(User? user) async {
+    if (!_splashRemoved) {
+      _splashRemoved = true;
+      FlutterNativeSplash.remove();
+    }
+
     if (user == null) {
       final isFirstTime = await _repository.checkFirstTime();
       if (isFirstTime) {
@@ -24,19 +35,52 @@ class AuthCubit extends Cubit<AuthState> {
         emit(const AuthState(status: AuthStatus.unauthenticated));
       }
     } else {
-      // User is logged in
-      user.reload(); // Refresh user data
-      if (user.emailVerified) {
-        emit(AuthState(status: AuthStatus.authenticated, user: user));
+      await _saveNewUserData(user);
+
+      await user.reload();
+      final freshUser = _repository.currentUser;
+      if (freshUser == null) {
+        emit(const AuthState(status: AuthStatus.unauthenticated));
+        return;
+      }
+
+      if (freshUser.emailVerified) {
+        emit(AuthState(status: AuthStatus.authenticated, user: freshUser));
       } else {
-        emit(AuthState(status: AuthStatus.emailVerification, user: user));
+        emit(AuthState(status: AuthStatus.emailVerification, user: freshUser));
       }
     }
   }
 
+   Future<void> _saveNewUserData(User user) async {
+    try {
+      // Check if the user record already exists in Firestore
+      final existingUser = await _userRepository.fetchUserRecord(user.uid);
+      if (existingUser == null) {
+        // This is a new user, so create a UserModel
+        final nameParts = UserModel.nameParts(user.displayName ?? '');
+        final username = UserModel.generateUsername(user.displayName ?? '');
+
+        final newUser = UserModel(
+          id: user.uid,
+          firstName: nameParts.isNotEmpty ? nameParts[0] : '',
+          lastName: nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '',
+          username: username,
+          email: user.email ?? '',
+          phoneNumber: user.phoneNumber ?? '',
+          profilePicture: user.photoURL ?? '',
+        );
+
+        // Save the new user record to Firestore
+        await _userRepository.saveUserData(newUser);
+      }
+    } catch (e) {
+      // Log the error but don't block the login flow
+      print('Error saving new user data: $e');
+    }
+  }
+
   Future<void> signOut() async {
-    // The stream will automatically handle the state change after sign-out.
-    // We just need to call the method.
     try {
       await _repository.signOut();
     } catch (e) {
@@ -44,10 +88,9 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  /// Close the stream subscription when the cubit is closed
   @override
   Future<void> close() {
-    _authSubscription.cancel();
+    _authSubscription?.cancel();
     return super.close();
   }
 }

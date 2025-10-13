@@ -22,5 +22,16 @@ class AuthState extends Equatable {
   final String? errorMessage;
 
   @override
-  List<Object?> get props => [status, user, errorMessage];
+  List<Object?> get props => [status, user?.uid, errorMessage];
+  AuthState copyWith({
+    AuthStatus? status,
+    User? user,
+    String? errorMessage,
+  }) {
+    return AuthState(
+      status: status ?? this.status,
+      user: user ?? this.user,
+      errorMessage: errorMessage ?? this.errorMessage,
+    );
+  }
 }

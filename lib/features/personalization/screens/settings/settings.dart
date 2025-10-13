@@ -3,10 +3,12 @@ import 'package:cwt_starter_template/common/widgets/list_tile/user_profile_tile.
 import 'package:cwt_starter_template/common/widgets/appbar/appbar.dart';
 import 'package:cwt_starter_template/common/widgets/containers/primary_header_container.dart';
 import 'package:cwt_starter_template/common/widgets/texts/section_heading.dart';
+import 'package:cwt_starter_template/data/repositories/authentication/auth_cubit.dart';
 import 'package:cwt_starter_template/utils/constants/colors.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
 import 'package:cwt_starter_template/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -120,6 +122,12 @@ class SettingsScreen extends StatelessWidget {
                     subtitle: 'Upload Data to your Cloud Firebase',
                     trailing: Switch(value: false, onChanged: (value) {}),
                   ),
+                  const SizedBox(height: TSizes.spaceBtwItems,),
+                  SizedBox(
+                    width: double.infinity,
+                    child: OutlinedButton(onPressed: () => context.read<AuthCubit>().signOut(), child: Text('Log out')),
+                  )
+                
                 ],
               ),
             ),

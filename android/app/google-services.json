@@ -58,6 +58,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "471522883420-3dmppoek6he82k5ctt4uauocsct8rk9f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ecommerce_from_scratch",
+            "certificate_hash": "307821430676da820a65cbc988e5a071e1d39490"
+          }
+        },
+        {
           "client_id": "471522883420-pui5h4o2pi8co7o8ofbg4t8821qqdt42.apps.googleusercontent.com",
           "client_type": 3
         }

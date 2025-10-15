@@ -71,10 +71,14 @@ class LoginCubit extends Cubit<LoginState> {
       );
       return;
     }
-    emit(state.copyWith(status: LoginStatus.loading));
+    try {
+      emit(state.copyWith(status: LoginStatus.loading));
 
-    await _authRepository.signInWithGoogle();
+      await _authRepository.signInWithGoogle();
 
-    emit(state.copyWith(status: LoginStatus.success));
+      emit(state.copyWith(status: LoginStatus.success));
+    } catch (e) {
+      emit(state.copyWith(status: LoginStatus.failure, error: e.toString()));
+    }
   }
 }

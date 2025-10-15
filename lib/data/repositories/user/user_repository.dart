@@ -11,7 +11,7 @@ class UserRepository {
   Future<void> saveUserData(UserModel user) async {
     try {
       await _db.collection("Users").doc(user.id).set(user.toJson());
-    }  on FirebaseException catch (e) {
+    } on FirebaseException catch (e) {
       throw TFirebaseException(e.code).message;
     } on FormatException catch (_) {
       throw TFormatException();
@@ -21,16 +21,49 @@ class UserRepository {
       throw 'Something went wrong. Please try again.';
     }
   }
-   Future<UserModel?> fetchUserRecord(String userId) async {
+
+  Future<UserModel?> fetchUserRecord(String userId) async {
     try {
       final documentSnapshot = await _db.collection("Users").doc(userId).get();
       if (documentSnapshot.exists) {
         return UserModel.fromSnapshot(documentSnapshot);
+      } else {
+        return UserModel.empty();
       }
-      return null;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
     } catch (e) {
-      // Return null or handle the error as needed
-      return null;
+      throw 'Something went wrong. Please try again.';
+    }
+  }
+  Future<void> updateUserRecord(UserModel updatedUser) async {
+    try {
+       await _db.collection("Users").doc(updatedUser.id).update(updatedUser.toJson());
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again.';
+    }
+  }
+  Future<void> removeUserRecord(String userId) async {
+    try {
+       await _db.collection("Users").doc(userId).delete();
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again.';
     }
   }
 }

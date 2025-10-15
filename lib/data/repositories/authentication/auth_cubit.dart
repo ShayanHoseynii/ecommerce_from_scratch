@@ -3,6 +3,7 @@ import 'package:cwt_starter_template/data/models/user_model.dart';
 import 'package:cwt_starter_template/data/repositories/authentication/auth_state.dart';
 import 'package:cwt_starter_template/data/repositories/authentication/authentication_repository.dart';
 import 'package:cwt_starter_template/data/repositories/user/user_repository.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -15,7 +16,6 @@ class AuthCubit extends Cubit<AuthState> {
 
   AuthCubit(this._repository, this._userRepository)
     : super(const AuthState(status: AuthStatus.unknown)) {
-    // Start listening to auth state changes immediately when the cubit is created.
     _authSubscription = _repository.authStateChanges.listen(
       _onAuthStateChanged,
     );
@@ -54,7 +54,6 @@ class AuthCubit extends Cubit<AuthState> {
 
    Future<void> _saveNewUserData(User user) async {
     try {
-      // Check if the user record already exists in Firestore
       final existingUser = await _userRepository.fetchUserRecord(user.uid);
       if (existingUser == null) {
         // This is a new user, so create a UserModel
@@ -71,12 +70,10 @@ class AuthCubit extends Cubit<AuthState> {
           profilePicture: user.photoURL ?? '',
         );
 
-        // Save the new user record to Firestore
         await _userRepository.saveUserData(newUser);
       }
     } catch (e) {
-      // Log the error but don't block the login flow
-      print('Error saving new user data: $e');
+      if(kDebugMode) print('Error saving new user data: $e');
     }
   }
 

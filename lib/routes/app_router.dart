@@ -1,4 +1,5 @@
 import 'package:cwt_starter_template/data/repositories/authentication/authentication_repository.dart';
+import 'package:cwt_starter_template/features/authentication/cubit/forgetPassword/forget_password_cubit.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/login/login_cubit.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/onboarding/onboarding_cubit.dart';
 import 'package:cwt_starter_template/features/authentication/screens/login/login.dart';
@@ -52,26 +53,26 @@ class AppRouter {
         );
 
       case '/login':
-        return MaterialPageRoute(
-          builder:
-              (_) => BlocProvider(
-                create:
-                    (context) => LoginCubit(
-                      authRepository: context.read<AuthenticationRepository>(),
-                      networkCubit: context.read<NetworkCubit>(),
-                    ),
-                child: const LoginScreen(),
-              ),
-        );
+        return MaterialPageRoute(builder: (_) => const LoginScreen());
 
       case '/create-account':
         return MaterialPageRoute(builder: (_) => SignUpScreen());
 
       case '/forget-password':
-        return MaterialPageRoute(builder: (_) => ForgetPassword());
+        return MaterialPageRoute(
+          builder:
+              (_) => BlocProvider(
+                create:
+                    (context) => ForgetPasswordCubit(
+                      authRepository: context.read<AuthenticationRepository>(),
+                      networkCubit: context.read<NetworkCubit>(),
+                    ),
+                child: ForgetPassword(),
+              ),
+        );
 
       case '/reset-password':
-        return MaterialPageRoute(builder: (_) => ResetPasswordScreen());
+          return MaterialPageRoute(builder: (_) => const ResetPasswordScreen(email: ''));
 
       case '/profile':
         return MaterialPageRoute(builder: (_) => ProfileScreen());

@@ -5,7 +5,6 @@ import 'package:cwt_starter_template/features/shop/screens/product_detail/widget
 import 'package:cwt_starter_template/features/shop/screens/product_detail/widgets/product_meta_data.dart';
 import 'package:cwt_starter_template/features/shop/screens/product_detail/widgets/rating_share_widget.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
-import 'package:cwt_starter_template/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:readmore/readmore.dart';
@@ -15,7 +14,6 @@ class ProductDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
     return Scaffold(
       bottomNavigationBar: TBottomAddToCart(),
       body: SingleChildScrollView(

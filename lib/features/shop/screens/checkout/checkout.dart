@@ -8,7 +8,6 @@ import 'package:cwt_starter_template/features/shop/screens/checkout/widgets/bill
 import 'package:cwt_starter_template/features/shop/screens/checkout/widgets/billing_payment_section.dart';
 import 'package:cwt_starter_template/utils/constants/image_strings.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
-import 'package:cwt_starter_template/utils/helpers/exports.dart';
 import 'package:flutter/material.dart';
 
 class CheckoutScreen extends StatelessWidget {
@@ -16,7 +15,6 @@ class CheckoutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
     return Scaffold(
       appBar: TAppBar(
         showBackArrow: true,

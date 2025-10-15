@@ -2,6 +2,8 @@ import 'package:cwt_starter_template/data/repositories/authentication/auth_cubit
 import 'package:cwt_starter_template/data/repositories/authentication/auth_state.dart';
 import 'package:cwt_starter_template/data/repositories/authentication/authentication_repository.dart';
 import 'package:cwt_starter_template/data/repositories/user/user_repository.dart';
+import 'package:cwt_starter_template/features/authentication/cubit/login/login_cubit.dart';
+import 'package:cwt_starter_template/features/authentication/cubit/user/user_cubit.dart';
 import 'package:cwt_starter_template/utils/helpers/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,6 +37,17 @@ Future<void> main() async {
                 ),
           ),
           BlocProvider(create: (context) => NetworkCubit()),
+          BlocProvider(
+            create:
+                (context) => LoginCubit(
+                  authRepository: context.read<AuthenticationRepository>(),
+                  networkCubit: context.read<NetworkCubit>(),
+                ),
+
+          ),
+          BlocProvider(
+            create: (context) => UserCubit(context.read<UserRepository>()),
+          )
         ],
         child: MyApp(),
       ),

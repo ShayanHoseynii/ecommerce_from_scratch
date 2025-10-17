@@ -207,7 +207,9 @@ class _SignupFormState extends State<SignupForm> {
                               return;
                             }
                             if (_formKey.currentState!.validate()) {
-                              context.read<SignupCubit>().signUp();
+                              context
+                                  .read<SignupCubit>()
+                                  .signUpWithEmailPassword();
                             }
                           },
                   child:

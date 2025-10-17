@@ -40,19 +40,20 @@ class UserRepository {
       throw 'Something went wrong. Please try again.';
     }
   }
-  Future<void> updateUserRecord(UserModel updatedUser) async {
+Future<void> updateUserRecord(String userId, Map<String, dynamic> data) async {
     try {
-       await _db.collection("Users").doc(updatedUser.id).update(updatedUser.toJson());
+      await _db.collection("Users").doc(userId).update(data);
     } on FirebaseException catch (e) {
       throw TFirebaseException(e.code).message;
     } on FormatException catch (_) {
-      throw TFormatException();
+      throw const TFormatException();
     } on PlatformException catch (e) {
       throw TPlatformException(e.code).message;
     } catch (e) {
       throw 'Something went wrong. Please try again.';
     }
   }
+  
   Future<void> removeUserRecord(String userId) async {
     try {
        await _db.collection("Users").doc(userId).delete();

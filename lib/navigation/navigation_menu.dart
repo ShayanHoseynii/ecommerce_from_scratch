@@ -1,3 +1,4 @@
+import 'package:cwt_starter_template/features/authentication/cubit/user/user_cubit.dart';
 import 'package:cwt_starter_template/features/personalization/screens/settings/settings.dart';
 import 'package:cwt_starter_template/features/shop/screens/home/home.dart';
 import 'package:cwt_starter_template/features/shop/screens/store/store.dart';
@@ -10,8 +11,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 
-class NavigationMenu extends StatelessWidget {
+class NavigationMenu extends StatefulWidget {
   const NavigationMenu({super.key});
+
+  @override
+  State<NavigationMenu> createState() => _NavigationMenuState();
+}
+
+class _NavigationMenuState extends State<NavigationMenu> {
+  @override
+  void initState() {
+    context.read<UserCubit>().fetchUserData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,21 +47,24 @@ class NavigationMenu extends StatelessWidget {
             onDestinationSelected:
                 (value) => {context.read<NavigationCubit>().changeIndex(value)},
             backgroundColor: darkMode ? TColors.black : Colors.white,
-            indicatorColor: darkMode ? TColors.white.withOpacity(0.1) : TColors.black.withOpacity(0.1),
+            indicatorColor:
+                darkMode
+                    ? TColors.white.withOpacity(0.1)
+                    : TColors.black.withOpacity(0.1),
           );
         },
       ),
       body: BlocBuilder<NavigationCubit, NavigationState>(
         builder: (context, state) {
           return IndexedStack(
-              index: state.index,
-              children: [
-                HomeScreen(),
-                Store(),
-                FavouriteItemScreen(),
-                SettingsScreen(),
-              ],
-            );
+            index: state.index,
+            children: [
+              HomeScreen(),
+              Store(),
+              FavouriteItemScreen(),
+              SettingsScreen(),
+            ],
+          );
         },
       ),
     );

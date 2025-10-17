@@ -34,7 +34,7 @@ class SignupCubit extends Cubit<SignupState> {
     emit(state.copyWith(areTermsAccepted: value ?? false));
   }
 
-  Future<void> signUp() async {
+  Future<void> signUpWithEmailPassword() async {
     final isConnected = await _networkCubit.isConnected();
     if (!isConnected) {
       emit(
@@ -73,4 +73,6 @@ class SignupCubit extends Cubit<SignupState> {
       );
     }
   }
+
+ 
 }

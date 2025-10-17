@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-enum FormStatus { initial, loading, success, failure }
-
+enum FormStatus { initial, loading, success, failure, googleSignupSuccess}
 
 class SignupState extends Equatable {
   const SignupState({

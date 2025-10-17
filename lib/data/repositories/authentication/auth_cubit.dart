@@ -10,11 +10,10 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   final AuthenticationRepository _repository;
-  final UserRepository _userRepository;
   StreamSubscription<User?>? _authSubscription;
   bool _splashRemoved = false;
 
-  AuthCubit(this._repository, this._userRepository)
+  AuthCubit(this._repository)
     : super(const AuthState(status: AuthStatus.unknown)) {
     _authSubscription = _repository.authStateChanges.listen(
       _onAuthStateChanged,
@@ -35,8 +34,6 @@ class AuthCubit extends Cubit<AuthState> {
         emit(const AuthState(status: AuthStatus.unauthenticated));
       }
     } else {
-      await _saveNewUserData(user);
-
       await user.reload();
       final freshUser = _repository.currentUser;
       if (freshUser == null) {
@@ -52,30 +49,7 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-   Future<void> _saveNewUserData(User user) async {
-    try {
-      final existingUser = await _userRepository.fetchUserRecord(user.uid);
-      if (existingUser == null) {
-        // This is a new user, so create a UserModel
-        final nameParts = UserModel.nameParts(user.displayName ?? '');
-        final username = UserModel.generateUsername(user.displayName ?? '');
-
-        final newUser = UserModel(
-          id: user.uid,
-          firstName: nameParts.isNotEmpty ? nameParts[0] : '',
-          lastName: nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '',
-          username: username,
-          email: user.email ?? '',
-          phoneNumber: user.phoneNumber ?? '',
-          profilePicture: user.photoURL ?? '',
-        );
-
-        await _userRepository.saveUserData(newUser);
-      }
-    } catch (e) {
-      if(kDebugMode) print('Error saving new user data: $e');
-    }
-  }
+  
 
   Future<void> signOut() async {
     try {
@@ -84,7 +58,6 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthState(status: AuthStatus.authError, errorMessage: e.toString()));
     }
   }
-
   @override
   Future<void> close() {
     _authSubscription?.cancel();

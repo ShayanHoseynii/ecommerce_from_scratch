@@ -11,6 +11,10 @@ class AuthenticationRepository {
   User? get currentUser => _auth.currentUser;
   Stream<User?> get authStateChanges => _auth.authStateChanges();
 
+  String? getAuthProvider() {
+    return _auth.currentUser?.providerData.first.providerId;
+  }
+
   Future<bool> checkFirstTime() async {
     // No need for GetStorage.init() here as it's called in main.dart
     _storage.writeIfNull('IsFirstTime', true);
@@ -78,6 +82,7 @@ class AuthenticationRepository {
 
   Future<void> signOut() async {
     try {
+      await GoogleSignIn().signOut();
       await _auth.signOut();
     } on FirebaseAuthException catch (e) {
       throw TFirebaseAuthException(e.code).message;
@@ -118,7 +123,7 @@ Future<UserCredential?> signInWithGoogle() async {
     final GoogleSignInAuthentication? googleAuth = await userAccount?.authentication;
 
     // Create a new credential
-    final credential = GoogleAuthProvider.credential(
+    final credential =  GoogleAuthProvider.credential(
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
@@ -139,4 +144,32 @@ Future<UserCredential?> signInWithGoogle() async {
     return null;
   }
 }
+
+Future<void> deleteAccount() async {
+    try {
+      final provider = _auth.currentUser?.providerData.first.providerId;
+
+    if (provider == 'google.com') {
+      // Disconnect from Google to clear the cache
+      await GoogleSignIn().disconnect();
+    }
+
+      await _auth.currentUser?.delete();
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again.';
+    }
+  }
+
+  Future<void> reAuthenticateWithEmailAndPassword(String email, String password) async {
+    try {
+      final credential = EmailAuthProvider.credential(email: email, password: password);
+      await _auth.currentUser?.reauthenticateWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again.';
+    }
+  }
 }

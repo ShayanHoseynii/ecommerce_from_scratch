@@ -33,20 +33,20 @@ Future<void> main() async {
             create:
                 (context) => AuthCubit(
                   context.read<AuthenticationRepository>(),
-                  context.read<UserRepository>(),
                 ),
           ),
           BlocProvider(create: (context) => NetworkCubit()),
           BlocProvider(
             create:
                 (context) => LoginCubit(
+                  userRepo: context.read<UserRepository>(),
                   authRepository: context.read<AuthenticationRepository>(),
                   networkCubit: context.read<NetworkCubit>(),
                 ),
 
           ),
           BlocProvider(
-            create: (context) => UserCubit(context.read<UserRepository>()),
+            create: (context) => UserCubit(context.read<UserRepository>(), context.read<AuthenticationRepository>()),
           )
         ],
         child: MyApp(),

@@ -254,7 +254,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           borderRadius: BorderRadius.circular(100),
                         ),
                         child: IconButton(
-                          onPressed: () => context.read<LoginCubit>().googleSignIn(),
+                          onPressed: () => context.read<LoginCubit>().signUpWithGoogle(),
                           icon: const Image(
                             width: TSizes.iconMd,
                             height: TSizes.iconMd,

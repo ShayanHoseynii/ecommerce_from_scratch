@@ -45,6 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final dark = THelperFunctions.isDarkMode(context);
     return Scaffold(
       body: BlocListener<LoginCubit, LoginState>(
+        listenWhen: (previous, current) => previous.status != current.status,
         listener: (context, state) {
           if (state.status == LoginStatus.loading) {
             TFullScreenLoader.openLoadingDialog(
@@ -213,73 +214,74 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                 ),
                 const SizedBox(height: TSizes.spaceBtwItems),
-                
-                  // Devider
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Flexible(
-                        child: Divider(
-                          color: dark ? TColors.darkGrey : TColors.grey,
-                          thickness: 0.5,
-                          endIndent: 5,
-                          indent: 60,
-                        ),
-                      ),
 
-                      Text(
-                        'Or Sing in With',
-                        style: Theme.of(context).textTheme.labelMedium,
+                // Devider
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Flexible(
+                      child: Divider(
+                        color: dark ? TColors.darkGrey : TColors.grey,
+                        thickness: 0.5,
+                        endIndent: 5,
+                        indent: 60,
                       ),
-                      Flexible(
-                        child: Divider(
-                          color: dark ? TColors.darkGrey : TColors.grey,
-                          thickness: 0.5,
-                          endIndent: 60,
-                          indent: 5,
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
 
-                  const SizedBox(height: TSizes.spaceBtwSections),
+                    Text(
+                      'Or Sing in With',
+                      style: Theme.of(context).textTheme.labelMedium,
+                    ),
+                    Flexible(
+                      child: Divider(
+                        color: dark ? TColors.darkGrey : TColors.grey,
+                        thickness: 0.5,
+                        endIndent: 60,
+                        indent: 5,
+                      ),
+                    ),
+                  ],
+                ),
 
-                  // Footer
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: TColors.grey),
-                          borderRadius: BorderRadius.circular(100),
-                        ),
-                        child: IconButton(
-                          onPressed: () => context.read<LoginCubit>().signUpWithGoogle(),
-                          icon: const Image(
-                            width: TSizes.iconMd,
-                            height: TSizes.iconMd,
-                            image: AssetImage(TImages.tGoogleLogo),
-                          ),
+                const SizedBox(height: TSizes.spaceBtwSections),
+
+                // Footer
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: TColors.grey),
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      child: IconButton(
+                        onPressed:
+                            () => context.read<LoginCubit>().signUpWithGoogle(),
+                        icon: const Image(
+                          width: TSizes.iconMd,
+                          height: TSizes.iconMd,
+                          image: AssetImage(TImages.tGoogleLogo),
                         ),
                       ),
-                      const SizedBox(width: TSizes.spaceBtwItems),
+                    ),
+                    const SizedBox(width: TSizes.spaceBtwItems),
 
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: TColors.grey),
-                          borderRadius: BorderRadius.circular(100),
-                        ),
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: const Image(
-                            width: TSizes.iconMd,
-                            height: TSizes.iconMd,
-                            image: AssetImage(TImages.tFacebookLogo),
-                          ),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: TColors.grey),
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      child: IconButton(
+                        onPressed: () {},
+                        icon: const Image(
+                          width: TSizes.iconMd,
+                          height: TSizes.iconMd,
+                          image: AssetImage(TImages.tFacebookLogo),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

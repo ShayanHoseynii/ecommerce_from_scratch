@@ -1,7 +1,4 @@
-
-
-
-
+import 'package:cwt_starter_template/common/widgets/shimmer/shimmer.dart';
 import 'package:cwt_starter_template/utils/constants/colors.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
 import 'package:cwt_starter_template/utils/helpers/helper_functions.dart';
@@ -24,6 +21,10 @@ class TVerticalImageText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ✅ Determine if the image is from the network or a local asset
+    final isNetworkImage = image.startsWith('http');
+    final dark = THelperFunctions.isDarkMode(context);
+
     return GestureDetector(
       onTap: onTap,
       child: Padding(
@@ -33,25 +34,32 @@ class TVerticalImageText extends StatelessWidget {
             Container(
               width: 56,
               height: 56,
-              padding: EdgeInsets.all(TSizes.sm),
+              padding: const EdgeInsets.all(TSizes.sm),
               decoration: BoxDecoration(
-                color:
-                    backgroundColor ??
-                    (THelperFunctions.isDarkMode(context)
-                        ? TColors.black
-                        : TColors.white),
+                color: backgroundColor ?? (dark ? TColors.black : TColors.white),
                 borderRadius: BorderRadius.circular(100),
               ),
               child: Center(
-                child: Image(
-                  image: AssetImage(image),
-                  fit: BoxFit.cover,
-                  color:
-                      backgroundColor ??
-                      (THelperFunctions.isDarkMode(context)
-                          ? TColors.white
-                          : TColors.black),
-                ),
+                // ✅ Use a conditional check to build the correct Image widget
+                child: isNetworkImage
+                    ? Image.network(
+                        image,
+                        fit: BoxFit.cover,
+                        // Show a loading indicator
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return TShimmerEffect(width: 55, height: 55);
+                        },
+                        // Show an error icon if it fails to load
+                        errorBuilder: (context, error, stackTrace) {
+                          return const Icon(Icons.error, color: Colors.red);
+                        },
+                      )
+                    : Image.asset(
+                        image,
+                        fit: BoxFit.cover,
+                        color: dark ? TColors.white : TColors.dark,
+                      ),
               ),
             ),
             const SizedBox(height: TSizes.spaceBtwItems / 2),
@@ -59,9 +67,7 @@ class TVerticalImageText extends StatelessWidget {
               width: 55,
               child: Text(
                 title,
-                style: Theme.of(
-                  context,
-                ).textTheme.labelMedium!.apply(color: TColors.white),
+                style: Theme.of(context).textTheme.labelMedium!.apply(color: textColor),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),

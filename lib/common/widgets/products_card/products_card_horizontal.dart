@@ -41,7 +41,6 @@ class TProductCardHorizontal extends StatelessWidget {
                   height: 120,
                   child: TRoundedImage(
                     imageUrl: TImages.productImage1,
-                    applyImageRadious: true,
                   ),
                 ),
                 Positioned(

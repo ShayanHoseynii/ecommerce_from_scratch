@@ -1,9 +1,12 @@
 import 'package:cwt_starter_template/data/repositories/authentication/auth_cubit.dart';
 import 'package:cwt_starter_template/data/repositories/authentication/auth_state.dart';
 import 'package:cwt_starter_template/data/repositories/authentication/authentication_repository.dart';
+import 'package:cwt_starter_template/data/repositories/banners/banners_repository.dart';
+import 'package:cwt_starter_template/data/repositories/categories/category_repository.dart';
 import 'package:cwt_starter_template/data/repositories/user/user_repository.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/login/login_cubit.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/user/user_cubit.dart';
+import 'package:cwt_starter_template/simple_bloc_observer.dart';
 import 'package:cwt_starter_template/utils/helpers/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,12 +23,15 @@ Future<void> main() async {
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await GetStorage.init();
-
+  Bloc.observer = SimpleBlocObserver();
   runApp(
     MultiRepositoryProvider(
       providers: [
         RepositoryProvider(create: (context) => AuthenticationRepository()),
         RepositoryProvider(create: (context) => UserRepository()),
+        RepositoryProvider(create: (context) => CategoryRepository()),
+        RepositoryProvider(create: (context) => BannersRepository()),
+
       ],
       child: MultiBlocProvider(
         providers: [

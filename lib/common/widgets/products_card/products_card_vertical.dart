@@ -38,7 +38,6 @@ class ProductCardVertical extends StatelessWidget {
                 children: [
                   TRoundedImage(
                     imageUrl: TImages.productImage1,
-                    applyImageRadious: true,
                   ),
                   // --Sale Tag
                   Positioned(

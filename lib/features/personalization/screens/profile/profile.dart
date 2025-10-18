@@ -25,6 +25,7 @@ class ProfileScreen extends StatelessWidget {
       body: BlocListener<UserCubit, UserState>(
         listener: (context, state) {
           if (state is UserReAuthenticationRequired) {
+            TFullScreenLoader.stopLoading(context);
             Navigator.of(
               context,
             ).push(MaterialPageRoute(builder: (_) => const ReauthLoginForm()));
@@ -35,9 +36,8 @@ class ProfileScreen extends StatelessWidget {
               TImages.docerAnimation,
             );
           } else if (state is UserFailure) {
+            TFullScreenLoader.stopLoading(context);
             TLoaders.errorSnackBar(context: context, title: state.error);
-          }else if (state is UserLoading){
-            TFullScreenLoader.openLoadingDialog(context, 'Processing', TImages.docerAnimation);
           }
         },
         child: BlocBuilder<UserCubit, UserState>(
@@ -63,11 +63,17 @@ class ProfileScreen extends StatelessWidget {
                                   user.profilePicture.isNotEmpty
                                       ? user.profilePicture
                                       : TImages.user,
+                              isNetworkImage:
+                                  user.profilePicture.isNotEmpty ? true : false,
                               width: 80,
                               height: 80,
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed:
+                                  () =>
+                                      context
+                                          .read<UserCubit>()
+                                          .uploadImageProfilePicture(),
                               child: const Text('Change Profile Picture'),
                             ),
                           ],
@@ -152,13 +158,18 @@ class ProfileScreen extends StatelessWidget {
                                     actions: [
                                       TextButton(
                                         onPressed:
-                                            () => Navigator.of(dialogContext).pop(),
+                                            () =>
+                                                Navigator.of(
+                                                  dialogContext,
+                                                ).pop(),
                                         child: Text('Cancel'),
                                       ),
                                       ElevatedButton(
                                         onPressed: () {
                                           Navigator.of(dialogContext).pop();
-                                          context.read<UserCubit>().deleteUserAccount();
+                                          context
+                                              .read<UserCubit>()
+                                              .deleteUserAccount();
                                         },
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor: Colors.red,

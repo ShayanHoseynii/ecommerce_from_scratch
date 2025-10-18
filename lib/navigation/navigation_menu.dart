@@ -1,5 +1,10 @@
+import 'package:cwt_starter_template/data/repositories/banners/banners_repository.dart';
+import 'package:cwt_starter_template/data/repositories/categories/category_repository.dart';
+import 'package:cwt_starter_template/features/authentication/cubit/banners/banners_cubit.dart';
+import 'package:cwt_starter_template/features/authentication/cubit/category/category_cubit.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/user/user_cubit.dart';
 import 'package:cwt_starter_template/features/personalization/screens/settings/settings.dart';
+import 'package:cwt_starter_template/features/shop/screens/home/controller/carusoul_cubit.dart';
 import 'package:cwt_starter_template/features/shop/screens/home/home.dart';
 import 'package:cwt_starter_template/features/shop/screens/store/store.dart';
 import 'package:cwt_starter_template/features/shop/screens/wishlist/wishlist.dart';
@@ -28,10 +33,10 @@ class _NavigationMenuState extends State<NavigationMenu> {
   @override
   Widget build(BuildContext context) {
     final darkMode = THelperFunctions.isDarkMode(context);
-    return Scaffold(
-      bottomNavigationBar: BlocBuilder<NavigationCubit, NavigationState>(
-        builder: (context, state) {
-          return NavigationBar(
+    return BlocBuilder<NavigationCubit, NavigationState>(
+      builder: (context, state) {
+        return Scaffold(
+          bottomNavigationBar: NavigationBar(
             destinations: const [
               NavigationDestination(icon: Icon(Iconsax.home), label: 'Home'),
               NavigationDestination(icon: Icon(Iconsax.shop), label: 'Store'),
@@ -51,22 +56,24 @@ class _NavigationMenuState extends State<NavigationMenu> {
                 darkMode
                     ? TColors.white.withOpacity(0.1)
                     : TColors.black.withOpacity(0.1),
-          );
-        },
-      ),
-      body: BlocBuilder<NavigationCubit, NavigationState>(
-        builder: (context, state) {
-          return IndexedStack(
-            index: state.index,
-            children: [
-              HomeScreen(),
-              Store(),
-              FavouriteItemScreen(),
-              SettingsScreen(),
+          ),
+
+          body: MultiBlocProvider(
+            providers: [
+               BlocProvider(create: (context) => CategoryCubit(context.read<CategoryRepository>())..fetchCategories()),
             ],
-          );
-        },
-      ),
+            child: IndexedStack(
+              index: state.index,
+              children: [
+                HomeScreen(),
+                Store(),
+                FavouriteItemScreen(),
+                SettingsScreen(),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

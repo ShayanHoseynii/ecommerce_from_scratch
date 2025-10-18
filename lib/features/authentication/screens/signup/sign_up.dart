@@ -1,11 +1,9 @@
 import 'package:cwt_starter_template/data/repositories/authentication/authentication_repository.dart';
 import 'package:cwt_starter_template/data/repositories/user/user_repository.dart';
-import 'package:cwt_starter_template/features/authentication/cubit/login/login_cubit.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/signup/signup_cubit.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/signup/signup_state.dart';
 import 'package:cwt_starter_template/features/authentication/screens/signup/verify_email.dart';
 import 'package:cwt_starter_template/features/authentication/screens/signup/widgets/signup_form.dart';
-import 'package:cwt_starter_template/utils/constants/colors.dart';
 import 'package:cwt_starter_template/utils/constants/image_strings.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
 import 'package:cwt_starter_template/utils/helpers/exports.dart';

@@ -20,9 +20,13 @@ class UserLoaded extends UserState {
   final UserModel user;
   const UserLoaded(this.user);
 
+
+
   @override
   List<Object> get props => [user];
 }
+
+
 
 class UserFailure extends UserState {
   final String error;

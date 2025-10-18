@@ -27,6 +27,7 @@ class UserProfileTile extends StatelessWidget {
                   user.profilePicture.isNotEmpty
                       ? user.profilePicture
                       : TImages.user,
+              isNetworkImage: user.profilePicture.isNotEmpty,
               width: 50,
               height: 50,
               padding: 0,

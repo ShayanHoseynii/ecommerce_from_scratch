@@ -12,6 +12,7 @@ class UserModel {
   String phoneNumber;
   String profilePicture;
 
+
   /// Constructor for UserModel.
   UserModel({
     required this.id,
@@ -22,6 +23,26 @@ class UserModel {
     required this.phoneNumber,
     required this.profilePicture,
   });
+
+  UserModel copyWith({
+    String? id,
+    String? firstName,
+    String? lastName,
+    String? username,
+    String? email,
+    String? phoneNumber,
+    String? profilePicture,
+  }) {
+    return UserModel(
+      id: id ?? this.id,
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
+      username: username ?? this.username,
+      email: email ?? this.email,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      profilePicture: profilePicture ?? this.profilePicture,
+    );
+  }
 
   /// Helper function to get the full name.
   String get fullName => '$firstName $lastName';

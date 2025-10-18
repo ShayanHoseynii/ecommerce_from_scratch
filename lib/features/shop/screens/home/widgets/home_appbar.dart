@@ -7,7 +7,6 @@ import 'package:cwt_starter_template/utils/constants/colors.dart';
 import 'package:cwt_starter_template/utils/constants/text_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shimmer/shimmer.dart';
 
 class THomeAppBar extends StatelessWidget {
   const THomeAppBar({super.key});

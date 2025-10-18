@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cwt_starter_template/common/widgets/shimmer/shimmer.dart';
 import 'package:flutter/material.dart';
 
 class TRoundedImage extends StatelessWidget {
@@ -6,27 +8,30 @@ class TRoundedImage extends StatelessWidget {
     required this.imageUrl,
     this.width,
     this.height,
-    this.applyImageRadious = false,
+    this.applyImageRadius = true, // Default to true, it's a rounded image widget
     this.border,
     this.backgroundColor,
     this.fit = BoxFit.contain,
     this.padding,
-    this.isNetworkImage = false,
     this.onPressed,
-    this.borderRadious = 16,
+    this.borderRadius = 16,
   });
+
   final String imageUrl;
   final double? width, height;
-  final bool applyImageRadious;
+  final bool applyImageRadius;
   final BoxBorder? border;
   final Color? backgroundColor;
-  final BoxFit? fit;
+  final BoxFit fit; // Removed nullable for clarity, it has a default
   final EdgeInsetsGeometry? padding;
-  final bool isNetworkImage;
   final VoidCallback? onPressed;
-  final double borderRadious;
+  final double borderRadius;
+
   @override
   Widget build(BuildContext context) {
+    // ✅ Automatically detect if the image is a network URL
+    final isNetworkImage = imageUrl.startsWith('http');
+
     return GestureDetector(
       onTap: onPressed,
       child: Container(
@@ -36,19 +41,30 @@ class TRoundedImage extends StatelessWidget {
         decoration: BoxDecoration(
           border: border,
           color: backgroundColor,
-          borderRadius: BorderRadius.circular(borderRadious),
+          borderRadius: BorderRadius.circular(borderRadius),
         ),
         child: ClipRRect(
-          borderRadius:
-              applyImageRadious
-                  ? BorderRadius.circular(borderRadious)
-                  : BorderRadius.zero,
-          child: Image(
-            image:
-                isNetworkImage
-                    ? NetworkImage(imageUrl)
-                    : AssetImage(imageUrl) as ImageProvider,
-          ),
+          borderRadius: applyImageRadius
+              ? BorderRadius.circular(borderRadius)
+              : BorderRadius.zero,
+          child: isNetworkImage
+              // ✅ Use Image.network for URLs
+              ? CachedNetworkImage(
+                imageUrl: imageUrl,
+                fit: fit,
+                // Show a shimmer effect while the image is loading for the first time
+                placeholder: (context, url) =>  TShimmerEffect(
+                  width: width ?? double.infinity,
+                  height: height ?? 190,
+                ),
+                // Show an error icon if the download fails
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+              )
+              // ✅ Use Image.asset for local assets
+              : Image.asset(
+                  imageUrl,
+                  fit: fit,
+                ),
         ),
       ),
     );

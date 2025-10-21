@@ -3,6 +3,7 @@ import 'package:cwt_starter_template/data/repositories/authentication/auth_state
 import 'package:cwt_starter_template/data/repositories/authentication/authentication_repository.dart';
 import 'package:cwt_starter_template/data/repositories/banners/banners_repository.dart';
 import 'package:cwt_starter_template/data/repositories/categories/category_repository.dart';
+import 'package:cwt_starter_template/data/repositories/products/product_repo.dart';
 import 'package:cwt_starter_template/data/repositories/user/user_repository.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/login/login_cubit.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/user/user_cubit.dart';
@@ -11,6 +12,7 @@ import 'package:cwt_starter_template/utils/helpers/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
 import 'routes/app_router.dart';
 import 'utils/theme/theme.dart';
@@ -31,15 +33,14 @@ Future<void> main() async {
         RepositoryProvider(create: (context) => UserRepository()),
         RepositoryProvider(create: (context) => CategoryRepository()),
         RepositoryProvider(create: (context) => BannersRepository()),
-
+        RepositoryProvider(create: (context) => ProductRepository()),
       ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
             create:
-                (context) => AuthCubit(
-                  context.read<AuthenticationRepository>(),
-                ),
+                (context) =>
+                    AuthCubit(context.read<AuthenticationRepository>()),
           ),
           BlocProvider(create: (context) => NetworkCubit()),
           BlocProvider(
@@ -49,11 +50,14 @@ Future<void> main() async {
                   authRepository: context.read<AuthenticationRepository>(),
                   networkCubit: context.read<NetworkCubit>(),
                 ),
-
           ),
           BlocProvider(
-            create: (context) => UserCubit(context.read<UserRepository>(), context.read<AuthenticationRepository>()),
-          )
+            create:
+                (context) => UserCubit(
+                  context.read<UserRepository>(),
+                  context.read<AuthenticationRepository>(),
+                ),
+          ),
         ],
         child: MyApp(),
       ),
@@ -69,7 +73,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       themeMode: ThemeMode.system,
       theme: TAppTheme.lightTheme,

@@ -44,6 +44,7 @@ class TVerticalImageText extends StatelessWidget {
                 child: isNetworkImage
                     ? Image.network(
                         image,
+                        color: dark ? TColors.white : TColors.dark,
                         fit: BoxFit.cover,
                         // Show a loading indicator
                         loadingBuilder: (context, child, loadingProgress) {

@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cwt_starter_template/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -7,7 +9,7 @@ import 'package:intl/intl.dart';
 class THelperFunctions {
   static Color? getColor(String value) {
     /// Define your product specific colors here and it will match the attribute colors and show specific 🟠🟡🟢🔵🟣🟤
-
+    value = value.trim();
     if (value == 'Green') {
       return Colors.green;
     } else if (value == 'Green') {
@@ -42,7 +44,7 @@ class THelperFunctions {
   }
 
   /// Gets safe area height based on notch presence
-  static double  getTopSafeArea(BuildContext context) {
+  static double getTopSafeArea(BuildContext context) {
     return MediaQuery.of(context).viewPadding.top;
   }
 
@@ -52,9 +54,9 @@ class THelperFunctions {
   }
 
   static void showSnackBar(String message) {
-    ScaffoldMessenger.of(Get.context!).showSnackBar(
-      SnackBar(content: Text(message)),
-    );
+    ScaffoldMessenger.of(
+      Get.context!,
+    ).showSnackBar(SnackBar(content: Text(message)));
   }
 
   static void showAlert(String title, String message) {
@@ -75,11 +77,50 @@ class THelperFunctions {
     );
   }
 
-  static void navigateToScreen(BuildContext context, Widget screen) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (_) => screen),
+  static void showEnlargedImage(String image) {
+    Get.to(
+      () => Dialog.fullscreen(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: TSizes.defaultSpace * 2,
+                horizontal: TSizes.defaultSpace,
+              ),
+              // Using CachedNetworkImage for better performance
+              child: CachedNetworkImage(
+                imageUrl: image,
+                // Optional: Add a placeholder while the image is loading
+                placeholder:
+                    (context, url) => const CircularProgressIndicator(),
+                // Optional: Show an error icon if the image fails to load
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+              ),
+            ),
+            const SizedBox(height: TSizes.spaceBtwSections),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: SizedBox(
+                width: 150,
+                child: OutlinedButton(
+                  onPressed: () => Get.back(), // Use GetX to close the dialog
+                  child: const Text('Close'),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      // Use GetX's fullscreenDialog property
+      fullscreenDialog: true,
     );
+  }
+
+  static void navigateToScreen(BuildContext context, Widget screen) {
+    Navigator.push(context, MaterialPageRoute(builder: (_) => screen));
   }
 
   static String truncateText(String text, int maxLength) {
@@ -91,38 +132,29 @@ class THelperFunctions {
   }
 
   static bool isDarkMode(BuildContext context) {
-    return Theme
-        .of(context)
-        .brightness == Brightness.dark;
+    return Theme.of(context).brightness == Brightness.dark;
   }
 
   static bool isPortrait(BuildContext context) {
-    return MediaQuery
-        .of(context)
-        .orientation == Orientation.portrait;
+    return MediaQuery.of(context).orientation == Orientation.portrait;
   }
 
   static Size screenSize() {
-    return MediaQuery
-        .of(Get.context!)
-        .size;
+    return MediaQuery.of(Get.context!).size;
   }
 
   static double screenHeight() {
-    return MediaQuery
-        .of(Get.context!)
-        .size
-        .height;
+    return MediaQuery.of(Get.context!).size.height;
   }
 
   static double screenWidth() {
-    return MediaQuery
-        .of(Get.context!)
-        .size
-        .width;
+    return MediaQuery.of(Get.context!).size.width;
   }
 
-  static String getFormattedDate(DateTime date, {String format = 'dd MMM yyyy'}) {
+  static String getFormattedDate(
+    DateTime date, {
+    String format = 'dd MMM yyyy',
+  }) {
     return DateFormat(format).format(date);
   }
 
@@ -134,30 +166,30 @@ class THelperFunctions {
     final wrappedList = <Widget>[];
     for (var i = 0; i < widgets.length; i += rowSize) {
       final rowChildren = widgets.sublist(
-          i, i + rowSize > widgets.length ? widgets.length : i + rowSize);
+        i,
+        i + rowSize > widgets.length ? widgets.length : i + rowSize,
+      );
       wrappedList.add(Row(children: rowChildren));
     }
     return wrappedList;
   }
 
-
   static String maskPhoneNumber(String number) {
     if (number.length > 6) {
       final visibleStart = number.substring(0, 2);
       final visibleEnd = number.substring(number.length - 3);
-      final maskedPart = '*' * (number.length - visibleStart.length - visibleEnd.length);
+      final maskedPart =
+          '*' * (number.length - visibleStart.length - visibleEnd.length);
       return '$visibleStart $maskedPart $visibleEnd';
     }
     return number;
   }
-
 
   static String generateReferralCode(String firstName) {
     final random = Random();
     final randomNumber = random.nextInt(1000);
     return firstName.toUpperCase() + randomNumber.toString();
   }
-
 
   /// Converts a dynamic [value] to a [DateTime] object.
   ///
@@ -209,5 +241,4 @@ class THelperFunctions {
 
     return age;
   }
-
 }

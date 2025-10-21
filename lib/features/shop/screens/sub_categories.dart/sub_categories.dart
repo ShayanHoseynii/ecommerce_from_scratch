@@ -2,7 +2,6 @@ import 'package:cwt_starter_template/common/widgets/appbar/appbar.dart';
 import 'package:cwt_starter_template/common/widgets/images/rounded_image.dart';
 import 'package:cwt_starter_template/common/widgets/products_card/products_card_horizontal.dart';
 import 'package:cwt_starter_template/common/widgets/texts/section_heading.dart';
-import 'package:cwt_starter_template/features/authentication/models/category_model.dart';
 import 'package:cwt_starter_template/utils/constants/image_strings.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';

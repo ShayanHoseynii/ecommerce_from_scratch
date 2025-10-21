@@ -91,9 +91,6 @@ class AppRouter {
       case '/profile':
         return MaterialPageRoute(builder: (_) => ProfileScreen());
 
-      case '/product-detail':
-        return MaterialPageRoute(builder: (_) => ProductDetailScreen());
-
       case '/reviews':
         return MaterialPageRoute(builder: (_) => ProductReviewsScreen());
 

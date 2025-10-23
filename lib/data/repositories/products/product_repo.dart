@@ -51,4 +51,36 @@ class ProductRepository {
     }
   }
 
+  Future<List<ProductModel>> fetchProductByQuery(Query query) async{
+    try {
+      final snapshot = await query.get();
+      final list =
+          snapshot.docs.map((doc) => ProductModel.fromQuerySnapshot(doc)).toList();
+      return list;
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again.';
+    }
+  }
+
+  Future<List<ProductModel>> getFeaturedProducts({int limit = 6}) async {
+    try {
+      final query = _db
+          .collection('Products')
+          .where('isFeatured', isEqualTo: true)
+          .limit(limit);
+      return await fetchProductByQuery(query); // Use your existing method
+    } catch (e) {
+      // Handle or rethrow specific errors
+      rethrow; 
+    }
+  }
+
 }

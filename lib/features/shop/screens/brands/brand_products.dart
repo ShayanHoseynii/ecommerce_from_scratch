@@ -20,7 +20,7 @@ class BrandProducts extends StatelessWidget {
             BrandCard(showBorder: true),
             const SizedBox(height: TSizes.spaceBtwSections,),
 
-            TSortableProducts(),
+            // TSortableProducts(),
           ],
         ),),
       ),

@@ -191,4 +191,53 @@ class ProductModel {
       return totalStock > 0 ? 'In Stock' : 'Out of Stock';
     }
   }
+
+  // Map Json-oriented document snapshot from Firebase to Model
+factory ProductModel.fromQuerySnapshot(QueryDocumentSnapshot<Object?> document) {
+  final data = document.data() as Map<String, dynamic>;
+  return ProductModel(
+    id: document.id,
+    sku: data['sku'] ?? '',
+    title: data['title'] ?? '',
+    stock: data['stock'] ?? 0,
+    isFeatured: data['isFeatured'] ?? false,
+    price: double.parse((data['price'] ?? 0.0).toString()),
+    salePrice: double.parse((data['salePrice'] ?? 0.0).toString()),
+    thumbnail: data['thumbnail'] ?? '',
+    categoryId: data['categoryId'] ?? '',
+    description: data['description'] ?? '',
+    productType: data['productType'] ?? '',
+    brand: BrandModel.fromJson(data['brand']),
+    images: data['images'] != null ? List<String>.from(data['images']) : [],
+    productAttributes: (data['productAttributes'] as List<dynamic>)
+        .map((e) => ProductAttributeModel.fromJson(e))
+        .toList(),
+    productVariations: (data['productVariations'] as List<dynamic>)
+        .map((e) => ProductVariationModel.fromJson(e))
+        .toList(),
+  );
+}
+
+double get effectivePrice {
+  if (productType == ProductType.single.toString()) {
+    // For single products, use its own price (or sale price if available)
+    return salePrice > 0 ? salePrice : price;
+  } else {
+    // For variable products, find the minimum price among variations
+    double minPrice = double.infinity;
+    if (productVariations != null && productVariations!.isNotEmpty) {
+      for (var variation in productVariations!) {
+        final priceToConsider = variation.salePrice > 0 ? variation.salePrice : variation.price;
+        if (priceToConsider < minPrice) {
+          minPrice = priceToConsider;
+        }
+      }
+      // Return the lowest found price, or 0 if no variations (shouldn't happen ideally)
+      return minPrice == double.infinity ? 0.0 : minPrice;
+    } else {
+      // Fallback if somehow a variable product has no variations
+      return 0.0;
+    }
+  }
+}
 }

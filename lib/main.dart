@@ -29,11 +29,11 @@ Future<void> main() async {
   runApp(
     MultiRepositoryProvider(
       providers: [
-        RepositoryProvider(create: (context) => AuthenticationRepository()),
-        RepositoryProvider(create: (context) => UserRepository()),
-        RepositoryProvider(create: (context) => CategoryRepository()),
-        RepositoryProvider(create: (context) => BannersRepository()),
-        RepositoryProvider(create: (context) => ProductRepository()),
+        RepositoryProvider(create: (_) => AuthenticationRepository()),
+        RepositoryProvider(create: (_) => UserRepository()),
+        RepositoryProvider(create: (_) => CategoryRepository()),
+        RepositoryProvider(create: (_) => BannersRepository()),
+        RepositoryProvider(create: (_) => ProductRepository()),
       ],
       child: MultiBlocProvider(
         providers: [

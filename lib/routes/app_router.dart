@@ -11,13 +11,11 @@ import 'package:cwt_starter_template/features/authentication/screens/signup/sign
 import 'package:cwt_starter_template/features/personalization/screens/profile/profile.dart';
 import 'package:cwt_starter_template/features/personalization/screens/adresses/add_new_address.dart';
 import 'package:cwt_starter_template/features/personalization/screens/adresses/addresses.dart';
-import 'package:cwt_starter_template/features/shop/screens/all_products/all_products.dart';
 import 'package:cwt_starter_template/features/shop/screens/brands/all_brands.dart';
 import 'package:cwt_starter_template/features/shop/screens/brands/brand_products.dart';
 import 'package:cwt_starter_template/features/shop/screens/cart/cart.dart';
 import 'package:cwt_starter_template/features/shop/screens/checkout/checkout.dart';
 import 'package:cwt_starter_template/features/shop/screens/order/order.dart';
-import 'package:cwt_starter_template/features/shop/screens/product_detail/product_detail.dart';
 import 'package:cwt_starter_template/features/shop/screens/product_reviews/product_reviews.dart';
 import 'package:cwt_starter_template/features/shop/screens/sub_categories.dart/sub_categories.dart';
 import 'package:cwt_starter_template/navigation/cubit/navigation_menu__cubit.dart';
@@ -112,8 +110,7 @@ class AppRouter {
       case '/sub-categories':
         return MaterialPageRoute(builder: (_) => SubCategoriesScreen());
 
-      case '/all-products':
-        return MaterialPageRoute(builder: (_) => AllProductsScreen());
+
 
       case '/brands':
         return MaterialPageRoute(builder: (_) => AllBrandsScreen());

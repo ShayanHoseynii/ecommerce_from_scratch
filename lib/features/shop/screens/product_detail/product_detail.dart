@@ -1,6 +1,5 @@
 import 'package:cwt_starter_template/common/widgets/texts/section_heading.dart';
 import 'package:cwt_starter_template/features/authentication/models/product_model.dart';
-import 'package:cwt_starter_template/features/shop/screens/product_detail/cubit/image_slider_cubit.dart';
 import 'package:cwt_starter_template/features/shop/screens/product_detail/cubit/variation_cubit.dart';
 import 'package:cwt_starter_template/features/shop/screens/product_detail/cubit/variation_state.dart';
 import 'package:cwt_starter_template/features/shop/screens/product_detail/widgets/bottom_add_to_cart_widget.dart';

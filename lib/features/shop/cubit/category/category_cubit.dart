@@ -1,5 +1,5 @@
 import 'package:cwt_starter_template/data/repositories/categories/category_repository.dart';
-import 'package:cwt_starter_template/features/authentication/cubit/category/category_state.dart';
+import 'package:cwt_starter_template/features/shop/cubit/category/category_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CategoryCubit extends Cubit<CategoryState> {

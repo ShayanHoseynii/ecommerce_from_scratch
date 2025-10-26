@@ -1,4 +1,4 @@
-import 'package:cwt_starter_template/features/authentication/models/banner_model.dart';
+import 'package:cwt_starter_template/features/models/banner_model.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class BannerState extends Equatable {

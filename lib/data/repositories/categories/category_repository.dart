@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cwt_starter_template/features/authentication/models/category_model.dart';
+import 'package:cwt_starter_template/features/models/category_model.dart';
 import 'package:cwt_starter_template/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:cwt_starter_template/utils/exceptions/firebase_exceptions.dart';
 import 'package:cwt_starter_template/utils/exceptions/format_exceptions.dart';

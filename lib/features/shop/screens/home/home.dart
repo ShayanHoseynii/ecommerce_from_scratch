@@ -6,10 +6,10 @@ import 'package:cwt_starter_template/common/widgets/products_card/products_card_
 import 'package:cwt_starter_template/common/widgets/texts/section_heading.dart';
 import 'package:cwt_starter_template/data/repositories/banners/banners_repository.dart';
 import 'package:cwt_starter_template/data/repositories/products/product_repo.dart';
-import 'package:cwt_starter_template/features/authentication/cubit/all_products/all_products_cubit.dart';
-import 'package:cwt_starter_template/features/authentication/cubit/banners/banners_cubit.dart';
-import 'package:cwt_starter_template/features/authentication/cubit/product/product_cubit.dart';
-import 'package:cwt_starter_template/features/authentication/cubit/product/product_state.dart';
+import 'package:cwt_starter_template/features/shop/cubit/all_products/all_products_cubit.dart';
+import 'package:cwt_starter_template/features/shop/cubit/banners/banners_cubit.dart';
+import 'package:cwt_starter_template/features/shop/cubit/product/product_cubit.dart';
+import 'package:cwt_starter_template/features/shop/cubit/product/product_state.dart';
 import 'package:cwt_starter_template/features/shop/screens/all_products/all_products.dart';
 import 'package:cwt_starter_template/features/shop/screens/home/controller/carusoul_cubit.dart';
 import 'package:cwt_starter_template/features/shop/screens/home/widgets/home_appbar.dart';

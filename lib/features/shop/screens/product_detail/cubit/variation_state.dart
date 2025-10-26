@@ -1,5 +1,5 @@
-import 'package:cwt_starter_template/features/authentication/models/product_model.dart';
-import 'package:cwt_starter_template/features/authentication/models/product_variation_model.dart';
+import 'package:cwt_starter_template/features/models/product_model.dart';
+import 'package:cwt_starter_template/features/models/product_variation_model.dart';
 import 'package:equatable/equatable.dart';
 
 class VariationState extends Equatable {

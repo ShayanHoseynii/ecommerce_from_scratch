@@ -1,9 +1,11 @@
 import 'package:cwt_starter_template/data/repositories/banners/banners_repository.dart';
+import 'package:cwt_starter_template/data/repositories/brands/brands_repository.dart';
 import 'package:cwt_starter_template/data/repositories/categories/category_repository.dart';
 import 'package:cwt_starter_template/data/repositories/products/product_repo.dart';
-import 'package:cwt_starter_template/features/authentication/cubit/banners/banners_cubit.dart';
-import 'package:cwt_starter_template/features/authentication/cubit/category/category_cubit.dart';
-import 'package:cwt_starter_template/features/authentication/cubit/product/product_cubit.dart';
+import 'package:cwt_starter_template/features/shop/cubit/banners/banners_cubit.dart';
+import 'package:cwt_starter_template/features/shop/cubit/brands/brands_cubit.dart';
+import 'package:cwt_starter_template/features/shop/cubit/category/category_cubit.dart';
+import 'package:cwt_starter_template/features/shop/cubit/product/product_cubit.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/user/user_cubit.dart';
 import 'package:cwt_starter_template/features/personalization/screens/settings/settings.dart';
 import 'package:cwt_starter_template/features/shop/screens/home/controller/carusoul_cubit.dart';
@@ -65,7 +67,8 @@ class _NavigationMenuState extends State<NavigationMenu> {
                BlocProvider(create: (context) => CategoryCubit(context.read<CategoryRepository>())..fetchCategories()),
                BlocProvider(
                 create: (context) => ProductCubit(context.read<ProductRepository>())..fetchProducts(),
-               )
+               ),
+               BlocProvider(create: (context) => BrandsCubit(context.read<BrandsRepository>())..fetchBrands()),
             ],
             child: IndexedStack(
               index: state.index,

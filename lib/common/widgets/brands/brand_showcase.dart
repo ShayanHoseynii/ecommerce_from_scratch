@@ -1,18 +1,18 @@
-
-
-
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cwt_starter_template/common/widgets/brands/brand_card.dart';
 import 'package:cwt_starter_template/common/widgets/containers/rounded_container.dart';
+import 'package:cwt_starter_template/common/widgets/shimmer/shimmer.dart';
+import 'package:cwt_starter_template/features/models/brand_model.dart';
 import 'package:cwt_starter_template/utils/constants/colors.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
 import 'package:cwt_starter_template/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 
 class TBrandShowcase extends StatelessWidget {
-  const TBrandShowcase({super.key, required this.images});
+  const TBrandShowcase({super.key, required this.images, required this.brand});
 
   final List<String> images;
+  final BrandModel brand;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class TBrandShowcase extends StatelessWidget {
       child: Column(
         children: [
           /// -- Brand with Products Count
-          const BrandCard(showBorder: false),
+          BrandCard(showBorder: false, brand: brand),
           const SizedBox(height: TSizes.spaceBtwItems),
 
           /// Brand Top 3 Product Image
@@ -47,7 +47,14 @@ class TBrandShowcase extends StatelessWidget {
                                 ? 0
                                 : TSizes.sm, // no margin for last
                       ),
-                      child: Image(image: AssetImage(img), fit: BoxFit.contain),
+                      child: CachedNetworkImage(
+                        imageUrl: img,
+                        placeholder:
+                            (context, url) =>
+                                const TShimmerEffect(width: 100, height: 100),
+                        errorWidget:
+                            (context, url, error) => const Icon(Icons.error),
+                      ),
                     ),
                   );
                 }).toList(),

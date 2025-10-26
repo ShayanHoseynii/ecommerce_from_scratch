@@ -1,8 +1,8 @@
 // all_products_screen.dart
 import 'package:cwt_starter_template/common/widgets/appbar/appbar.dart';
 import 'package:cwt_starter_template/common/widgets/products/sortable/sortable_products.dart';
-import 'package:cwt_starter_template/features/authentication/cubit/all_products/all_products_cubit.dart';
-import 'package:cwt_starter_template/features/authentication/cubit/all_products/all_products_state.dart';
+import 'package:cwt_starter_template/features/shop/cubit/all_products/all_products_cubit.dart';
+import 'package:cwt_starter_template/features/shop/cubit/all_products/all_products_state.dart';
 import 'package:cwt_starter_template/features/shop/screens/home/widgets/vertical_product_shimmer.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';

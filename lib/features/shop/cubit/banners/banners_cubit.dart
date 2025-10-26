@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:cwt_starter_template/data/repositories/banners/banners_repository.dart';
-import 'package:cwt_starter_template/features/authentication/cubit/banners/banners_state.dart';
+import 'package:cwt_starter_template/features/shop/cubit/banners/banners_state.dart';
 
 class BannerCubit extends Cubit<BannerState> {
   final BannersRepository _bannerRepository;

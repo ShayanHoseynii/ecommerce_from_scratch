@@ -1,4 +1,4 @@
-import 'package:cwt_starter_template/features/authentication/models/category_model.dart';
+import 'package:cwt_starter_template/features/models/category_model.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class CategoryState extends Equatable {

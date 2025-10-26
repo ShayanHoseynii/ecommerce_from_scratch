@@ -4,7 +4,7 @@ import 'package:cwt_starter_template/common/widgets/appbar/appbar.dart';
 import 'package:cwt_starter_template/common/widgets/curved_edges/curved_edges_widget.dart';
 import 'package:cwt_starter_template/common/widgets/images/rounded_image.dart';
 import 'package:cwt_starter_template/common/widgets/shimmer/shimmer.dart';
-import 'package:cwt_starter_template/features/authentication/models/product_model.dart';
+import 'package:cwt_starter_template/features/models/product_model.dart';
 import 'package:cwt_starter_template/utils/constants/colors.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
 import 'package:cwt_starter_template/utils/helpers/helper_functions.dart';

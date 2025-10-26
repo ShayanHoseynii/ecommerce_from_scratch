@@ -3,7 +3,7 @@ import 'package:cwt_starter_template/common/widgets/containers/rounded_container
 import 'package:cwt_starter_template/common/widgets/texts/product_price_text.dart';
 import 'package:cwt_starter_template/common/widgets/texts/product_title_text.dart';
 import 'package:cwt_starter_template/common/widgets/texts/section_heading.dart';
-import 'package:cwt_starter_template/features/authentication/models/product_model.dart';
+import 'package:cwt_starter_template/features/models/product_model.dart';
 import 'package:cwt_starter_template/features/shop/screens/product_detail/cubit/variation_cubit.dart';
 import 'package:cwt_starter_template/features/shop/screens/product_detail/cubit/variation_state.dart';
 import 'package:cwt_starter_template/utils/constants/colors.dart';

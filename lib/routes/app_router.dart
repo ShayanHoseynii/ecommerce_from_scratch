@@ -12,7 +12,6 @@ import 'package:cwt_starter_template/features/personalization/screens/profile/pr
 import 'package:cwt_starter_template/features/personalization/screens/adresses/add_new_address.dart';
 import 'package:cwt_starter_template/features/personalization/screens/adresses/addresses.dart';
 import 'package:cwt_starter_template/features/shop/screens/brands/all_brands.dart';
-import 'package:cwt_starter_template/features/shop/screens/brands/brand_products.dart';
 import 'package:cwt_starter_template/features/shop/screens/cart/cart.dart';
 import 'package:cwt_starter_template/features/shop/screens/checkout/checkout.dart';
 import 'package:cwt_starter_template/features/shop/screens/order/order.dart';
@@ -115,8 +114,7 @@ class AppRouter {
       case '/brands':
         return MaterialPageRoute(builder: (_) => AllBrandsScreen());
 
-      case '/brand-products':
-        return MaterialPageRoute(builder: (_) => BrandProducts());
+
 
       default:
         return null;

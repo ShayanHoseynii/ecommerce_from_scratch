@@ -1,6 +1,6 @@
 import 'package:cwt_starter_template/common/widgets/shimmer/shimmer.dart';
-import 'package:cwt_starter_template/features/authentication/cubit/category/category_cubit.dart';
-import 'package:cwt_starter_template/features/authentication/cubit/category/category_state.dart';
+import 'package:cwt_starter_template/features/shop/cubit/category/category_cubit.dart';
+import 'package:cwt_starter_template/features/shop/cubit/category/category_state.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

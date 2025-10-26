@@ -4,7 +4,7 @@ import 'package:cwt_starter_template/common/widgets/containers/rounded_container
 import 'package:cwt_starter_template/common/widgets/images/rounded_image.dart';
 import 'package:cwt_starter_template/common/widgets/texts/brand_title_text_with_verifiedIcon.dart';
 import 'package:cwt_starter_template/common/widgets/texts/product_title_text.dart';
-import 'package:cwt_starter_template/features/authentication/models/product_model.dart';
+import 'package:cwt_starter_template/features/models/product_model.dart';
 import 'package:cwt_starter_template/features/shop/screens/product_detail/product_detail.dart';
 import 'package:cwt_starter_template/utils/constants/colors.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';

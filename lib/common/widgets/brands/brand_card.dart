@@ -1,15 +1,21 @@
 import 'package:cwt_starter_template/common/widgets/containers/rounded_container.dart';
 import 'package:cwt_starter_template/common/widgets/images/circular_image.dart';
 import 'package:cwt_starter_template/common/widgets/texts/brand_title_text_with_verifiedIcon.dart';
+import 'package:cwt_starter_template/features/models/brand_model.dart';
 import 'package:cwt_starter_template/utils/constants/colors.dart';
 import 'package:cwt_starter_template/utils/constants/enums.dart';
-import 'package:cwt_starter_template/utils/constants/image_strings.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
 import 'package:cwt_starter_template/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 
 class BrandCard extends StatelessWidget {
-  const BrandCard({super.key, required this.showBorder, this.onTap});
+  const BrandCard({
+    super.key,
+    required this.showBorder,
+    this.onTap,
+    this.brand,
+  });
+  final BrandModel? brand;
 
   final bool showBorder;
   final void Function()? onTap;
@@ -28,9 +34,9 @@ class BrandCard extends StatelessWidget {
               child: CircularImage(
                 dark: dark,
                 overlayColor: dark ? TColors.white : TColors.black,
-                image: TImages.nikeLogo,
+                image: brand!.image,
                 backgroundColor: Colors.transparent,
-                isNetworkImage: false,
+                isNetworkImage: true,
               ),
             ),
             const SizedBox(width: TSizes.spaceBtwItems / 2),
@@ -42,11 +48,11 @@ class BrandCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   BrandTitleTextWithVerifiedIcon(
-                    title: 'Nike',
+                    title: brand!.name,
                     brandTextSize: TextSizes.large,
                   ),
                   Text(
-                    '256 products',
+                    '${brand!.productCount} products',
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.labelMedium,
                   ),

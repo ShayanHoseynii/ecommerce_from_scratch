@@ -69,6 +69,21 @@ class ProductRepository {
       throw 'Something went wrong. Please try again.';
     }
   }
+
+  Future<List<ProductModel>> getProductsForCategory(String categoryId, {int limit = 4}) async {
+    try {
+
+      final snapshot = await _db.collection('Products')
+                            .where('categoryIds', arrayContains: categoryId)
+                            .limit(limit)
+                            .get();
+      
+      return snapshot.docs.map((doc) => ProductModel.fromSnapshot(doc)).toList();
+    } catch (e) {
+      // Handle errors
+      throw 'Something went wrong: $e';
+    }
+  }
 Future<List<ProductModel>> getProductsByCategoryId(String categoryId) async {
     try {
       // Use 'array-contains' to query products where the categoryId exists in the categoryIds list
@@ -139,5 +154,26 @@ Future<List<ProductModel>> getProductsByCategoryId(String categoryId) async {
       throw 'Something went wrong. Please try again.';
     }
   }
+
+
+Future<List<ProductModel>> getProductsByIds(List<String> ids) async {
+  try {
+    // If the list of IDs is empty, return an empty list to avoid a Firebase error
+    if (ids.isEmpty) return [];
+
+    final snapshot = await _db
+        .collection('Products')
+        .where(FieldPath.documentId, whereIn: ids)
+        .get();
+
+    return snapshot.docs.map((doc) => ProductModel.fromSnapshot(doc)).toList();
+  } on FirebaseException catch (e) {
+    throw 'FirebaseException: ${e.message}';
+  } on PlatformException catch (e) {
+    throw 'PlatformException: ${e.message}';
+  } catch (e) {
+    throw 'Something went wrong. Please try again.';
+  }
+}
 
 }

@@ -1,15 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cwt_starter_template/common/widgets/icons/circular_icon.dart';
 import 'package:cwt_starter_template/common/widgets/appbar/appbar.dart';
 import 'package:cwt_starter_template/common/widgets/curved_edges/curved_edges_widget.dart';
 import 'package:cwt_starter_template/common/widgets/images/rounded_image.dart';
+import 'package:cwt_starter_template/common/widgets/products/favourite_icon/favourite_icon.dart';
 import 'package:cwt_starter_template/common/widgets/shimmer/shimmer.dart';
 import 'package:cwt_starter_template/features/models/product_model.dart';
 import 'package:cwt_starter_template/utils/constants/colors.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
 import 'package:cwt_starter_template/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 
 class TProductImageSlider extends StatelessWidget {
   const TProductImageSlider({
@@ -104,11 +103,7 @@ class TProductImageSlider extends StatelessWidget {
             TAppBar(
               showBackArrow: true,
               actions: [
-                CircularIcon(
-                  dark: dark,
-                  icon: Iconsax.heart5,
-                  color: TColors.red,
-                ),
+               TFavouriteIcon(productId: product.id,)
               ],
             ),
           ],

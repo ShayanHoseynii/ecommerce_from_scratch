@@ -5,10 +5,11 @@ import 'package:cwt_starter_template/data/repositories/products/product_repo.dar
 import 'package:cwt_starter_template/features/shop/cubit/banners/banners_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/brands/brands_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/category/category_cubit.dart';
+import 'package:cwt_starter_template/features/shop/cubit/favourite_icon/favourite_icon_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/product/product_cubit.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/user/user_cubit.dart';
 import 'package:cwt_starter_template/features/personalization/screens/settings/settings.dart';
-import 'package:cwt_starter_template/features/shop/screens/home/controller/carusoul_cubit.dart';
+import 'package:cwt_starter_template/features/shop/cubit/wish_list/wish_list_cubit.dart';
 import 'package:cwt_starter_template/features/shop/screens/home/home.dart';
 import 'package:cwt_starter_template/features/shop/screens/store/store.dart';
 import 'package:cwt_starter_template/features/shop/screens/wishlist/wishlist.dart';
@@ -62,23 +63,17 @@ class _NavigationMenuState extends State<NavigationMenu> {
                     : TColors.black.withOpacity(0.1),
           ),
 
-          body: MultiBlocProvider(
-            providers: [
-               BlocProvider(create: (context) => CategoryCubit(context.read<CategoryRepository>())..fetchCategories()),
-               BlocProvider(
-                create: (context) => ProductCubit(context.read<ProductRepository>())..fetchProducts(),
-               ),
-               BlocProvider(create: (context) => BrandsCubit(context.read<BrandsRepository>())..fetchBrands()),
+          body: IndexedStack(
+            index: state.index,
+            children: [
+              HomeScreen(),
+              Store(),
+              BlocProvider(
+                create: (context) => WishlistCubit(context.read<FavouriteProductsCubit>(),context.read<ProductRepository>())..fetchWishlistProducts(),
+                child: FavouriteItemScreen(),
+              ),
+              SettingsScreen(),
             ],
-            child: IndexedStack(
-              index: state.index,
-              children: [
-                HomeScreen(),
-                Store(),
-                FavouriteItemScreen(),
-                SettingsScreen(),
-              ],
-            ),
           ),
         );
       },

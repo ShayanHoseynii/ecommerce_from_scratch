@@ -1,23 +1,29 @@
 import 'package:cwt_starter_template/common/styles/shodows.dart';
 import 'package:cwt_starter_template/common/widgets/containers/rounded_container.dart';
-import 'package:cwt_starter_template/common/widgets/icons/circular_icon.dart';
 import 'package:cwt_starter_template/common/widgets/images/rounded_image.dart';
+import 'package:cwt_starter_template/common/widgets/products/favourite_icon/favourite_icon.dart';
 import 'package:cwt_starter_template/common/widgets/texts/brand_title_text_with_verifiedIcon.dart';
 import 'package:cwt_starter_template/common/widgets/texts/product_price_text.dart';
 import 'package:cwt_starter_template/common/widgets/texts/product_title_text.dart';
+import 'package:cwt_starter_template/features/models/product_model.dart';
 import 'package:cwt_starter_template/utils/constants/colors.dart';
-import 'package:cwt_starter_template/utils/constants/image_strings.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
 import 'package:cwt_starter_template/utils/helpers/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
 class TProductCardHorizontal extends StatelessWidget {
-  const TProductCardHorizontal({super.key});
+  const TProductCardHorizontal({super.key, required this.product});
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
+        final dark = THelperFunctions.isDarkMode(context);
+    final salePercentage = product.calculateSalePercentage(
+      product.price,
+      product.salePrice,
+    );
+    final price = product.getProductPrice(product);
     return Container(
       width: 310,
       padding: const EdgeInsets.all(1),
@@ -39,9 +45,7 @@ class TProductCardHorizontal extends StatelessWidget {
                 SizedBox(
                   width: 120,
                   height: 120,
-                  child: TRoundedImage(
-                    imageUrl: TImages.productImage1,
-                  ),
+                  child: TRoundedImage(imageUrl: product.thumbnail),
                 ),
                 Positioned(
                   top: 12,
@@ -53,7 +57,7 @@ class TProductCardHorizontal extends StatelessWidget {
                       vertical: TSizes.xs,
                     ),
                     child: Text(
-                      '%25',
+                      '%$salePercentage',
                       style: Theme.of(
                         context,
                       ).textTheme.labelLarge!.apply(color: TColors.black),
@@ -63,11 +67,7 @@ class TProductCardHorizontal extends StatelessWidget {
                 Positioned(
                   top: 0,
                   right: 0,
-                  child: CircularIcon(
-                    dark: dark,
-                    icon: Iconsax.heart5,
-                    color: Colors.red,
-                  ),
+                  child: TFavouriteIcon(productId: product.id),
                 ),
               ],
             ),
@@ -85,11 +85,11 @@ class TProductCardHorizontal extends StatelessWidget {
 
                     children: [
                       ProductTitleText(
-                        title: 'Green Nike Half Sleeves Shirt',
+                        title: product.title,
                         smallSize: true,
                       ),
                       const SizedBox(height: TSizes.spaceBtwItems / 2),
-                      BrandTitleTextWithVerifiedIcon(title: 'Nike'),
+                      BrandTitleTextWithVerifiedIcon(title: product.brand!.name),
                     ],
                   ),
 
@@ -98,7 +98,7 @@ class TProductCardHorizontal extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Flexible(child: TProductPriceText(price: '256.0')),
+                      Flexible(child: TProductPriceText(price: price)),
                       Container(
                         decoration: const BoxDecoration(
                           color: TColors.dark,

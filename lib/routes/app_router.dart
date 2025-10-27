@@ -16,7 +16,6 @@ import 'package:cwt_starter_template/features/shop/screens/cart/cart.dart';
 import 'package:cwt_starter_template/features/shop/screens/checkout/checkout.dart';
 import 'package:cwt_starter_template/features/shop/screens/order/order.dart';
 import 'package:cwt_starter_template/features/shop/screens/product_reviews/product_reviews.dart';
-import 'package:cwt_starter_template/features/shop/screens/sub_categories.dart/sub_categories.dart';
 import 'package:cwt_starter_template/navigation/cubit/navigation_menu__cubit.dart';
 import 'package:cwt_starter_template/navigation/navigation_menu.dart';
 import 'package:cwt_starter_template/utils/helpers/networkManager/network_manager.dart';
@@ -106,15 +105,8 @@ class AppRouter {
       case '/orders':
         return MaterialPageRoute(builder: (_) => OrderScreen());
 
-      case '/sub-categories':
-        return MaterialPageRoute(builder: (_) => SubCategoriesScreen());
-
-
-
       case '/brands':
         return MaterialPageRoute(builder: (_) => AllBrandsScreen());
-
-
 
       default:
         return null;

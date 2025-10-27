@@ -1,5 +1,4 @@
 import 'package:cwt_starter_template/features/models/brand_model.dart';
-import 'package:cwt_starter_template/features/models/product_model.dart';
 
 abstract class BrandShowcaseState {}
 

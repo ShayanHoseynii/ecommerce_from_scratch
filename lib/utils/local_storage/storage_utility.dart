@@ -6,26 +6,43 @@ class TLocalStorage {
   // Singleton instance
   static TLocalStorage? _instance;
 
-  TLocalStorage._internal();
+  // Private constructor
+  TLocalStorage._internal(this._storage);
 
-  /// Create a named constructor to obtain an instance with a specific bucket name
-  factory TLocalStorage.instance() {
-    _instance ??= TLocalStorage._internal();
-    return _instance!;
+  /// Default bucket name for logged-out users
+  static const String _defaultBucket = 'default_storage';
+
+  ///
+  /// Must be called in main.dart on app launch
+  ///
+  /// [bucketName] is optional. If null, it will use the default logged-out bucket.
+  /// This method sets up the singleton instance with the specified bucket.
+  static Future<void> init(String? bucketName) async {
+    final finalBucketName = bucketName ?? _defaultBucket;
+    // We must initialize the bucket with GetStorage before we can use it.
+    await GetStorage.init(finalBucketName);
+    // Create the singleton instance with its storage
+    _instance = TLocalStorage._internal(GetStorage(finalBucketName));
   }
 
-
-  /// Asynchronous initialization method
-  static Future<void> init(String bucketName) async {
-    // Very Important when you want to use Bucket's
-    await GetStorage.init(bucketName);
-    _instance = TLocalStorage._internal();
-    _instance!._storage = GetStorage(bucketName);
+  /// Factory to get the already initialized instance
+  /// Throws an exception if init() has not been called.
+  factory TLocalStorage.instance() {
+    if (_instance == null) {
+      throw Exception(
+          "TLocalStorage not initialized. Call TLocalStorage.init() in your AuthCubit or main.dart.");
+    }
+    return _instance!;
   }
 
   /// Generic method to save data
   Future<void> writeData<T>(String key, T value) async {
     await _storage.write(key, value);
+  }
+
+  /// Write data only if key doesn't exist
+  Future<void> writeDataIfNull<T>(String key, T value) async {
+    await _storage.writeIfNull(key, value);
   }
 
   /// Generic method to read data

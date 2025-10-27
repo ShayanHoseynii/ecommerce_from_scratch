@@ -1,9 +1,9 @@
 import 'package:cwt_starter_template/common/widgets/icons/circular_icon.dart';
 import 'package:cwt_starter_template/common/widgets/appbar/appbar.dart';
 import 'package:cwt_starter_template/common/widgets/layout/grid_layout.dart';
-import 'package:cwt_starter_template/common/widgets/products_card/products_card_vertical.dart';
-import 'package:cwt_starter_template/features/shop/cubit/product/product_cubit.dart';
-import 'package:cwt_starter_template/features/shop/cubit/product/product_state.dart';
+import 'package:cwt_starter_template/common/widgets/products/products_card/products_card_vertical.dart';
+import 'package:cwt_starter_template/features/shop/cubit/wish_list/wish_list_cubit.dart';
+import 'package:cwt_starter_template/features/shop/cubit/wish_list/wish_list_state.dart';
 import 'package:cwt_starter_template/features/shop/screens/home/widgets/vertical_product_shimmer.dart';
 import 'package:cwt_starter_template/navigation/cubit/navigation_menu__cubit.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
@@ -37,18 +37,18 @@ class FavouriteItemScreen extends StatelessWidget {
           padding: const EdgeInsets.all(TSizes.defaultSpace),
           child: Column(
             children: [
-              BlocBuilder<ProductCubit, ProductState>(
+              BlocBuilder<WishlistCubit, WishlistState>(
                 builder: (context, state) {
-                  if (state is ProductLoading) {
+                  if (state is WishlistLoading) {
                     return const TVerticalProductShimmer();
-                  } else if (state is ProductError) {
+                  } else if (state is WishlistError) {
                     return Center(child: Text('Error: ${state.message}'));
-                  } else if (state is ProductLoaded && state.featuredProducts == null) {
+                  } else if (state is WishlistLoaded && state.products.isEmpty) {
                     return const Center(child: Text('No products available'));
-                  } else if (state is ProductLoaded) {
+                  } else if (state is WishlistLoaded) {
                     return GridLayout(
-                      itemCount: state.featuredProducts!.length,
-                      itemBuilder: (_, index) =>  ProductCardVertical(product: state.featuredProducts![index],),
+                      itemCount: state.products.length,
+                      itemBuilder: (_, index) =>  ProductCardVertical(product: state.products[index],),
                     );
                   }
                   return const SizedBox.shrink();

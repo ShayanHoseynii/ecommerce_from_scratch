@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseFirestore;
 import 'package:cwt_starter_template/common/widgets/containers/primary_header_container.dart';
 import 'package:cwt_starter_template/common/widgets/containers/search_container.dart';
 import 'package:cwt_starter_template/common/widgets/layout/grid_layout.dart';
-import 'package:cwt_starter_template/common/widgets/products_card/products_card_vertical.dart';
+import 'package:cwt_starter_template/common/widgets/products/products_card/products_card_vertical.dart';
 import 'package:cwt_starter_template/common/widgets/texts/section_heading.dart';
 import 'package:cwt_starter_template/data/repositories/banners/banners_repository.dart';
 import 'package:cwt_starter_template/data/repositories/products/product_repo.dart';

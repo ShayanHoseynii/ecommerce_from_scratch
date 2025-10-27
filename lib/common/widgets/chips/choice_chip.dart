@@ -16,10 +16,8 @@ class TChoiceChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('text in ChoiceChip: $text');
     final isColor = THelperFunctions.getColor(text) != null;
     final color = THelperFunctions.getColor(text);
-    print('ChoiceChip Color: $color, isColor: $isColor');
     return ChoiceChip(
       label: isColor ? SizedBox() : Text(text),
       selected: selected,

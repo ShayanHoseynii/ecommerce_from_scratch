@@ -8,8 +8,13 @@ import 'package:cwt_starter_template/data/repositories/products/product_repo.dar
 import 'package:cwt_starter_template/data/repositories/user/user_repository.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/login/login_cubit.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/user/user_cubit.dart';
+import 'package:cwt_starter_template/features/shop/cubit/brands/brands_cubit.dart';
+import 'package:cwt_starter_template/features/shop/cubit/category/category_cubit.dart';
+import 'package:cwt_starter_template/features/shop/cubit/favourite_icon/favourite_icon_cubit.dart';
+import 'package:cwt_starter_template/features/shop/cubit/product/product_cubit.dart';
 import 'package:cwt_starter_template/simple_bloc_observer.dart';
 import 'package:cwt_starter_template/utils/helpers/exports.dart';
+import 'package:cwt_starter_template/utils/local_storage/storage_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -26,6 +31,8 @@ Future<void> main() async {
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await GetStorage.init();
+
+  await TLocalStorage.init(null); 
   Bloc.observer = SimpleBlocObserver();
   runApp(
     MultiRepositoryProvider(
@@ -60,6 +67,27 @@ Future<void> main() async {
                   context.read<AuthenticationRepository>(),
                 ),
           ),
+
+           BlocProvider(
+                create:
+                    (context) =>
+                        CategoryCubit(context.read<CategoryRepository>())
+                          ..fetchCategories(),
+              ),
+              BlocProvider(
+                create:
+                    (context) =>
+                        ProductCubit(context.read<ProductRepository>())
+                          ..fetchProducts(),
+              ),
+              BlocProvider(
+                create:
+                    (context) =>
+                        BrandsCubit(context.read<BrandsRepository>())
+                          ..fetchBrands(),
+              ),
+              BlocProvider(create: (context) => FavouriteProductsCubit()),
+          
         ],
         child: MyApp(),
       ),

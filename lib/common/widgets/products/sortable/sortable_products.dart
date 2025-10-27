@@ -1,6 +1,6 @@
 // t_sortable_products.dart
 import 'package:cwt_starter_template/common/widgets/layout/grid_layout.dart';
-import 'package:cwt_starter_template/common/widgets/products_card/products_card_vertical.dart';
+import 'package:cwt_starter_template/common/widgets/products/products_card/products_card_vertical.dart';
 import 'package:cwt_starter_template/features/shop/cubit/all_products/all_products_cubit.dart';
 import 'package:cwt_starter_template/features/models/product_model.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';

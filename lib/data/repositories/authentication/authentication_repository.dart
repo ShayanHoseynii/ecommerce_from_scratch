@@ -1,12 +1,11 @@
 import 'package:cwt_starter_template/utils/exceptions/exports.dart';
+import 'package:cwt_starter_template/utils/local_storage/storage_utility.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthenticationRepository {
-  final _storage = GetStorage();
   final _auth = FirebaseAuth.instance;
   User? get currentUser => _auth.currentUser;
   Stream<User?> get authStateChanges => _auth.authStateChanges();
@@ -17,10 +16,10 @@ class AuthenticationRepository {
 
   Future<bool> checkFirstTime() async {
     // No need for GetStorage.init() here as it's called in main.dart
-    _storage.writeIfNull('IsFirstTime', true);
-    final bool isFirstTime = _storage.read('IsFirstTime');
+    final storage = TLocalStorage.instance();
+    final bool isFirstTime = storage.readData<bool>('IsFirstTime') ?? true;
     if (isFirstTime) {
-      _storage.write('IsFirstTime', false);
+      await storage.writeData<bool>('IsFirstTime', false);
     }
     return isFirstTime;
   }

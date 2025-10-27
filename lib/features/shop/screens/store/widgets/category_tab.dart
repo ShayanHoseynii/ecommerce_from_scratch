@@ -1,6 +1,6 @@
 import 'package:cwt_starter_template/common/widgets/brands/brand_showcase.dart';
 import 'package:cwt_starter_template/common/widgets/layout/grid_layout.dart';
-import 'package:cwt_starter_template/common/widgets/products_card/products_card_vertical.dart';
+import 'package:cwt_starter_template/common/widgets/products/products_card/products_card_vertical.dart';
 import 'package:cwt_starter_template/common/widgets/shimmer/boxes_shimmer.dart';
 import 'package:cwt_starter_template/common/widgets/shimmer/list_tile_shimmer.dart';
 import 'package:cwt_starter_template/common/widgets/texts/section_heading.dart';

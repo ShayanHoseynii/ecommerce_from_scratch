@@ -1,7 +1,11 @@
 import 'package:cwt_starter_template/common/widgets/image_text_widgets.dart/vertical_image_text.dart';
+import 'package:cwt_starter_template/data/repositories/categories/category_repository.dart';
+import 'package:cwt_starter_template/data/repositories/products/product_repo.dart';
 import 'package:cwt_starter_template/features/shop/cubit/category/category_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/category/category_state.dart';
+import 'package:cwt_starter_template/features/shop/cubit/subcategory/subcategory_cubit.dart';
 import 'package:cwt_starter_template/features/shop/screens/home/widgets/category_shimmer.dart';
+import 'package:cwt_starter_template/features/shop/screens/sub_categories.dart/sub_categories.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -28,15 +32,22 @@ class THomeCategories extends StatelessWidget {
             height: 80,
             child: ListView.builder(
               shrinkWrap: true,
-              itemBuilder: (_ , int index) {
+              itemBuilder: (_, int index) {
                 final category = state.featuredCategories[index];
                 return TVerticalImageText(
                   image: category.image,
                   title: category.name,
                   onTap:
-                      () => Navigator.of(
+                      () => Navigator.push(
                         context,
-                      ).pushNamed('/sub-categories', arguments: category),
+                        MaterialPageRoute(
+                          builder:
+                              (_) => BlocProvider(
+                                create: (context) => SubcategoryCubit(context.read<CategoryRepository>(),context.read<ProductRepository>())..fetchSubCategories(category.id),
+                                child: SubCategoriesScreen(category: category,),
+                              ),
+                        ),
+                      ),
                 );
               },
               itemCount: state.featuredCategories.length,

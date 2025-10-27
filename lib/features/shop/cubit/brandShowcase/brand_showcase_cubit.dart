@@ -1,7 +1,6 @@
 import 'package:cwt_starter_template/data/repositories/brands/brands_repository.dart';
 import 'package:cwt_starter_template/data/repositories/products/product_repo.dart';
 import 'package:cwt_starter_template/features/shop/cubit/brandShowcase/brand_showcase_state.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BrandShowcaseCubit extends Cubit<BrandShowcaseState> {

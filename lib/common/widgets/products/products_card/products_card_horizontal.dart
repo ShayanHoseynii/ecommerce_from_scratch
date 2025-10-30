@@ -43,7 +43,6 @@ class TProductCardHorizontal extends StatelessWidget {
                     builder: (_) => ProductDetailScreen(product: product),
                   ),
                 ),
-            // --- THIS IS THE START OF THE BLOCK TO KEEP ---
             child: TRoundedContainer(
               height: 120,
               padding: const EdgeInsets.all(TSizes.sm),
@@ -86,10 +85,8 @@ class TProductCardHorizontal extends StatelessWidget {
                 ],
               ),
             ),
-            // --- THIS IS THE END OF THE BLOCK TO KEEP ---
           ),
 
-          // --- ALL THE DUPLICATE CODE AND MERGE MARKERS HAVE BEEN DELETED ---
 
           /// Details
           SizedBox(

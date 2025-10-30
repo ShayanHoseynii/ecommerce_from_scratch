@@ -5,7 +5,8 @@ import 'package:cwt_starter_template/common/widgets/products/favourite_icon/favo
 import 'package:cwt_starter_template/common/widgets/texts/brand_title_text_with_verifiedIcon.dart';
 import 'package:cwt_starter_template/common/widgets/texts/product_title_text.dart';
 import 'package:cwt_starter_template/features/models/product_model.dart';
-import 'package:cwt_starter_template/features/shop/cubit/favourite_icon/favourite_icon_cubit.dart';
+import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_cubit.dart';
+import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_state.dart';
 import 'package:cwt_starter_template/features/shop/screens/product_detail/product_detail.dart';
 import 'package:cwt_starter_template/utils/constants/colors.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
@@ -29,13 +30,11 @@ class ProductCardVertical extends StatelessWidget {
     final price = product.getProductPrice(product);
 
     return GestureDetector(
-      onTap:
-          () => Navigator.of(context).push(
-            MaterialPageRoute(
-              builder:
-                  (_) => ProductDetailScreen(product: product),
-            ),
-          ),
+      onTap: () => {Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (_) => ProductDetailScreen(product: product),
+        ),
+      )},
       child: Container(
         width: 180,
         padding: const EdgeInsets.all(1),
@@ -44,7 +43,6 @@ class ProductCardVertical extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           color: dark ? TColors.darkerGrey : TColors.white,
         ),
-
         child: Column(
           children: [
             TRoundedContainer(
@@ -128,8 +126,8 @@ class ProductCardVertical extends StatelessWidget {
                                   style: Theme.of(
                                     context,
                                   ).textTheme.labelMedium!.apply(
-                                    decoration: TextDecoration.lineThrough,
-                                  ),
+                                        decoration: TextDecoration.lineThrough,
+                                      ),
                                 ),
 
                               // Final Price
@@ -146,23 +144,73 @@ class ProductCardVertical extends StatelessWidget {
                       ),
 
                       // Add to Cart Button
-                      Container(
-                        decoration: const BoxDecoration(
-                          color: TColors.dark,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(TSizes.cardRadiusMd),
-                            bottomRight: Radius.circular(
-                              TSizes.productImageRadius,
+                      BlocBuilder<CartCubit, CartState>(
+                        builder: (context, state) {
+                          int productQuantityInCart = 0;
+                          if (state is CartLoaded) {
+                            productQuantityInCart = state.cartItems
+                                .where((item) => item.productId == product.id)
+                                .fold(
+                                  0,
+                                  (previous, element) =>
+                                      previous + element.quantity,
+                                );
+                          }
+
+                          return GestureDetector(
+
+                            behavior: HitTestBehavior.opaque,
+                            onTap: () {
+                              if (product.productType ==
+                                  'ProductType.single') {
+                                context.read<CartCubit>().addToCart(
+                                      product: product,
+                                      quantity: 1,
+                                      selectedVariation: null,
+                                    );
+                              } else {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) =>
+                                        ProductDetailScreen(product: product),
+                                  ),
+                                );
+                              }
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: productQuantityInCart > 0
+                                    ? TColors.primary
+                                    : TColors.black,
+                                borderRadius: const BorderRadius.only(
+                                  topLeft:
+                                      Radius.circular(TSizes.cardRadiusMd),
+                                  bottomRight: Radius.circular(
+                                      TSizes.productImageRadius),
+                                ),
+                              ),
+                              child: SizedBox(
+                                height: TSizes.iconLg * 1.2,
+                                width: TSizes.iconLg * 1.2,
+                                child: Center(
+                                  child: productQuantityInCart > 0
+                                      ? Text(
+                                          productQuantityInCart.toString(),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleSmall!
+                                              .apply(color: TColors.white),
+                                        )
+                                      : const Icon(
+                                          Iconsax.add,
+                                          color: TColors.white,
+                                        ),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                        child: const SizedBox(
-                          height: TSizes.iconLg * 1.2,
-                          width: TSizes.iconLg * 1.2,
-                          child: Center(
-                            child: Icon(Iconsax.add, color: TColors.white),
-                          ),
-                        ),
+                          );
+                        },
                       ),
                     ],
                   ),

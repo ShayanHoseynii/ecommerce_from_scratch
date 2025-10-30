@@ -1,5 +1,6 @@
 import 'package:cwt_starter_template/utils/exceptions/exports.dart';
 import 'package:cwt_starter_template/utils/local_storage/storage_utility.dart';
+import 'package:cwt_starter_template/utils/local_storage/storage_utility.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -24,7 +25,9 @@ class AuthenticationRepository {
     // No need for GetStorage.init() here as it's called in main.dart
     final storage = TLocalStorage.instance();
     final bool isFirstTime = storage.readData<bool>('IsFirstTime') ?? true;
+
     if (isFirstTime) {
+      await storage.writeData<bool>('IsFirstTime', false);
       await storage.writeData<bool>('IsFirstTime', false);
     }
     return isFirstTime;

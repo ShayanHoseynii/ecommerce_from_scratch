@@ -19,7 +19,7 @@ class TProductCardHorizontal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        final dark = THelperFunctions.isDarkMode(context);
+    final dark = THelperFunctions.isDarkMode(context);
     final salePercentage = product.calculateSalePercentage(
       product.price,
       product.salePrice,
@@ -37,13 +37,13 @@ class TProductCardHorizontal extends StatelessWidget {
         children: [
           /// Thumbnail
           GestureDetector(
-             onTap:
-          () => Navigator.of(context).push(
-            MaterialPageRoute(
-              builder:
-                  (_) => ProductDetailScreen(product: product),
-            ),
-          ),
+            onTap:
+                () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => ProductDetailScreen(product: product),
+                  ),
+                ),
+            // --- THIS IS THE START OF THE BLOCK TO KEEP ---
             child: TRoundedContainer(
               height: 120,
               padding: const EdgeInsets.all(TSizes.sm),
@@ -56,23 +56,28 @@ class TProductCardHorizontal extends StatelessWidget {
                     height: 120,
                     child: TRoundedImage(imageUrl: product.thumbnail),
                   ),
-                  Positioned(
-                    top: 12,
-                    child: TRoundedContainer(
-                      radius: TSizes.sm,
-                      backgroundColor: TColors.secondary.withOpacity(0.8),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: TSizes.sm,
-                        vertical: TSizes.xs,
-                      ),
-                      child: Text(
-                        '%$salePercentage',
-                        style: Theme.of(
-                          context,
-                        ).textTheme.labelLarge!.apply(color: TColors.black),
+
+                  // -- Sale Tag
+                  if (salePercentage != null)
+                    Positioned(
+                      top: 12,
+                      child: TRoundedContainer(
+                        radius: TSizes.sm,
+                        backgroundColor: TColors.secondary.withOpacity(0.8),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: TSizes.sm,
+                          vertical: TSizes.xs,
+                        ),
+                        child: Text(
+                          '$salePercentage%',
+                          style: Theme.of(
+                            context,
+                          ).textTheme.labelLarge!.apply(color: TColors.black),
+                        ),
                       ),
                     ),
-                  ),
+
+                  /// -- Favourite Icon
                   Positioned(
                     top: 0,
                     right: 0,
@@ -81,7 +86,10 @@ class TProductCardHorizontal extends StatelessWidget {
                 ],
               ),
             ),
+            // --- THIS IS THE END OF THE BLOCK TO KEEP ---
           ),
+
+          // --- ALL THE DUPLICATE CODE AND MERGE MARKERS HAVE BEEN DELETED ---
 
           /// Details
           SizedBox(
@@ -92,19 +100,15 @@ class TProductCardHorizontal extends StatelessWidget {
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-
                     children: [
-                      ProductTitleText(
-                        title: product.title,
-                        smallSize: true,
-                      ),
+                      ProductTitleText(title: product.title, smallSize: true),
                       const SizedBox(height: TSizes.spaceBtwItems / 2),
-                      BrandTitleTextWithVerifiedIcon(title: product.brand!.name),
+                      BrandTitleTextWithVerifiedIcon(
+                        title: product.brand!.name,
+                      ),
                     ],
                   ),
-
                   const Spacer(),
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

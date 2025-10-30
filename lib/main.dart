@@ -35,67 +35,61 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await GetStorage.init();
 
-  await TLocalStorage.init(null); 
+  await TLocalStorage.init(null);
   Bloc.observer = SimpleBlocObserver();
   runApp(
     MultiRepositoryProvider(
       providers: [
-RepositoryProvider.value(value: AuthenticationRepository.instance),        RepositoryProvider(create: (_) => UserRepository()),
+        // --- Use .value for your singleton instance ---
+        RepositoryProvider.value(value: AuthenticationRepository.instance),
+        RepositoryProvider(create: (_) => UserRepository()),
         RepositoryProvider(create: (_) => CategoryRepository()),
         RepositoryProvider(create: (_) => BannersRepository()),
         RepositoryProvider(create: (_) => ProductRepository()),
         RepositoryProvider(create: (_) => BrandsRepository()),
+        // --- Add AddressRepository ---
         RepositoryProvider(create: (_) => AddressRepository()),
       ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create:
-                (context) =>
-                    AuthCubit(context.read<AuthenticationRepository>()),
+            create: (context) =>
+                AuthCubit(context.read<AuthenticationRepository>()),
           ),
           BlocProvider(create: (context) => NetworkCubit()),
           BlocProvider(
-            create:
-                (context) => LoginCubit(
-                  userRepo: context.read<UserRepository>(),
-                  authRepository: context.read<AuthenticationRepository>(),
-                  networkCubit: context.read<NetworkCubit>(),
-                ),
+            create: (context) => LoginCubit(
+              userRepo: context.read<UserRepository>(),
+              authRepository: context.read<AuthenticationRepository>(),
+              networkCubit: context.read<NetworkCubit>(),
+            ),
           ),
           BlocProvider(
-            create:
-                (context) => UserCubit(
-                  context.read<UserRepository>(),
-                  context.read<AuthenticationRepository>(),
-                ),
+            create: (context) => UserCubit(
+              context.read<UserRepository>(),
+              context.read<AuthenticationRepository>(),
+            ),
           ),
-
-           BlocProvider(
-                create:
-                    (context) =>
-                        CategoryCubit(context.read<CategoryRepository>())
-                          ..fetchCategories(),
-              ),
-              BlocProvider(
-                create:
-                    (context) =>
-                        ProductCubit(context.read<ProductRepository>())
-                          ..fetchProducts(),
-              ),
-              BlocProvider(
-                create:
-                    (context) =>
-                        BrandsCubit(context.read<BrandsRepository>())
-                          ..fetchBrands(),
-              ),
-              BlocProvider(create: (context) => FavouriteProductsCubit()),
-                      BlocProvider(create: (_) => CartCubit()), 
-                      BlocProvider(create: (context) => AddressCubit(context.read<AddressRepository>())..fetchUserAddresses()), 
-
-
-
-          
+          BlocProvider(
+            create: (context) =>
+                CategoryCubit(context.read<CategoryRepository>())
+                  ..fetchCategories(),
+          ),
+          BlocProvider(
+            create: (context) =>
+                ProductCubit(context.read<ProductRepository>())
+                  ..fetchProducts(),
+          ),
+          BlocProvider(
+            create: (context) =>
+                BrandsCubit(context.read<BrandsRepository>())..fetchBrands(),
+          ),
+          BlocProvider(create: (context) => FavouriteProductsCubit()),
+          // --- Add CartCubit ---
+          BlocProvider(create: (context) => CartCubit()),
+          BlocProvider(
+            create: (context) => AddressCubit(context.read<AddressRepository>())..fetchUserAddresses(),
+          )
         ],
         child: MyApp(),
       ),

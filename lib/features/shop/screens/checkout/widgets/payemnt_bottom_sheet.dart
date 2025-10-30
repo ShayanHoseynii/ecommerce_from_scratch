@@ -51,7 +51,7 @@ class PaymentSelectionSheet extends StatelessWidget {
                 ListView.separated(
                   itemCount: paymentMethods.length,
                   shrinkWrap: true,
-                  separatorBuilder: (_, __) =>
+                  separatorBuilder: (_, _) =>
                       const SizedBox(height: TSizes.spaceBtwItems / 2),
                   itemBuilder: (context, index) {
                     final method = paymentMethods[index];

@@ -81,7 +81,7 @@ class AddressSelectionSheet extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: state.addresses.length,
                     separatorBuilder:
-                        (_, __) => const SizedBox(height: TSizes.spaceBtwItems),
+                        (_, _) => const SizedBox(height: TSizes.spaceBtwItems),
                     itemBuilder: (context, index) {
                       final address = state.addresses[index];
                       final isSelected = state.selectedAddressId == address.id;

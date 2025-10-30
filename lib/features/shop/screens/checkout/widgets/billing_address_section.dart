@@ -15,16 +15,7 @@ class TBillingAddressSection extends StatelessWidget {
     return BlocBuilder<AddressCubit, AddressState>(
       builder: (context, state) {
         if (state is AddressLoading) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TShimmerEffect(width: 45, height: 5),
-              const SizedBox(height: TSizes.spaceBtwItems),
-              TShimmerEffect(width: 50, height: 5),
-              const SizedBox(height: TSizes.spaceBtwItems),
-              TShimmerEffect(width: 50, height: 5),
-            ],
-          );
+          return _AddressShimmer();
         }
         if (state is AddressLoaded) {
           final address = state.addresses.firstWhere(
@@ -38,14 +29,15 @@ class TBillingAddressSection extends StatelessWidget {
                 buttonTitle: 'Change',
                 onPressed: () {
                   {
-                  showModalBottomSheet(
-                    context: context,
-                    builder: (_) => BlocProvider.value(
-                      value: context.read<AddressCubit>(), 
-                      child: const AddressSelectionSheet(),
-                    ),
-                  );
-                }
+                    showModalBottomSheet(
+                      context: context,
+                      builder:
+                          (_) => BlocProvider.value(
+                            value: context.read<AddressCubit>(),
+                            child: const AddressSelectionSheet(),
+                          ),
+                    );
+                  }
                 },
               ),
               Text(address.name, style: Theme.of(context).textTheme.bodyLarge),
@@ -84,6 +76,51 @@ class TBillingAddressSection extends StatelessWidget {
         }
         return SizedBox.shrink();
       },
+    );
+  }
+}
+
+class _AddressShimmer extends StatelessWidget {
+  const _AddressShimmer();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Mimic TSectionHeading (title + button)
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            TShimmerEffect(width: 120, height: 18), // "Shipping Address"
+            TShimmerEffect(width: 60, height: 18), // "Change"
+          ],
+        ),
+        const SizedBox(height: TSizes.spaceBtwItems),
+
+        // Mimic Text(address.name)
+        TShimmerEffect(width: 150, height: 14),
+        const SizedBox(height: TSizes.spaceBtwItems / 2),
+
+        // Mimic Row (Icon + Phone)
+        Row(
+          children: [
+            TShimmerEffect(width: 16, height: 16), // Icon
+            const SizedBox(width: TSizes.spaceBtwItems),
+            TShimmerEffect(width: 120, height: 12), // Phone
+          ],
+        ),
+        const SizedBox(height: TSizes.spaceBtwItems / 2),
+
+        // Mimic Row (Icon + Full Address)
+        Row(
+          children: [
+            TShimmerEffect(width: 16, height: 16), // Icon
+            const SizedBox(width: TSizes.spaceBtwItems),
+            TShimmerEffect(width: 200, height: 12), // Full Address
+          ],
+        ),
+      ],
     );
   }
 }

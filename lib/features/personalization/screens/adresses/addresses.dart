@@ -1,5 +1,6 @@
 import 'package:cwt_starter_template/common/widgets/appbar/appbar.dart';
-import 'package:cwt_starter_template/common/widgets/shimmer/list_tile_shimmer.dart';
+import 'package:cwt_starter_template/common/widgets/containers/rounded_container.dart';
+import 'package:cwt_starter_template/common/widgets/shimmer/shimmer.dart';
 import 'package:cwt_starter_template/data/repositories/address/address_repository.dart';
 import 'package:cwt_starter_template/features/personalization/screens/adresses/add_new_address.dart';
 import 'package:cwt_starter_template/features/personalization/screens/adresses/cubit/address_cubit.dart';
@@ -8,6 +9,7 @@ import 'package:cwt_starter_template/features/personalization/screens/adresses/c
 import 'package:cwt_starter_template/features/personalization/screens/adresses/widgets/single_address.dart';
 import 'package:cwt_starter_template/utils/constants/colors.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
+import 'package:cwt_starter_template/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
@@ -45,7 +47,7 @@ class AdressesScreen extends StatelessWidget {
       body: BlocBuilder<AddressCubit, AddressState>(
         builder: (context, state) {
           if (state is AddressLoading) {
-            return const TListTileShimmer();
+            return const _AddressListShimmer();
           }
           if (state is AddressFailure) {
             return Center(child: Text(state.error));
@@ -68,7 +70,7 @@ class AdressesScreen extends StatelessWidget {
                             context.read<AddressCubit>().selectAddress(address),
                   );
                 },
-                separatorBuilder: (_, __) => const SizedBox(height: 2),
+                separatorBuilder: (_, _) => const SizedBox(height: 2),
                 itemCount: state.addresses.length,
               ),
             );
@@ -76,6 +78,41 @@ class AdressesScreen extends StatelessWidget {
 
           return const SizedBox.shrink();
         },
+      ),
+    );
+  }
+}
+
+class _AddressListShimmer extends StatelessWidget {
+  const _AddressListShimmer();
+
+  @override
+  Widget build(BuildContext context) {
+    final dark = THelperFunctions.isDarkMode(context);
+
+    return Padding(
+      padding: const EdgeInsets.all(TSizes.defaultSpace),
+      child: ListView.separated(
+        shrinkWrap: true,
+        itemCount: 3, // Show 3 shimmer items
+        separatorBuilder: (_, _) => const SizedBox(height: TSizes.spaceBtwItems),
+        itemBuilder: (_, _) => TRoundedContainer(
+          padding: const EdgeInsets.all(TSizes.md),
+          width: double.infinity,
+          showBorder: true,
+          backgroundColor: Colors.transparent,
+          borderColor: dark ? TColors.darkerGrey : TColors.grey,
+          child: const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TShimmerEffect(width: 160, height: 18), // Mimic Name
+              SizedBox(height: TSizes.sm / 2),
+              TShimmerEffect(width: 130, height: 14), // Mimic Phone
+              SizedBox(height: TSizes.sm / 2),
+              TShimmerEffect(width: 250, height: 12), // Mimic Address line
+            ],
+          ),
+        ),
       ),
     );
   }

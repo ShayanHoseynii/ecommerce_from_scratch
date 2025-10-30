@@ -90,7 +90,6 @@ class _ChangeNameScreenState extends State<ChangeNameScreen> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      print('object');
                       if (_formKey.currentState!.validate()) {
                         final dataToUpdate = {
                           'FirstName': _firstNameController.text.trim(),

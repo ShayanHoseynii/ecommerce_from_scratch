@@ -4,7 +4,13 @@ import 'package:cwt_starter_template/common/widgets/appbar/appbar.dart';
 import 'package:cwt_starter_template/common/widgets/containers/primary_header_container.dart';
 import 'package:cwt_starter_template/common/widgets/texts/section_heading.dart';
 import 'package:cwt_starter_template/data/repositories/authentication/auth_cubit.dart';
+import 'package:cwt_starter_template/data/repositories/order/order_repository.dart';
 import 'package:cwt_starter_template/features/personalization/screens/adresses/addresses.dart';
+import 'package:cwt_starter_template/features/personalization/screens/adresses/cubit/address_cubit.dart';
+import 'package:cwt_starter_template/features/shop/cubit/orders/cubit/order_cubit.dart';
+import 'package:cwt_starter_template/features/shop/cubit/payment/payment_method_cubit.dart';
+import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_cubit.dart';
+import 'package:cwt_starter_template/features/shop/screens/order/order.dart';
 import 'package:cwt_starter_template/utils/constants/colors.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
 import 'package:cwt_starter_template/utils/helpers/helper_functions.dart';
@@ -60,7 +66,10 @@ class SettingsScreen extends StatelessWidget {
                     icon: Iconsax.safe_home,
                     title: 'My Addresses',
                     subtitle: 'Set shopping delivery address',
-                    onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => AdressesScreen())),
+                    onTap:
+                        () => Navigator.of(context).push(
+                          MaterialPageRoute(builder: (_) => AdressesScreen()),
+                        ),
                   ),
                   TSeetingsMenuTile(
                     icon: Iconsax.shopping_cart,
@@ -72,7 +81,29 @@ class SettingsScreen extends StatelessWidget {
                     icon: Iconsax.bag_tick,
                     title: 'My Orders',
                     subtitle: 'In-progress and Completed Orders',
-                    onTap: () => Navigator.of(context).pushNamed('/orders'),
+                    onTap:
+                        () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder:
+                                (_) => MultiBlocProvider(
+                                  providers: [
+                                    BlocProvider(
+                                      create: (context) => PaymentCubit(),
+                                    ),
+                                    BlocProvider(
+                                      create:
+                                          (context) => OrderCubit(
+                                            context.read<OrderRepository>(),
+                                            context.read<AddressCubit>(),
+                                            context.read<PaymentCubit>(),
+                                            context.read<CartCubit>(),
+                                          )..fetchUserOrders(),
+                                    ),
+                                  ],
+                                  child: OrderScreen(),
+                                ),
+                          ),
+                        ),
                   ),
                   TSeetingsMenuTile(
                     icon: Iconsax.bank,
@@ -123,12 +154,14 @@ class SettingsScreen extends StatelessWidget {
                     subtitle: 'Upload Data to your Cloud Firebase',
                     trailing: Switch(value: false, onChanged: (value) {}),
                   ),
-                  const SizedBox(height: TSizes.spaceBtwItems,),
+                  const SizedBox(height: TSizes.spaceBtwItems),
                   SizedBox(
                     width: double.infinity,
-                    child: OutlinedButton(onPressed: () => context.read<AuthCubit>().signOut(), child: Text('Log out')),
-                  )
-                
+                    child: OutlinedButton(
+                      onPressed: () => context.read<AuthCubit>().signOut(),
+                      child: Text('Log out'),
+                    ),
+                  ),
                 ],
               ),
             ),

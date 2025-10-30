@@ -172,4 +172,14 @@ class CartCubit extends Cubit<CartState> {
         .fold(0, (previous, element) => previous + element.quantity);
     return quantity;
   }
+
+  void clearCart() {
+    try {
+      final List<CartItemModel> emptyItems = [];
+      
+      _updateCartState(emptyItems);
+    } catch (e) {
+      emit(CartError(e.toString()));
+    }
+  }
 }

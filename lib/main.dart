@@ -5,6 +5,7 @@ import 'package:cwt_starter_template/data/repositories/authentication/authentica
 import 'package:cwt_starter_template/data/repositories/banners/banners_repository.dart';
 import 'package:cwt_starter_template/data/repositories/brands/brands_repository.dart';
 import 'package:cwt_starter_template/data/repositories/categories/category_repository.dart';
+import 'package:cwt_starter_template/data/repositories/order/order_repository.dart';
 import 'package:cwt_starter_template/data/repositories/products/product_repo.dart';
 import 'package:cwt_starter_template/data/repositories/user/user_repository.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/login/login_cubit.dart';
@@ -49,6 +50,7 @@ Future<void> main() async {
         RepositoryProvider(create: (_) => BrandsRepository()),
         // --- Add AddressRepository ---
         RepositoryProvider(create: (_) => AddressRepository()),
+        RepositoryProvider(create: (_) => OrderRepository()),
       ],
       child: MultiBlocProvider(
         providers: [

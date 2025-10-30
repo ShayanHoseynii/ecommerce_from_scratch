@@ -1,15 +1,12 @@
-
-
+import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_cubit.dart';
+import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_state.dart';
 import 'package:cwt_starter_template/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 
 class TCartCounterIcon extends StatelessWidget {
-  const TCartCounterIcon({
-    super.key,
-    this.iconColor,
-    required this.onPressed,
-  });
+  const TCartCounterIcon({super.key, this.iconColor, required this.onPressed});
 
   final Color? iconColor;
   final VoidCallback onPressed;
@@ -32,12 +29,26 @@ class TCartCounterIcon extends StatelessWidget {
               borderRadius: BorderRadius.circular(100),
             ),
             child: Center(
-              child: Text(
-                '2',
-                style: Theme.of(context).textTheme.labelLarge!.apply(
-                  color: TColors.white,
-                  fontSizeFactor: 0.8,
-                ),
+              child: BlocBuilder<CartCubit, CartState>(
+                builder: (context, state) {
+                  if (state is CartLoaded) {
+                    return Text(
+                      state.cartItems.length.toString(),
+                      style: Theme.of(context).textTheme.labelLarge!.apply(
+                        color: TColors.white,
+                        fontSizeFactor: 0.8,
+                      ),
+                    );
+                  } else {
+                    return Text(
+                      '0',
+                      style: Theme.of(context).textTheme.labelLarge!.apply(
+                        color: TColors.white,
+                        fontSizeFactor: 0.8,
+                      ),
+                    );
+                  }
+                },
               ),
             ),
           ),

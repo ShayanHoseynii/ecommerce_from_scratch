@@ -12,6 +12,7 @@ import 'package:cwt_starter_template/features/shop/cubit/brands/brands_cubit.dar
 import 'package:cwt_starter_template/features/shop/cubit/category/category_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/favourite_icon/favourite_icon_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/product/product_cubit.dart';
+import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_cubit.dart';
 import 'package:cwt_starter_template/simple_bloc_observer.dart';
 import 'package:cwt_starter_template/utils/helpers/exports.dart';
 import 'package:cwt_starter_template/utils/local_storage/storage_utility.dart';
@@ -87,6 +88,8 @@ Future<void> main() async {
                           ..fetchBrands(),
               ),
               BlocProvider(create: (context) => FavouriteProductsCubit()),
+                      BlocProvider(create: (_) => CartCubit()), 
+
           
         ],
         child: MyApp(),

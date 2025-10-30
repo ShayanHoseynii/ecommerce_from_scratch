@@ -8,7 +8,6 @@ import 'package:cwt_starter_template/common/widgets/shimmer/brands_shimmer.dart'
 import 'package:cwt_starter_template/common/widgets/texts/section_heading.dart';
 import 'package:cwt_starter_template/data/repositories/brands/brands_repository.dart';
 import 'package:cwt_starter_template/data/repositories/products/product_repo.dart';
-import 'package:cwt_starter_template/features/shop/cubit/all_products/all_products_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/brandShowcase/brand_showcase_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/brands/brands_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/brands/brands_state.dart';
@@ -16,6 +15,7 @@ import 'package:cwt_starter_template/features/shop/cubit/category/category_cubit
 import 'package:cwt_starter_template/features/shop/cubit/category/category_state.dart';
 import 'package:cwt_starter_template/features/shop/cubit/product/product_cubit.dart';
 import 'package:cwt_starter_template/features/shop/screens/brands/all_brands.dart';
+import 'package:cwt_starter_template/features/shop/screens/cart/cart.dart';
 import 'package:cwt_starter_template/features/shop/screens/store/widgets/category_tab.dart';
 import 'package:cwt_starter_template/utils/constants/colors.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
@@ -48,7 +48,7 @@ class Store extends StatelessWidget {
                   'Store',
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
-                actions: [TCartCounterIcon(onPressed: () {})],
+                actions: [TCartCounterIcon(onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => CartScreen())))],
               ),
 
               body: NestedScrollView(

@@ -1,7 +1,10 @@
 import 'package:cwt_starter_template/common/widgets/appbar/appbar.dart';
+import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_cubit.dart';
+import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_state.dart';
 import 'package:cwt_starter_template/features/shop/screens/cart/widgets/cart_items.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -15,13 +18,21 @@ class CartScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsetsGeometry.all(TSizes.defaultSpace),
-        child: TCartItems(showAddRemoveButtons: true,),
+        child: TCartItems(showAddRemoveButtons: true),
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(TSizes.defaultSpace),
         child: ElevatedButton(
           onPressed: () => Navigator.of(context).pushNamed('/checkout'),
-          child: Text('Checkout \$256.0'),
+          child: BlocBuilder<CartCubit, CartState>(
+            builder: (context, state) {
+              if (state is CartLoaded) {
+                return Text('Checkout \$${state.totalPrice}');
+              } else {
+                return const Text('Checkout \$0.00');
+              }
+            },
+          ),
         ),
       ),
     );

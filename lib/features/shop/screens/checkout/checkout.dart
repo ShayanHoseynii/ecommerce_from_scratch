@@ -3,7 +3,6 @@ import 'package:cwt_starter_template/common/widgets/containers/rounded_container
 import 'package:cwt_starter_template/common/widgets/products/cart/coupon_widget.dart';
 import 'package:cwt_starter_template/common/widgets/success_screen/success_screen.dart';
 import 'package:cwt_starter_template/features/shop/cubit/payment/payment_method_cubit.dart';
-import 'package:cwt_starter_template/features/shop/cubit/payment/payment_method_state.dart';
 import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_state.dart';
 import 'package:cwt_starter_template/features/shop/screens/cart/widgets/cart_items.dart';

@@ -1,6 +1,5 @@
 import 'package:cwt_starter_template/common/widgets/shimmer/shimmer.dart';
 import 'package:cwt_starter_template/common/widgets/texts/section_heading.dart';
-import 'package:cwt_starter_template/data/repositories/address/address_repository.dart';
 import 'package:cwt_starter_template/features/personalization/screens/adresses/cubit/address_cubit.dart';
 import 'package:cwt_starter_template/features/personalization/screens/adresses/cubit/address_state.dart';
 import 'package:cwt_starter_template/features/shop/screens/checkout/widgets/address_selection_bottomsheet.dart';

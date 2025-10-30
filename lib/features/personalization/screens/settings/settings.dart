@@ -4,6 +4,7 @@ import 'package:cwt_starter_template/common/widgets/appbar/appbar.dart';
 import 'package:cwt_starter_template/common/widgets/containers/primary_header_container.dart';
 import 'package:cwt_starter_template/common/widgets/texts/section_heading.dart';
 import 'package:cwt_starter_template/data/repositories/authentication/auth_cubit.dart';
+import 'package:cwt_starter_template/features/personalization/screens/adresses/addresses.dart';
 import 'package:cwt_starter_template/utils/constants/colors.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
 import 'package:cwt_starter_template/utils/helpers/helper_functions.dart';
@@ -59,7 +60,7 @@ class SettingsScreen extends StatelessWidget {
                     icon: Iconsax.safe_home,
                     title: 'My Addresses',
                     subtitle: 'Set shopping delivery address',
-                    onTap: () => Navigator.of(context).pushNamed('/addresses'),
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => AdressesScreen())),
                   ),
                   TSeetingsMenuTile(
                     icon: Iconsax.shopping_cart,

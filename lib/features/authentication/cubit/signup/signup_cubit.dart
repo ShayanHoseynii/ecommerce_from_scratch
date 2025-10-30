@@ -61,7 +61,7 @@ class SignupCubit extends Cubit<SignupState> {
         username: state.username.trim(),
         email: state.email.trim(),
         phoneNumber: state.phoneNumber.trim(),
-        profilePicture: '', // Default profile picture
+        profilePicture: '',
       );
       await _userRepository.saveUserData(newUser);
       // On success

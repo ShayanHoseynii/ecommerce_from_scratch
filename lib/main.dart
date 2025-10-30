@@ -1,3 +1,4 @@
+import 'package:cwt_starter_template/data/repositories/address/address_repository.dart';
 import 'package:cwt_starter_template/data/repositories/authentication/auth_cubit.dart';
 import 'package:cwt_starter_template/data/repositories/authentication/auth_state.dart';
 import 'package:cwt_starter_template/data/repositories/authentication/authentication_repository.dart';
@@ -8,6 +9,7 @@ import 'package:cwt_starter_template/data/repositories/products/product_repo.dar
 import 'package:cwt_starter_template/data/repositories/user/user_repository.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/login/login_cubit.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/user/user_cubit.dart';
+import 'package:cwt_starter_template/features/personalization/screens/adresses/cubit/address_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/brands/brands_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/category/category_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/favourite_icon/favourite_icon_cubit.dart';
@@ -38,12 +40,12 @@ Future<void> main() async {
   runApp(
     MultiRepositoryProvider(
       providers: [
-        RepositoryProvider(create: (_) => AuthenticationRepository()),
-        RepositoryProvider(create: (_) => UserRepository()),
+RepositoryProvider.value(value: AuthenticationRepository.instance),        RepositoryProvider(create: (_) => UserRepository()),
         RepositoryProvider(create: (_) => CategoryRepository()),
         RepositoryProvider(create: (_) => BannersRepository()),
         RepositoryProvider(create: (_) => ProductRepository()),
         RepositoryProvider(create: (_) => BrandsRepository()),
+        RepositoryProvider(create: (_) => AddressRepository()),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -89,6 +91,9 @@ Future<void> main() async {
               ),
               BlocProvider(create: (context) => FavouriteProductsCubit()),
                       BlocProvider(create: (_) => CartCubit()), 
+                      BlocProvider(create: (context) => AddressCubit(context.read<AddressRepository>())..fetchUserAddresses()), 
+
+
 
           
         ],

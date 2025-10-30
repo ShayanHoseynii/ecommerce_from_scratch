@@ -6,6 +6,12 @@ import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthenticationRepository {
+  
+  AuthenticationRepository._privateConstructor();
+  static final AuthenticationRepository _instance =
+      AuthenticationRepository._privateConstructor();
+  static AuthenticationRepository get instance => _instance;
+
   final _auth = FirebaseAuth.instance;
   User? get currentUser => _auth.currentUser;
   Stream<User?> get authStateChanges => _auth.authStateChanges();
@@ -62,7 +68,7 @@ class AuthenticationRepository {
       throw 'Something went wrong. Please try again.';
     }
   }
-  
+
   Future<void> sendPasswordResetEmail(String email) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
@@ -112,46 +118,46 @@ class AuthenticationRepository {
     }
   }
 
- /// [GoogleAuthentication] - GOOGLE
-Future<UserCredential?> signInWithGoogle() async {
-  try {
-    // Trigger the authentication flow
-    final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
+  /// [GoogleAuthentication] - GOOGLE
+  Future<UserCredential?> signInWithGoogle() async {
+    try {
+      // Trigger the authentication flow
+      final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
 
-    // Obtain the auth details from the request
-    final GoogleSignInAuthentication? googleAuth = await userAccount?.authentication;
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication? googleAuth =
+          await userAccount?.authentication;
 
-    // Create a new credential
-    final credential =  GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
-    );
+      // Create a new credential
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
 
-    // Once signed in, return the UserCredential
-    return await _auth.signInWithCredential(credential);
-    
-  } on FirebaseAuthException catch (e) {
-    throw TFirebaseAuthException(e.code).message;
-  } on FirebaseException catch (e) {
-    throw TFirebaseException(e.code).message;
-  } on FormatException catch (_) {
-    throw const TFormatException();
-  } on PlatformException catch (e) {
-    throw TPlatformException(e.code).message;
-  } catch (e) {
-    if (kDebugMode) print('Something went wrong: $e');
-    return null;
+      // Once signed in, return the UserCredential
+      return await _auth.signInWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      if (kDebugMode) print('Something went wrong: $e');
+      return null;
+    }
   }
-}
 
-Future<void> deleteAccount() async {
+  Future<void> deleteAccount() async {
     try {
       final provider = _auth.currentUser?.providerData.first.providerId;
 
-    if (provider == 'google.com') {
-      // Disconnect from Google to clear the cache
-      await GoogleSignIn().disconnect();
-    }
+      if (provider == 'google.com') {
+        // Disconnect from Google to clear the cache
+        await GoogleSignIn().disconnect();
+      }
 
       await _auth.currentUser?.delete();
     } on FirebaseAuthException catch (e) {
@@ -161,9 +167,15 @@ Future<void> deleteAccount() async {
     }
   }
 
-  Future<void> reAuthenticateWithEmailAndPassword(String email, String password) async {
+  Future<void> reAuthenticateWithEmailAndPassword(
+    String email,
+    String password,
+  ) async {
     try {
-      final credential = EmailAuthProvider.credential(email: email, password: password);
+      final credential = EmailAuthProvider.credential(
+        email: email,
+        password: password,
+      );
       await _auth.currentUser?.reauthenticateWithCredential(credential);
     } on FirebaseAuthException catch (e) {
       throw TFirebaseAuthException(e.code).message;

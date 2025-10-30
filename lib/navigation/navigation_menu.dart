@@ -1,12 +1,7 @@
-import 'package:cwt_starter_template/data/repositories/banners/banners_repository.dart';
-import 'package:cwt_starter_template/data/repositories/brands/brands_repository.dart';
-import 'package:cwt_starter_template/data/repositories/categories/category_repository.dart';
+import 'package:cwt_starter_template/data/repositories/address/address_repository.dart';
 import 'package:cwt_starter_template/data/repositories/products/product_repo.dart';
-import 'package:cwt_starter_template/features/shop/cubit/banners/banners_cubit.dart';
-import 'package:cwt_starter_template/features/shop/cubit/brands/brands_cubit.dart';
-import 'package:cwt_starter_template/features/shop/cubit/category/category_cubit.dart';
+import 'package:cwt_starter_template/features/personalization/screens/adresses/cubit/address_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/favourite_icon/favourite_icon_cubit.dart';
-import 'package:cwt_starter_template/features/shop/cubit/product/product_cubit.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/user/user_cubit.dart';
 import 'package:cwt_starter_template/features/personalization/screens/settings/settings.dart';
 import 'package:cwt_starter_template/features/shop/cubit/wish_list/wish_list_cubit.dart';
@@ -49,27 +44,36 @@ class _NavigationMenuState extends State<NavigationMenu> {
                 icon: Icon(Iconsax.heart),
                 label: 'WishList',
               ),
-              NavigationDestination(icon: Icon(Iconsax.user), label: 'Profile'),
+              NavigationDestination(
+                icon: Icon(Iconsax.user),
+                label: 'Profile',
+              ),
             ],
             height: 80,
             elevation: 0,
             selectedIndex: state.index,
             onDestinationSelected:
-                (value) => {context.read<NavigationCubit>().changeIndex(value)},
+                (value) => {
+                  context.read<NavigationCubit>().changeIndex(value),
+                },
             backgroundColor: darkMode ? TColors.black : Colors.white,
             indicatorColor:
                 darkMode
                     ? TColors.white.withOpacity(0.1)
                     : TColors.black.withOpacity(0.1),
           ),
-
+        
           body: IndexedStack(
             index: state.index,
             children: [
               HomeScreen(),
               Store(),
               BlocProvider(
-                create: (context) => WishlistCubit(context.read<FavouriteProductsCubit>(),context.read<ProductRepository>())..fetchWishlistProducts(),
+                create:
+                    (context) => WishlistCubit(
+                      context.read<FavouriteProductsCubit>(),
+                      context.read<ProductRepository>(),
+                    )..fetchWishlistProducts(),
                 child: FavouriteItemScreen(),
               ),
               SettingsScreen(),

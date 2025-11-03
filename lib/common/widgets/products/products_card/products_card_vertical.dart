@@ -30,11 +30,14 @@ class ProductCardVertical extends StatelessWidget {
     final price = product.getProductPrice(product);
 
     return GestureDetector(
-      onTap: () => {Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (_) => ProductDetailScreen(product: product),
-        ),
-      )},
+      onTap:
+          () => {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => ProductDetailScreen(product: product),
+              ),
+            ),
+          },
       child: Container(
         width: 180,
         padding: const EdgeInsets.all(1),
@@ -104,7 +107,6 @@ class ProductCardVertical extends StatelessWidget {
                     ),
                   ),
 
-                  // Use Spacer to push the price to the bottom
                   const Spacer(),
 
                   // -- Price Row
@@ -118,7 +120,6 @@ class ProductCardVertical extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              // Strikethrough price if there is a sale price
                               if (product.salePrice != null &&
                                   product.salePrice! > 0)
                                 Text(
@@ -126,8 +127,8 @@ class ProductCardVertical extends StatelessWidget {
                                   style: Theme.of(
                                     context,
                                   ).textTheme.labelMedium!.apply(
-                                        decoration: TextDecoration.lineThrough,
-                                      ),
+                                    decoration: TextDecoration.lineThrough,
+                                  ),
                                 ),
 
                               // Final Price
@@ -143,7 +144,6 @@ class ProductCardVertical extends StatelessWidget {
                         ),
                       ),
 
-                      // Add to Cart Button
                       BlocBuilder<CartCubit, CartState>(
                         builder: (context, state) {
                           int productQuantityInCart = 0;
@@ -158,54 +158,56 @@ class ProductCardVertical extends StatelessWidget {
                           }
 
                           return GestureDetector(
-
                             behavior: HitTestBehavior.opaque,
                             onTap: () {
-                              if (product.productType ==
-                                  'ProductType.single') {
+                              if (product.productType == 'ProductType.single') {
                                 context.read<CartCubit>().addToCart(
-                                      product: product,
-                                      quantity: 1,
-                                      selectedVariation: null,
-                                    );
+                                  product: product,
+                                  quantity: 1,
+                                  selectedVariation: null,
+                                );
                               } else {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) =>
-                                        ProductDetailScreen(product: product),
+                                    builder:
+                                        (_) => ProductDetailScreen(
+                                          product: product,
+                                        ),
                                   ),
                                 );
                               }
                             },
                             child: Container(
                               decoration: BoxDecoration(
-                                color: productQuantityInCart > 0
-                                    ? TColors.primary
-                                    : TColors.black,
+                                color:
+                                    productQuantityInCart > 0
+                                        ? TColors.primary
+                                        : TColors.black,
                                 borderRadius: const BorderRadius.only(
-                                  topLeft:
-                                      Radius.circular(TSizes.cardRadiusMd),
+                                  topLeft: Radius.circular(TSizes.cardRadiusMd),
                                   bottomRight: Radius.circular(
-                                      TSizes.productImageRadius),
+                                    TSizes.productImageRadius,
+                                  ),
                                 ),
                               ),
                               child: SizedBox(
                                 height: TSizes.iconLg * 1.2,
                                 width: TSizes.iconLg * 1.2,
                                 child: Center(
-                                  child: productQuantityInCart > 0
-                                      ? Text(
-                                          productQuantityInCart.toString(),
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleSmall!
-                                              .apply(color: TColors.white),
-                                        )
-                                      : const Icon(
-                                          Iconsax.add,
-                                          color: TColors.white,
-                                        ),
+                                  child:
+                                      productQuantityInCart > 0
+                                          ? Text(
+                                            productQuantityInCart.toString(),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleSmall!
+                                                .apply(color: TColors.white),
+                                          )
+                                          : const Icon(
+                                            Iconsax.add,
+                                            color: TColors.white,
+                                          ),
                                 ),
                               ),
                             ),

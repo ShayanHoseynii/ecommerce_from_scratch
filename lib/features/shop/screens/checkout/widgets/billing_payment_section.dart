@@ -39,8 +39,7 @@ class TBillingPaymentSection extends StatelessWidget {
                 TRoundedContainer(
                   width: 60,
                   height: 35,
-                  backgroundColor:
-                      dark ? TColors.lightContainer : TColors.white,
+                  backgroundColor: Colors.transparent,
                   padding: EdgeInsets.all(TSizes.sm),
                   child: Image(
                     image: AssetImage(state.selectedPaymentMethod.image),

@@ -130,31 +130,6 @@ class SettingsScreen extends StatelessWidget {
                     onTap: () {},
                   ),
 
-                  /// -- App Settings
-                  SizedBox(height: TSizes.spaceBtwSections),
-                  TSectionHeading(
-                    title: 'App Settings',
-                    showActionButton: false,
-                  ),
-                  SizedBox(height: TSizes.spaceBtwItems),
-                  TSeetingsMenuTile(
-                    icon: Iconsax.document_upload,
-                    title: 'Load Data',
-                    subtitle: 'Upload Data to your Cloud Firebase',
-                  ),
-                  TSeetingsMenuTile(
-                    icon: Iconsax.security_user,
-                    title: 'Load Data',
-                    subtitle: 'Upload Data to your Cloud Firebase',
-                    trailing: Switch(value: false, onChanged: (value) {}),
-                  ),
-                  TSeetingsMenuTile(
-                    icon: Iconsax.image,
-                    title: 'Load Data',
-                    subtitle: 'Upload Data to your Cloud Firebase',
-                    trailing: Switch(value: false, onChanged: (value) {}),
-                  ),
-                  const SizedBox(height: TSizes.spaceBtwItems),
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(

@@ -80,30 +80,23 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     // Promo Slider
                     const TPromoSlider(),
-                    const SizedBox(height: TSizes.spaceBtwSections),
+                    const SizedBox(height: TSizes.spaceBtwItems),
 
                     // Popular Products
                     TSectionHeading(
                       title: 'Popular Products',
                       onPressed: () {
-                        // 1. Define the Query for Featured Products
                         final query = FirebaseFirestore.instance
                             .collection('Products')
-                            .where(
-                              'IsFeatured',
-                              isEqualTo: true,
-                            ); // You might want a limit here too
+                            .where('IsFeatured', isEqualTo: true);
 
-                        // 2. Navigate using Navigator.push
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder:
                                 (context) => BlocProvider(
-                                  // 3. Create the AllProductsCubit and immediately fetch data
                                   create:
                                       (context) => AllProductsCubit(
-                                        // Use read from the original context to get the repository
                                         context.read<ProductRepository>(),
                                       )..fetchAllProducts(),
                                   child: const AllProductsScreen(
@@ -118,10 +111,9 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: TSizes.spaceBtwItems),
 
             Padding(
-              padding: const EdgeInsets.all(TSizes.defaultSpace),
+              padding: const EdgeInsets.only(right: 20, left: 20),
               child: BlocBuilder<ProductCubit, ProductState>(
                 builder: (context, state) {
                   if (state is ProductLoading) {

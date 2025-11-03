@@ -26,12 +26,14 @@ class TPaymentTile extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(TSizes.sm),
       showBorder: true,
-      borderColor: isSelected
-          ? TColors.primary
-          : dark
-              ? TColors.darkGrey
+      borderColor:
+          isSelected
+              ? TColors.primary
+              : dark
+              ? TColors.darkerGrey
               : TColors.lightGrey,
-      backgroundColor: isSelected ? TColors.primary.withOpacity(0.1) : Colors.transparent,
+      backgroundColor:
+          isSelected ? TColors.primary.withOpacity(0.1) : Colors.transparent,
       // --- End Logic ---
       child: ListTile(
         leading: Image(
@@ -39,12 +41,13 @@ class TPaymentTile extends StatelessWidget {
           width: 60,
           height: 40,
           fit: BoxFit.contain,
-        ),
+          ),
         title: Text(paymentMethod.name),
         onTap: onTap,
-        trailing: isSelected
-            ? const Icon(Iconsax.tick_circle, color: TColors.primary)
-            : null,
+        trailing:
+            isSelected
+                ? const Icon(Iconsax.tick_circle, color: TColors.primary)
+                : null,
       ),
     );
   }

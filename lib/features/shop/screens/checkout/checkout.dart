@@ -12,7 +12,6 @@ import 'package:cwt_starter_template/features/shop/screens/cart/widgets/cart_ite
 import 'package:cwt_starter_template/features/shop/screens/checkout/widgets/billing_address_section.dart';
 import 'package:cwt_starter_template/features/shop/screens/checkout/widgets/billing_amount_section.dart';
 import 'package:cwt_starter_template/features/shop/screens/checkout/widgets/billing_payment_section.dart';
-import 'package:cwt_starter_template/features/shop/screens/home/home.dart';
 import 'package:cwt_starter_template/navigation/cubit/navigation_menu__cubit.dart';
 import 'package:cwt_starter_template/navigation/navigation_menu.dart';
 import 'package:cwt_starter_template/utils/constants/image_strings.dart';
@@ -107,6 +106,7 @@ class CheckoutScreen extends StatelessWidget {
                   /// -- Billing & Payment Section
                   TRoundedContainer(
                     showBorder: true,
+                    backgroundColor: Colors.transparent,
                     padding: EdgeInsets.all(TSizes.md),
                     child: Column(
                       children: [

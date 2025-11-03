@@ -1,4 +1,5 @@
 import 'package:cwt_starter_template/common/widgets/appbar/appbar.dart';
+import 'package:cwt_starter_template/common/widgets/shimmer/list_tile_shimmer.dart';
 import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_state.dart';
 import 'package:cwt_starter_template/features/shop/screens/cart/widgets/cart_items.dart';
@@ -6,7 +7,7 @@ import 'package:cwt_starter_template/features/shop/screens/checkout/checkout.dar
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:iconsax/iconsax.dart'; // Import for the icon
+import 'package:iconsax/iconsax.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -22,11 +23,11 @@ class CartScreen extends StatelessWidget {
       body: BlocBuilder<CartCubit, CartState>(
         builder: (context, state) {
           if (state is CartInitial || state is CartLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: TListTileShimmer());
           }
-          
+
           if (state is CartError) {
-             return const Center(child: Text('Something went wrong.'));
+            return const Center(child: Text('Something went wrong.'));
           }
 
           if (state is CartLoaded) {
@@ -39,7 +40,7 @@ class CartScreen extends StatelessWidget {
               );
             }
           }
-          
+
           return const SizedBox.shrink();
         },
       ),
@@ -51,14 +52,20 @@ class CartScreen extends StatelessWidget {
             final isLoaded = state is CartLoaded;
             final totalPrice = isLoaded ? state.totalPrice : 0.0;
             final hasItems = isLoaded && state.cartItems.isNotEmpty;
+            if (!hasItems) {
+              return const SizedBox.shrink();
+            }
             return ElevatedButton(
-              onPressed: hasItems
-                  ? () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) => const CheckoutScreen()),
-                      );
-                    }
-                  : null,
+              onPressed:
+                  hasItems
+                      ? () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => const CheckoutScreen(),
+                          ),
+                        );
+                      }
+                      : null,
               child: Text('Checkout \$${totalPrice.toStringAsFixed(2)}'),
             );
           },
@@ -67,7 +74,6 @@ class CartScreen extends StatelessWidget {
     );
   }
 }
-
 
 class _EmptyCartWidget extends StatelessWidget {
   const _EmptyCartWidget();
@@ -97,7 +103,7 @@ class _EmptyCartWidget extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () => Navigator.of(context).pop(), 
+                onPressed: () => Navigator.of(context).pop(),
                 child: const Text('Let\'s Go Shopping'),
               ),
             ),

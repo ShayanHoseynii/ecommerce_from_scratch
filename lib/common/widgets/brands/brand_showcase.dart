@@ -40,7 +40,7 @@ class TBrandShowcase extends StatelessWidget {
                     child: TRoundedContainer(
                       height: 100,
                       backgroundColor:
-                          dark ? TColors.darkGrey : TColors.lightContainer,
+                          dark ? TColors.dark : TColors.lightContainer,
                       margin: EdgeInsets.only(
                         right:
                             idx == images.length - 1

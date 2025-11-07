@@ -1,6 +1,7 @@
 import 'package:cwt_starter_template/common/widgets/shimmer/list_tile_shimmer.dart';
 import 'package:cwt_starter_template/common/widgets/texts/section_heading.dart';
 import 'package:cwt_starter_template/data/repositories/address/address_repository.dart';
+import 'package:cwt_starter_template/di/injection_container.dart';
 import 'package:cwt_starter_template/features/personalization/screens/adresses/add_new_address.dart';
 import 'package:cwt_starter_template/features/personalization/screens/adresses/cubit/address_cubit.dart';
 import 'package:cwt_starter_template/features/personalization/screens/adresses/cubit/address_form_cubit.dart';
@@ -41,14 +42,10 @@ class AddressSelectionSheet extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder:
-                        (_) => BlocProvider(
-                          create:
-                              (context) => AddressFormCubit(
-                                context.read<AddressRepository>(),
-                              ),
-                          child: const AddNewAddressScreen(),
-                        ),
+                    builder: (_) => BlocProvider(
+                      create: (_) => sl<AddressFormCubit>(),
+                      child: const AddNewAddressScreen(),
+                    ),
                   ),
                 );
               },

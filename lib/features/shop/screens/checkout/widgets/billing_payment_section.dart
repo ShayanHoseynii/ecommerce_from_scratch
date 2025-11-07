@@ -14,7 +14,6 @@ class TBillingPaymentSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
     return Column(
       children: [
         TSectionHeading(
@@ -25,14 +24,14 @@ class TBillingPaymentSection extends StatelessWidget {
               isScrollControlled: true,
               builder:
                   (_) => BlocProvider.value(
-                    value: context.read<PaymentCubit>(),
-                    child: PaymentSelectionSheet(),
+                    value: context.read<PaymentMethodCubit>(),
+                    child: const PaymentSelectionSheet(),
                   ),
               context: context,
             );
           },
         ),
-        BlocBuilder<PaymentCubit, PaymentState>(
+        BlocBuilder<PaymentMethodCubit, PaymentMethodState>(
           builder: (context, state) {
             return Row(
               children: [

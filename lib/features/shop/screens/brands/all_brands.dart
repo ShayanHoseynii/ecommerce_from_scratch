@@ -3,7 +3,7 @@ import 'package:cwt_starter_template/common/widgets/brands/brand_card.dart';
 import 'package:cwt_starter_template/common/widgets/layout/grid_layout.dart';
 import 'package:cwt_starter_template/common/widgets/shimmer/brands_shimmer.dart';
 import 'package:cwt_starter_template/common/widgets/texts/section_heading.dart';
-import 'package:cwt_starter_template/data/repositories/products/product_repo.dart';
+import 'package:cwt_starter_template/di/injection_container.dart';
 import 'package:cwt_starter_template/features/shop/cubit/all_products/all_products_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/brands/brands_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/brands/brands_state.dart';
@@ -49,7 +49,7 @@ class AllBrandsScreen extends StatelessWidget {
                                 context,
                               ).push(MaterialPageRoute(builder: (newContext) => 
                                 BlocProvider(
-                                  create: (_) => AllProductsCubit(context.read<ProductRepository>())..fetchProductsByBrand(state.allBrands[index].id),
+                                  create: (_) => sl<AllProductsCubit>()..fetchProductsByBrand(state.allBrands[index].id),
                                   child:  BrandProducts(brand: state.allBrands[index]),
                                 ),
                               ));

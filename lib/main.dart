@@ -1,13 +1,5 @@
-import 'package:cwt_starter_template/data/repositories/address/address_repository.dart';
 import 'package:cwt_starter_template/data/repositories/authentication/auth_cubit.dart';
 import 'package:cwt_starter_template/data/repositories/authentication/auth_state.dart';
-import 'package:cwt_starter_template/data/repositories/authentication/authentication_repository.dart';
-import 'package:cwt_starter_template/data/repositories/banners/banners_repository.dart';
-import 'package:cwt_starter_template/data/repositories/brands/brands_repository.dart';
-import 'package:cwt_starter_template/data/repositories/categories/category_repository.dart';
-import 'package:cwt_starter_template/data/repositories/order/order_repository.dart';
-import 'package:cwt_starter_template/data/repositories/products/product_repo.dart';
-import 'package:cwt_starter_template/data/repositories/user/user_repository.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/login/login_cubit.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/user/user_cubit.dart';
 import 'package:cwt_starter_template/features/personalization/screens/adresses/cubit/address_cubit.dart';
@@ -24,6 +16,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:cwt_starter_template/di/injection_container.dart';
 import 'routes/app_router.dart';
 import 'utils/theme/theme.dart';
 import 'firebase_options.dart';
@@ -37,64 +30,24 @@ Future<void> main() async {
   await GetStorage.init();
 
   await TLocalStorage.init(null);
+  
+  await initDependencies();
   Bloc.observer = SimpleBlocObserver();
   runApp(
-    MultiRepositoryProvider(
+    MultiBlocProvider(
       providers: [
-        // --- Use .value for your singleton instance ---
-        RepositoryProvider.value(value: AuthenticationRepository.instance),
-        RepositoryProvider(create: (_) => UserRepository()),
-        RepositoryProvider(create: (_) => CategoryRepository()),
-        RepositoryProvider(create: (_) => BannersRepository()),
-        RepositoryProvider(create: (_) => ProductRepository()),
-        RepositoryProvider(create: (_) => BrandsRepository()),
-        // --- Add AddressRepository ---
-        RepositoryProvider(create: (_) => AddressRepository()),
-        RepositoryProvider(create: (_) => OrderRepository()),
+        BlocProvider(create: (_) => sl<AuthCubit>()),
+        BlocProvider.value(value: sl<NetworkCubit>()),
+        BlocProvider(create: (_) => sl<LoginCubit>()),
+        BlocProvider(create: (_) => sl<UserCubit>()),
+        BlocProvider(create: (_) => sl<CategoryCubit>()..fetchCategories()),
+        BlocProvider(create: (_) => sl<ProductCubit>()..fetchProducts()),
+        BlocProvider(create: (_) => sl<BrandsCubit>()..fetchBrands()),
+        BlocProvider.value(value: sl<FavouriteProductsCubit>()),
+        BlocProvider.value(value: sl<CartCubit>()),
+        BlocProvider.value(value: sl<AddressCubit>()..fetchUserAddresses()),
       ],
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) =>
-                AuthCubit(context.read<AuthenticationRepository>()),
-          ),
-          BlocProvider(create: (context) => NetworkCubit()),
-          BlocProvider(
-            create: (context) => LoginCubit(
-              userRepo: context.read<UserRepository>(),
-              authRepository: context.read<AuthenticationRepository>(),
-              networkCubit: context.read<NetworkCubit>(),
-            ),
-          ),
-          BlocProvider(
-            create: (context) => UserCubit(
-              context.read<UserRepository>(),
-              context.read<AuthenticationRepository>(),
-            ),
-          ),
-          BlocProvider(
-            create: (context) =>
-                CategoryCubit(context.read<CategoryRepository>())
-                  ..fetchCategories(),
-          ),
-          BlocProvider(
-            create: (context) =>
-                ProductCubit(context.read<ProductRepository>())
-                  ..fetchProducts(),
-          ),
-          BlocProvider(
-            create: (context) =>
-                BrandsCubit(context.read<BrandsRepository>())..fetchBrands(),
-          ),
-          BlocProvider(create: (context) => FavouriteProductsCubit()),
-          // --- Add CartCubit ---
-          BlocProvider(create: (context) => CartCubit()),
-          BlocProvider(
-            create: (context) => AddressCubit(context.read<AddressRepository>())..fetchUserAddresses(),
-          )
-        ],
-        child: MyApp(),
-      ),
+      child: MyApp(),
     ),
   );
 }
@@ -116,33 +69,51 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: _appRouter.onGeneratedRoute,
       initialRoute: '/',
       builder: (context, child) {
-        return BlocListener<AuthCubit, AuthState>(
-          listener: (context, state) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              final navigator = navigatorKey.currentState;
-              if (navigator == null) return;
+        return MultiBlocListener(
+          listeners: [
+            BlocListener<AuthCubit, AuthState>(
+              listener: (context, state) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  final navigator = navigatorKey.currentState;
+                  if (navigator == null) return;
 
-              switch (state.status) {
-                case AuthStatus.firstTime:
-                  navigator.pushNamed('/onboarding');
-                  break;
+                  switch (state.status) {
+                    case AuthStatus.firstTime:
+                      navigator.pushNamed('/onboarding');
+                      break;
 
-                case AuthStatus.unauthenticated:
-                  navigator.pushReplacementNamed('/login');
-                  break;
+                    case AuthStatus.unauthenticated:
+                      navigator.pushReplacementNamed('/login');
+                      break;
 
-                case AuthStatus.authenticated:
-                  navigator.pushNamedAndRemoveUntil(
-                    '/navbar',
-                    (Route<dynamic> route) => false,
-                  );
-                  break;
-                // ... handle other cases similarly
-                default:
-                  break;
-              }
-            });
-          },
+                    case AuthStatus.authenticated:
+                      navigator.pushNamedAndRemoveUntil(
+                        '/navbar',
+                        (Route<dynamic> route) => false,
+                      );
+                      break;
+                    default:
+                      break;
+                  }
+                });
+              },
+            ),
+            BlocListener<AuthCubit, AuthState>(
+              listenWhen: (previous, current) => previous.status != current.status,
+              listener: (context, state) {
+                switch (state.status) {
+                  case AuthStatus.authenticated:
+                  case AuthStatus.emailVerification:
+                  case AuthStatus.unauthenticated:
+                    sl<FavouriteProductsCubit>().initFavourites();
+                    sl<CartCubit>().loadCartFromStorage();
+                    break;
+                  default:
+                    break;
+                }
+              },
+            ),
+          ],
           child: child!,
         );
       },

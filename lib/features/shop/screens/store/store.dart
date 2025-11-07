@@ -17,6 +17,7 @@ import 'package:cwt_starter_template/features/shop/cubit/product/product_cubit.d
 import 'package:cwt_starter_template/features/shop/screens/brands/all_brands.dart';
 import 'package:cwt_starter_template/features/shop/screens/cart/cart.dart';
 import 'package:cwt_starter_template/features/shop/screens/store/widgets/category_tab.dart';
+import 'package:cwt_starter_template/di/injection_container.dart';
 import 'package:cwt_starter_template/utils/constants/colors.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
 import 'package:cwt_starter_template/utils/helpers/helper_functions.dart';
@@ -140,16 +141,9 @@ class Store extends StatelessWidget {
                       categoryState.allCategories.map((category) {
                         return MultiBlocProvider(
                           providers: [
-                            BlocProvider(
-                              create: (context) => context.read<BrandsCubit>(),
-                            ),
-                            BlocProvider(
-                              create:
-                                  (context) => ProductCubit(context.read<ProductRepository>())..fetchProductsByCategoryId(category.id),
-                            ),
-                            BlocProvider(
-                              create: (context) => BrandShowcaseCubit(context.read<BrandsRepository>(), context.read<ProductRepository>())..loadShowcases(category.id),
-                            )
+                            BlocProvider(create: (_) => sl<BrandsCubit>()),
+                            BlocProvider(create: (_) => sl<ProductCubit>()..fetchProductsByCategoryId(category.id)),
+                            BlocProvider(create: (_) => sl<BrandShowcaseCubit>()..loadShowcases(category.id)),
                           ],
                           child: TCategoryTab(category: category,),
                         );

@@ -1,9 +1,8 @@
-import 'package:cwt_starter_template/data/repositories/authentication/authentication_repository.dart';
-import 'package:cwt_starter_template/data/repositories/user/user_repository.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/signup/signup_cubit.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/signup/signup_state.dart';
 import 'package:cwt_starter_template/features/authentication/screens/signup/verify_email.dart';
 import 'package:cwt_starter_template/features/authentication/screens/signup/widgets/signup_form.dart';
+import 'package:cwt_starter_template/di/injection_container.dart';
 import 'package:cwt_starter_template/utils/constants/image_strings.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
 import 'package:cwt_starter_template/utils/helpers/exports.dart';
@@ -19,12 +18,7 @@ class SignUpScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: BlocProvider(
-        create:
-            (context) => SignupCubit(
-              networkCubit: context.read<NetworkCubit>(),
-              authRepository: context.read<AuthenticationRepository>(),
-              userRepository: context.read<UserRepository>(),
-            ),
+        create: (_) => sl<SignupCubit>(),
         child: BlocListener<SignupCubit, SignupState>(
           listener: (context, state) {
             if (state.status == FormStatus.loading) {

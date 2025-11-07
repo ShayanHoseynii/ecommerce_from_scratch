@@ -14,6 +14,7 @@ import 'package:cwt_starter_template/features/shop/screens/all_products/all_prod
 import 'package:cwt_starter_template/features/shop/screens/home/controller/carusoul_cubit.dart';
 import 'package:cwt_starter_template/features/shop/screens/home/widgets/home_appbar.dart';
 import 'package:cwt_starter_template/features/shop/screens/home/widgets/home_categories.dart';
+import 'package:cwt_starter_template/di/injection_container.dart';
 import 'package:cwt_starter_template/features/shop/screens/home/widgets/promo_slider.dart';
 import 'package:cwt_starter_template/features/shop/screens/home/widgets/vertical_product_shimmer.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
@@ -67,13 +68,10 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.all(TSizes.defaultSpace),
               child: MultiBlocProvider(
                 providers: [
-                  BlocProvider(create: (_) => CarusoulCubit()),
+                  BlocProvider(create: (_) => sl<CarusoulCubit>()),
 
                   BlocProvider(
-                    create:
-                        (context) =>
-                            BannerCubit(context.read<BannersRepository>())
-                              ..fetchBanners(),
+                    create: (_) => sl<BannerCubit>()..fetchBanners(),
                   ),
                 ],
                 child: Column(
@@ -95,10 +93,7 @@ class HomeScreen extends StatelessWidget {
                           MaterialPageRoute(
                             builder:
                                 (context) => BlocProvider(
-                                  create:
-                                      (context) => AllProductsCubit(
-                                        context.read<ProductRepository>(),
-                                      )..fetchAllProducts(),
+                                  create: (_) => sl<AllProductsCubit>()..fetchAllProducts(),
                                   child: const AllProductsScreen(
                                     title: 'Popular Products',
                                   ),

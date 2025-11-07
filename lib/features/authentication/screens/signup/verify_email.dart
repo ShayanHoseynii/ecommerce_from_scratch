@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:cwt_starter_template/common/widgets/success_screen/success_screen.dart';
 import 'package:cwt_starter_template/data/repositories/authentication/auth_cubit.dart';
-import 'package:cwt_starter_template/data/repositories/authentication/authentication_repository.dart';
+import 'package:cwt_starter_template/di/injection_container.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/email/email_verification_state.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/email/email_verificatoin_cubit.dart';
 import 'package:cwt_starter_template/utils/constants/image_strings.dart';
@@ -20,10 +20,7 @@ class VerifyEmailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create:
-          (context) => EmailVerificationCubit(
-            authRepository: context.read<AuthenticationRepository>(),
-          ),
+      create: (_) => sl<EmailVerificationCubit>(),
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,

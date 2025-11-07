@@ -1,3 +1,5 @@
+import 'package:flash/flash.dart';
+import 'package:flash/flash_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import '../constants/colors.dart';
@@ -6,15 +8,20 @@ class TLoaders {
   static void hideSnackBar(BuildContext context) =>
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
 
-  static void successSnackBar({required BuildContext context, required String title, String message = ''}) {
+  static void successSnackBar({
+    required BuildContext context,
+    required String title,
+    String message = '',
+  }) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
+        duration: Duration(seconds: 1),
         elevation: 0,
         backgroundColor: Colors.transparent,
         content: Container(
           padding: const EdgeInsets.all(12.0),
           decoration: BoxDecoration(
-            color: TColors.primary,
+            color: TColors.primary.withOpacity(0.9),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Row(
@@ -26,11 +33,20 @@ class TLoaders {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(title, style: Theme.of(context).textTheme.titleLarge!.copyWith(color: TColors.white)),
+                    Text(
+                      title,
+                      style: Theme.of(
+                        context,
+                      ).textTheme.titleMedium!.copyWith(color: TColors.white),
+                    ),
                     if (message.isNotEmpty)
                       Padding(
                         padding: const EdgeInsets.only(top: 4.0),
-                        child: Text(message, style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: TColors.white)),
+                        child: Text(
+                          message,
+                          style: Theme.of(context).textTheme.bodyMedium!
+                              .copyWith(color: TColors.white),
+                        ),
                       ),
                   ],
                 ),
@@ -41,8 +57,12 @@ class TLoaders {
       ),
     );
   }
-  
-  static void warningSnackBar({required BuildContext context, required String title, String message = ''}) {
+
+  static void warningSnackBar({
+    required BuildContext context,
+    required String title,
+    String message = '',
+  }) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         elevation: 0,
@@ -62,11 +82,20 @@ class TLoaders {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(title, style: Theme.of(context).textTheme.titleLarge!.copyWith(color: TColors.white)),
+                    Text(
+                      title,
+                      style: Theme.of(
+                        context,
+                      ).textTheme.titleLarge!.copyWith(color: TColors.white),
+                    ),
                     if (message.isNotEmpty)
                       Padding(
                         padding: const EdgeInsets.only(top: 4.0),
-                        child: Text(message, style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: TColors.white)),
+                        child: Text(
+                          message,
+                          style: Theme.of(context).textTheme.bodyMedium!
+                              .copyWith(color: TColors.white),
+                        ),
                       ),
                   ],
                 ),
@@ -78,7 +107,11 @@ class TLoaders {
     );
   }
 
-  static void errorSnackBar({required BuildContext context, required String title, String message = ''}) {
+  static void errorSnackBar({
+    required BuildContext context,
+    required String title,
+    String message = '',
+  }) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         elevation: 0,
@@ -98,11 +131,20 @@ class TLoaders {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(title, style: Theme.of(context).textTheme.titleLarge!.copyWith(color: TColors.white)),
+                    Text(
+                      title,
+                      style: Theme.of(
+                        context,
+                      ).textTheme.titleLarge!.copyWith(color: TColors.white),
+                    ),
                     if (message.isNotEmpty)
                       Padding(
                         padding: const EdgeInsets.only(top: 4.0),
-                        child: Text(message, style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: TColors.white)),
+                        child: Text(
+                          message,
+                          style: Theme.of(context).textTheme.bodyMedium!
+                              .copyWith(color: TColors.white),
+                        ),
                       ),
                   ],
                 ),

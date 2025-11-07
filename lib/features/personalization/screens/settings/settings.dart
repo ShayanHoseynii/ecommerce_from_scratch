@@ -11,6 +11,7 @@ import 'package:cwt_starter_template/features/shop/cubit/orders/cubit/order_cubi
 import 'package:cwt_starter_template/features/shop/cubit/payment/payment_method_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_cubit.dart';
 import 'package:cwt_starter_template/features/shop/screens/order/order.dart';
+import 'package:cwt_starter_template/di/injection_container.dart';
 import 'package:cwt_starter_template/utils/constants/colors.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
 import 'package:cwt_starter_template/utils/helpers/helper_functions.dart';
@@ -87,17 +88,14 @@ class SettingsScreen extends StatelessWidget {
                             builder:
                                 (_) => MultiBlocProvider(
                                   providers: [
-                                    BlocProvider(
-                                      create: (context) => PaymentCubit(),
+                                    BlocProvider.value(
+                                      value: sl<PaymentMethodCubit>(),
                                     ),
                                     BlocProvider(
                                       create:
-                                          (context) => OrderCubit(
-                                            context.read<OrderRepository>(),
-                                            context.read<AddressCubit>(),
-                                            context.read<PaymentCubit>(),
-                                            context.read<CartCubit>(),
-                                          )..fetchUserOrders(),
+                                          (_) =>
+                                              sl<OrderCubit>()
+                                                ..fetchUserOrders(),
                                     ),
                                   ],
                                   child: OrderScreen(),

@@ -68,18 +68,15 @@ class TBottomAddToCart extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              // 6. Get all the data needed from the cubits
               final quantity = context.read<QuantityCubit>().state;
               final variationState = context.read<VariationCubit>().state;
 
-              // Get selected variation
               final ProductVariationModel variation =
                   variationState.selectedVariation;
 
               final ProductVariationModel? selectedVariation =
                   variation.id.isEmpty ? null : variation;
 
-              // 7. Call the CartCubit
               context.read<CartCubit>().addToCart(
                 product: product,
                 quantity: quantity,

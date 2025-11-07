@@ -123,33 +123,61 @@ class AuthenticationRepository {
 
   /// [GoogleAuthentication] - GOOGLE
   Future<UserCredential?> signInWithGoogle() async {
-    try {
-      // Trigger the authentication flow
-      final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
+    if (kIsWeb) {
+      try {
+        final provider = GoogleAuthProvider();
+        provider.setCustomParameters({'prompt': 'select_account'});
+        return await _auth.signInWithPopup(provider);
+      } on FirebaseAuthException catch (e) {
+        // Treat user-initiated closures as cancellation
+        if (e.code == 'popup-closed-by-user' ||
+            e.code == 'web-context-cancelled' ||
+            e.code == 'popup_blocked') {
+          return null;
+        }
+        throw TFirebaseAuthException(e.code).message;
+      } on FirebaseException catch (e) {
+        throw TFirebaseException(e.code).message;
+      } on PlatformException catch (e) {
+        throw TPlatformException(e.code).message;
+      } catch (e) {
+        if (kDebugMode) print('Something went wrong: $e');
+        throw 'Something went wrong. Please try again.';
+      }
+    } else {
+      try {
+        // Trigger the authentication flow
+        final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
 
-      // Obtain the auth details from the request
-      final GoogleSignInAuthentication? googleAuth =
-          await userAccount?.authentication;
+        // If user cancels the picker, return null so UI can show "cancelled"
+        if (userAccount == null) {
+          return null;
+        }
 
-      // Create a new credential
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken,
-      );
+        // Obtain the auth details from the request
+        final GoogleSignInAuthentication googleAuth =
+            await userAccount.authentication;
 
-      // Once signed in, return the UserCredential
-      return await _auth.signInWithCredential(credential);
-    } on FirebaseAuthException catch (e) {
-      throw TFirebaseAuthException(e.code).message;
-    } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on FormatException catch (_) {
-      throw const TFormatException();
-    } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
-    } catch (e) {
-      if (kDebugMode) print('Something went wrong: $e');
-      return null;
+        // Create a new credential
+        final credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+
+        // Once signed in, return the UserCredential
+        return await _auth.signInWithCredential(credential);
+      } on FirebaseAuthException catch (e) {
+        throw TFirebaseAuthException(e.code).message;
+      } on FirebaseException catch (e) {
+        throw TFirebaseException(e.code).message;
+      } on FormatException catch (_) {
+        throw const TFormatException();
+      } on PlatformException catch (e) {
+        throw TPlatformException(e.code).message;
+      } catch (e) {
+        if (kDebugMode) print('Something went wrong: $e');
+        throw 'Something went wrong. Please try again.';
+      }
     }
   }
 

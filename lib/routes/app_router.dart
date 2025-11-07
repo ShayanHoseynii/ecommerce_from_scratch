@@ -21,6 +21,7 @@ import 'package:cwt_starter_template/navigation/navigation_menu.dart';
 import 'package:cwt_starter_template/utils/helpers/networkManager/network_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:cwt_starter_template/di/injection_container.dart';
 
 class AppRouter {
   Route? onGeneratedRoute(RouteSettings settigns) {
@@ -56,12 +57,7 @@ class AppRouter {
         return MaterialPageRoute(
           builder:
               (_) => BlocProvider(
-                create:
-                    (context) => SignupCubit(
-                      authRepository: context.read<AuthenticationRepository>(),
-                      networkCubit: context.read<NetworkCubit>(),
-                      userRepository: context.read<UserRepository>(),
-                    ),
+                create: (_) => sl<SignupCubit>(),
                 child: SignUpScreen(),
               ),
         );
@@ -70,11 +66,7 @@ class AppRouter {
         return MaterialPageRoute(
           builder:
               (_) => BlocProvider(
-                create:
-                    (context) => ForgetPasswordCubit(
-                      authRepository: context.read<AuthenticationRepository>(),
-                      networkCubit: context.read<NetworkCubit>(),
-                    ),
+                create: (_) => sl<ForgetPasswordCubit>(),
                 child: ForgetPassword(),
               ),
         );

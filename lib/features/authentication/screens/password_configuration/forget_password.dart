@@ -1,4 +1,5 @@
 import 'package:cwt_starter_template/data/repositories/authentication/authentication_repository.dart';
+import 'package:cwt_starter_template/di/injection_container.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/forgetPassword/forget_password_cubit.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/forgetPassword/forget_password_state.dart';
 import 'package:cwt_starter_template/features/authentication/screens/password_configuration/reset_password.dart';
@@ -57,16 +58,10 @@ class _ForgetPasswordState extends State<ForgetPassword> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder:
-                  (_) => BlocProvider(
-                    create:
-                        (context) => ForgetPasswordCubit(
-                          authRepository:
-                              context.read<AuthenticationRepository>(),
-                          networkCubit: context.read<NetworkCubit>(),
-                        ),
-                    child: ResetPasswordScreen(email: _emailController.text),
-                  ),
+              builder: (_) => BlocProvider(
+                create: (_) => sl<ForgetPasswordCubit>(),
+                child: ResetPasswordScreen(email: _emailController.text),
+              ),
             ),
           );
         }

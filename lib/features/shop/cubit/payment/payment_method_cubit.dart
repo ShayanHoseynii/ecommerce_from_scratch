@@ -3,15 +3,15 @@ import 'package:cwt_starter_template/features/shop/cubit/payment/payment_method_
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cwt_starter_template/utils/constants/image_strings.dart';
 
-class PaymentCubit extends Cubit<PaymentState> {
-  PaymentCubit()
-      : super(
-          PaymentState(
-            PaymentMethodModel(name: 'Paypal', image: TImages.paypal),
-          ),
-        );
+class PaymentMethodCubit extends Cubit<PaymentMethodState> {
+  PaymentMethodCubit()
+    : super(
+        PaymentMethodState(
+          PaymentMethodModel(name: 'Paypal', image: TImages.paypal),
+        ),
+      );
 
   void selectPaymentMethod(PaymentMethodModel newMethod) {
-    emit(PaymentState(newMethod));
+    emit(PaymentMethodState(newMethod));
   }
 }

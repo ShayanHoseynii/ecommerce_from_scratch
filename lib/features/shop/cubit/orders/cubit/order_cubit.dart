@@ -16,7 +16,7 @@ part 'order_state.dart';
 class OrderCubit extends Cubit<OrderState> {
   final OrderRepository _orderRepository;
   final AddressCubit _addressCubit;
-  final PaymentCubit _paymentCubit;
+  final PaymentMethodCubit _paymentCubit;
   final CartCubit _cartCubit;
   OrderCubit(
     this._orderRepository,

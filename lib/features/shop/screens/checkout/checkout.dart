@@ -14,6 +14,7 @@ import 'package:cwt_starter_template/features/shop/screens/checkout/widgets/bill
 import 'package:cwt_starter_template/features/shop/screens/checkout/widgets/billing_payment_section.dart';
 import 'package:cwt_starter_template/navigation/cubit/navigation_menu__cubit.dart';
 import 'package:cwt_starter_template/navigation/navigation_menu.dart';
+import 'package:cwt_starter_template/di/injection_container.dart';
 import 'package:cwt_starter_template/utils/constants/image_strings.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
 import 'package:cwt_starter_template/utils/helpers/pricing_calculator.dart';
@@ -28,16 +29,8 @@ class CheckoutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => PaymentCubit()),
-        BlocProvider(
-          create:
-              (context) => OrderCubit(
-                context.read<OrderRepository>(),
-                context.read<AddressCubit>(),
-                context.read<PaymentCubit>(),
-                context.read<CartCubit>(),
-              ),
-        ),
+        BlocProvider.value(value: sl<PaymentMethodCubit>()),
+        BlocProvider(create: (_) => sl<OrderCubit>()),
       ],
       child: BlocListener<OrderCubit, OrderState>(
         listener: (context, state) {

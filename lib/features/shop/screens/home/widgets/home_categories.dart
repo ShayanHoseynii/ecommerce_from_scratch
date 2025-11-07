@@ -1,6 +1,5 @@
 import 'package:cwt_starter_template/common/widgets/image_text_widgets.dart/vertical_image_text.dart';
-import 'package:cwt_starter_template/data/repositories/categories/category_repository.dart';
-import 'package:cwt_starter_template/data/repositories/products/product_repo.dart';
+import 'package:cwt_starter_template/di/injection_container.dart';
 import 'package:cwt_starter_template/features/shop/cubit/category/category_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/category/category_state.dart';
 import 'package:cwt_starter_template/features/shop/cubit/subcategory/subcategory_cubit.dart';
@@ -43,7 +42,7 @@ class THomeCategories extends StatelessWidget {
                         MaterialPageRoute(
                           builder:
                               (_) => BlocProvider(
-                                create: (context) => SubcategoryCubit(context.read<CategoryRepository>(),context.read<ProductRepository>())..fetchSubCategories(category.id),
+                                create: (_) => sl<SubcategoryCubit>()..fetchSubCategories(category.id),
                                 child: SubCategoriesScreen(category: category,),
                               ),
                         ),

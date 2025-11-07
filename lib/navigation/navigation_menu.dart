@@ -15,8 +15,12 @@ import 'package:cwt_starter_template/features/shop/screens/store/store.dart';
 import 'package:cwt_starter_template/features/shop/screens/wishlist/wishlist.dart';
 import 'package:cwt_starter_template/navigation/cubit/navigation_menu__cubit.dart';
 import 'package:cwt_starter_template/navigation/cubit/navigation_menu_state.dart';
+import 'package:cwt_starter_template/di/injection_container.dart';
 import 'package:cwt_starter_template/utils/constants/colors.dart';
 import 'package:cwt_starter_template/utils/helpers/helper_functions.dart';
+import 'package:cwt_starter_template/utils/popups/loaders.dart';
+import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_cubit.dart';
+import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
@@ -40,7 +44,31 @@ class _NavigationMenuState extends State<NavigationMenu> {
     final darkMode = THelperFunctions.isDarkMode(context);
     return BlocBuilder<NavigationCubit, NavigationState>(
       builder: (context, state) {
-        return Scaffold(
+        return BlocListener<CartCubit, CartState>(
+          listener: (context, cartState) {
+            if (cartState is CartMessage) {
+              if (cartState.type == 'success') {
+                TLoaders.successSnackBar(
+                  context: context,
+                  title: cartState.title,
+                  message: cartState.message,
+                );
+              } else if (cartState.type == 'warning') {
+                TLoaders.warningSnackBar(
+                  context: context,
+                  title: cartState.title,
+                  message: cartState.message,
+                );
+              }
+            } else if (cartState is CartError) {
+              TLoaders.errorSnackBar(
+                context: context,
+                title: 'Cart Error',
+                message: cartState.message,
+              );
+            }
+          },
+          child: Scaffold(
           bottomNavigationBar: NavigationBar(
             destinations: const [
               NavigationDestination(icon: Icon(Iconsax.home), label: 'Home'),
@@ -65,24 +93,9 @@ class _NavigationMenuState extends State<NavigationMenu> {
 
           body: MultiBlocProvider(
             providers: [
-              BlocProvider(
-                create:
-                    (context) =>
-                        CategoryCubit(context.read<CategoryRepository>())
-                          ..fetchCategories(),
-              ),
-              BlocProvider(
-                create:
-                    (context) =>
-                        ProductCubit(context.read<ProductRepository>())
-                          ..fetchProducts(),
-              ),
-              BlocProvider(
-                create:
-                    (context) =>
-                        BrandsCubit(context.read<BrandsRepository>())
-                          ..fetchBrands(),
-              ),
+              BlocProvider(create: (_) => sl<CategoryCubit>()..fetchCategories()),
+              BlocProvider(create: (_) => sl<ProductCubit>()..fetchProducts()),
+              BlocProvider(create: (_) => sl<BrandsCubit>()..fetchBrands()),
             ],
             child: IndexedStack(
               index: state.index,
@@ -90,16 +103,13 @@ class _NavigationMenuState extends State<NavigationMenu> {
                 HomeScreen(),
                 Store(),
                 BlocProvider(
-                  create:
-                      (context) => WishlistCubit(
-                        context.read<FavouriteProductsCubit>(),
-                        context.read<ProductRepository>(),
-                      )..fetchWishlistProducts(),
+                  create: (_) => sl<WishlistCubit>()..fetchWishlistProducts(),
                   child: FavouriteItemScreen(),
                 ),
                 SettingsScreen(),
               ],
             ),
+          ),
           ),
         );
       },

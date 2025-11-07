@@ -1,5 +1,3 @@
-
-
 import 'package:cwt_starter_template/common/widgets/texts/section_heading.dart';
 import 'package:cwt_starter_template/features/models/payment_model.dart';
 import 'package:cwt_starter_template/features/shop/cubit/payment/payment_method_cubit.dart';
@@ -10,22 +8,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cwt_starter_template/utils/constants/image_strings.dart';
 
-
-
-
 class PaymentSelectionSheet extends StatelessWidget {
   const PaymentSelectionSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // We wrap the content in a BlocBuilder to get the current state
-    return BlocBuilder<PaymentCubit, PaymentState>(
+    return BlocBuilder<PaymentMethodCubit, PaymentMethodState>(
       builder: (context, state) {
-        // Get the cubit instance
-        final cubit = context.read<PaymentCubit>();
+        final cubit = context.read<PaymentMethodCubit>();
         final selectedMethodName = state.selectedPaymentMethod.name;
 
-        // This is the list of options from your image
         final paymentMethods = [
           PaymentMethodModel(name: 'Paypal', image: TImages.paypal),
           PaymentMethodModel(name: 'Google Pay', image: TImages.googlePay),
@@ -44,15 +36,17 @@ class PaymentSelectionSheet extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const TSectionHeading(
-                    title: 'Select Payment Method', showActionButton: false),
+                  title: 'Select Payment Method',
+                  showActionButton: false,
+                ),
                 const SizedBox(height: TSizes.spaceBtwSections),
 
-                // Now we build the list dynamically
                 ListView.separated(
                   itemCount: paymentMethods.length,
                   shrinkWrap: true,
-                  separatorBuilder: (_, _) =>
-                      const SizedBox(height: TSizes.spaceBtwItems / 2),
+                  separatorBuilder:
+                      (_, _) =>
+                          const SizedBox(height: TSizes.spaceBtwItems / 2),
                   itemBuilder: (context, index) {
                     final method = paymentMethods[index];
                     return TPaymentTile(

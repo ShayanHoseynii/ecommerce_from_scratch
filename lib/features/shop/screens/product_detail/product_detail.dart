@@ -1,17 +1,15 @@
 import 'package:cwt_starter_template/common/widgets/texts/section_heading.dart';
 import 'package:cwt_starter_template/features/models/product_model.dart';
-import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_cubit.dart';
-import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_state.dart';
 import 'package:cwt_starter_template/features/shop/screens/product_detail/cubit/cart_quntity_cubit.dart';
 import 'package:cwt_starter_template/features/shop/screens/product_detail/cubit/variation_cubit.dart';
 import 'package:cwt_starter_template/features/shop/screens/product_detail/cubit/variation_state.dart';
+import 'package:cwt_starter_template/di/injection_container.dart';
 import 'package:cwt_starter_template/features/shop/screens/product_detail/widgets/bottom_add_to_cart_widget.dart';
 import 'package:cwt_starter_template/features/shop/screens/product_detail/widgets/product_attributes.dart';
 import 'package:cwt_starter_template/features/shop/screens/product_detail/widgets/product_detail_image_slider.dart';
 import 'package:cwt_starter_template/features/shop/screens/product_detail/widgets/product_meta_data.dart';
 import 'package:cwt_starter_template/features/shop/screens/product_detail/widgets/rating_share_widget.dart';
 import 'package:cwt_starter_template/utils/constants/sizes.dart';
-import 'package:cwt_starter_template/utils/popups/loaders.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
@@ -25,34 +23,10 @@ class ProductDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => VariationCubit(product)),
+        BlocProvider(create: (_) => sl<VariationCubit>(param1: product)),
         BlocProvider(create: (context) => QuantityCubit()),
       ],
-      child: BlocListener<CartCubit, CartState>(
-        listener: (context, state) {
-          if (state is CartMessage) {
-            if (state.type == 'success') {
-              TLoaders.successSnackBar(
-                context: context,
-                title: state.title,
-                message: state.message,
-              );
-            } else if (state.type == 'warning') {
-              TLoaders.warningSnackBar(
-                context: context,
-                title: state.title,
-                message: state.message,
-              );
-            }
-          } else if (state is CartError) {
-            TLoaders.errorSnackBar(
-              context: context,
-              title: 'Oh Snap!',
-              message: state.message,
-            );
-          }
-        },
-        child: Scaffold(
+      child: Scaffold(
           bottomNavigationBar: TBottomAddToCart(product: product),
           body: SingleChildScrollView(
             child: Column(
@@ -95,16 +69,6 @@ class ProductDetailScreen extends StatelessWidget {
                           TProductAttributes(product: product),
                           SizedBox(height: TSizes.spaceBtwItems),
                         ],
-
-                      /// - Checkout Button
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          child: Text('Checkout'),
-                        ),
-                      ),
-                      const SizedBox(height: TSizes.spaceBtwSections),
 
                       /// - Details
                       TSectionHeading(
@@ -155,7 +119,6 @@ class ProductDetailScreen extends StatelessWidget {
             ),
           ),
         ),
-      ),
     );
   }
 }

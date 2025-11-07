@@ -83,6 +83,15 @@ class CartCubit extends Cubit<CartState> {
         currentItems.add(newItem);
       }
 
+      // Emit success feedback, then update cart state so UI remains loaded
+      emit(
+        CartMessage(
+          type: 'success',
+          title: 'Added to cart',
+          message: '${product.title} x$quantity',
+        ),
+      );
+
       _updateCartState(currentItems);
     } catch (e) {
       emit(CartError(e.toString()));

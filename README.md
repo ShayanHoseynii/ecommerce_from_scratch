@@ -1,38 +1,52 @@
-# E‑Commerce From Scratch
+# 🛒 E-Commerce From Scratch (Flutter + Firebase + Cubit)
 
-[![Build](https://img.shields.io/badge/CI-passing-brightgreen.svg)](#)
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](#)
-[![Flutter](https://img.shields.io/badge/Flutter-3.x-blue?logo=flutter)](https://flutter.dev)
-[![Dart](https://img.shields.io/badge/Dart->=3.7-blue?logo=dart)](https://dart.dev)
-[![Firebase](https://img.shields.io/badge/Firebase-Auth%20%7C%20Firestore%20%7C%20Storage-FFCA28?logo=firebase&labelColor=000)](https://firebase.google.com)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#license)
+<p align="center">
+  <a href="https://flutter.dev"><img alt="Flutter" src="https://img.shields.io/badge/Flutter-3.x-02569B?logo=flutter&logoColor=white"></a>
+  <a href="https://firebase.google.com"><img alt="Firebase" src="https://img.shields.io/badge/Firebase-Auth%20%7C%20Firestore%20%7C%20Storage-FFCA28?logo=firebase&logoColor=black"></a>
+<img alt="Platforms" src="https://img.shields.io/badge/Platforms-Android%20%7C%20iOS-success">
+</p>
+
+<p align="center">
+  A cross-platform shopping app built with <b>Flutter</b> and <b>Firebase</b> — modern UI, clean architecture, and scalable cloud services.
+</p>
 
 
-## Project Description
+---
 
-E‑Commerce From Scratch is a cross‑platform shopping application built with Flutter and Firebase. It delivers a smooth shopping experience across Android, iOS, Web, macOS, Windows, and Linux, featuring modern UI, robust state management, and scalable cloud services.
+## ✨ Highlights
 
-### Key Features
-- Authentication with Email/Password and Google Sign‑In
-- Product catalog with categories, brands, variations, and attributes
-- Cart management, coupon entry, and checkout flow
-- User addresses, orders history, and profile settings
-- Featured brands and “You might like” recommendations
-- Firebase Cloud Functions to keep brand product counts in sync
-- Offline storage and device‑friendly themes
-- Push notifications (FCM ready), crash logging, and analytics hooks
+- 🔐 Auth: Email/Password + Google Sign-In
+- 🛍️ Catalog: categories, brands, attributes, variations
+- 🛒 Cart + coupons + checkout flow
+- 📦 Addresses, order history, and profile settings
+- ⭐ Featured brands + “You might like” recommendations
+- ☁️ Cloud Functions to keep brand product counts in sync
+- 💾 Offline-friendly storage + adaptive theming
+- 🔔 FCM-ready notifications + analytics/crash hooks
+
+---
+
 
 ### Target Audience & Value Proposition
 - Shoppers who want a fast, elegant mobile shopping experience
 - Small/medium retailers seeking an extensible reference app
 - Developers learning Flutter + Firebase with clean architecture and BLoC
 
-### Screenshots
-> Place the following images at `docs/screenshots/` to render them in GitHub.
+---
 
-| Home | Cart (Empty) | Profile |
-|---|---|---|
-| ![Home screen UI showing categories, banner, and products](docs/screenshots/home.png) | ![Empty cart screen with CTA to start shopping](docs/screenshots/cart-empty.png) | ![Profile and account settings screen with logout](docs/screenshots/profile.png) |
+
+<h2 align="center">📱 App Screens</h2>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/461525be-c90a-4f68-9914-c4100f25b961" width="230" />
+  &nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/user-attachments/assets/3a6e9ce3-d6ec-46ed-aa0a-c9dbad543155" width="230" />
+  &nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/user-attachments/assets/3d68dd06-9a31-4503-a3c4-8d68e4b7690e" width="230" />
+</p>
+
+---
+
 
 
 ## Installation
@@ -119,10 +133,6 @@ Targets Android, iOS, web, and desktop depending on your configured toolchains.
 - View product details → add to cart → checkout
 - Manage addresses and review order history under Profile
 
-### Admin/Back‑Office
-- Use Firebase Console or a CMS to manage Products, Brands, and Categories.
-- Cloud Functions automatically update `Brands.productCount` when products are created/deleted.
-
 
 ## Technology Stack
 
@@ -142,83 +152,3 @@ Targets Android, iOS, web, and desktop depending on your configured toolchains.
 - Cloud Firestore (document store)
 - Firebase Storage (binary media)
 
-### Third‑Party APIs/Services
-- Google Sign‑In
-- Optional: Supabase SDK present but not actively used in the app flow
-
-
-## Configuration
-
-### Environment Reference
-- `lib/firebase_options.dart` – auto‑generated via `flutterfire configure`
-- `android/app/google-services.json` – Android Firebase config
-- `ios/Runner/GoogleService-Info.plist` – iOS Firebase config
-
-### Important Settings
-- Update app name/bundle identifiers in platform projects
-- Theme: edit `lib/utils/theme/` to customize light/dark colors and typography
-- Assets: declare under `pubspec.yaml` and place in `assets/`
-
-### Customization Options
-- Replace icons and brand imagery in `assets/`
-- Extend product attributes/variations in models and UI
-- Add payment gateways (Stripe/PayPal) in the checkout flow
-
-
-## API Documentation
-
-### Cloud Functions (Firestore Triggers)
-- `onProductCreated (Products/{productId})` → increments `Brands.productCount`
-- `onProductDeleted (Products/{productId})` → decrements `Brands.productCount`
-
-Example event data (simplified):
-```json
-{
-  "brand": { "id": "nike" },
-  "title": "Sneaker",
-  "price": 65.0
-}
-```
-
-### Firestore Access Patterns (App)
-- Products: `Products` and queries by `categoryIds` or document IDs
-- Brands: `Brands` collection
-- Categories: `Categories` collection
-- Orders: `Users/{uid}/Orders`
-- Addresses: `Users/{uid}/Addresses`
-
-### Authentication Methods
-- Email/Password: register, login, password reset, email verification
-- Google Sign‑In: OAuth flow via `google_sign_in`
-
-
-## Contributing
-
-### Guidelines
-- Fork the repo and create feature branches
-- Write clear commit messages and PR descriptions
-- Include screenshots for UI changes
-
-### Code Style
-- Run `flutter analyze` and fix warnings
-- Format with `dart format .`
-- Follow BLoC patterns for state and keep UI widgets lean
-
-### Pull Request Process
-1. Update documentation for any behavior changes
-2. Add/adjust tests if applicable
-3. Ensure CI passes
-4. Request review and respond to feedback
-
-
-## License
-
-This project is licensed under the MIT License. You may use, modify, and distribute the software with attribution. See the LICENSE file if provided; otherwise, treat this section as the current licensing statement.
-
-
-## Contact Information
-
-- Maintainer: Your Name
-- Email: your.email@example.com
-- Support: Open a GitHub Issue with steps to reproduce
-- Security: Report vulnerabilities privately to the maintainer email

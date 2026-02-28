@@ -1,6 +1,6 @@
 import 'package:cwt_starter_template/data/repositories/authentication/authentication_repository.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/forgetPassword/forget_password_state.dart';
-import 'package:cwt_starter_template/utils/helpers/networkManager/network_manager.dart';
+import 'package:cwt_starter_template/core/helpers/networkManager/network_manager.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {

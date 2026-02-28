@@ -4,8 +4,6 @@ import 'package:cwt_starter_template/common/widgets/containers/search_container.
 import 'package:cwt_starter_template/common/widgets/layout/grid_layout.dart';
 import 'package:cwt_starter_template/common/widgets/products/products_card/products_card_vertical.dart';
 import 'package:cwt_starter_template/common/widgets/texts/section_heading.dart';
-import 'package:cwt_starter_template/data/repositories/banners/banners_repository.dart';
-import 'package:cwt_starter_template/data/repositories/products/product_repo.dart';
 import 'package:cwt_starter_template/features/shop/cubit/all_products/all_products_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/banners/banners_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/product/product_cubit.dart';
@@ -17,7 +15,7 @@ import 'package:cwt_starter_template/features/shop/screens/home/widgets/home_cat
 import 'package:cwt_starter_template/di/injection_container.dart';
 import 'package:cwt_starter_template/features/shop/screens/home/widgets/promo_slider.dart';
 import 'package:cwt_starter_template/features/shop/screens/home/widgets/vertical_product_shimmer.dart';
-import 'package:cwt_starter_template/utils/constants/sizes.dart';
+import 'package:cwt_starter_template/core/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -84,16 +82,15 @@ class HomeScreen extends StatelessWidget {
                     TSectionHeading(
                       title: 'Popular Products',
                       onPressed: () {
-                        final query = FirebaseFirestore.instance
-                            .collection('Products')
-                            .where('IsFeatured', isEqualTo: true);
-
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder:
                                 (context) => BlocProvider(
-                                  create: (_) => sl<AllProductsCubit>()..fetchAllProducts(),
+                                  create:
+                                      (_) =>
+                                          sl<AllProductsCubit>()
+                                            ..fetchAllProducts(),
                                   child: const AllProductsScreen(
                                     title: 'Popular Products',
                                   ),

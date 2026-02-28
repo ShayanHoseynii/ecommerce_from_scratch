@@ -5,13 +5,13 @@ import 'package:cwt_starter_template/common/widgets/products/favourite_icon/favo
 import 'package:cwt_starter_template/common/widgets/texts/brand_title_text_with_verifiedIcon.dart';
 import 'package:cwt_starter_template/common/widgets/texts/product_price_text.dart';
 import 'package:cwt_starter_template/common/widgets/texts/product_title_text.dart';
-import 'package:cwt_starter_template/features/models/product_model.dart';
+import 'package:cwt_starter_template/data/models/product_model.dart';
 import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_state.dart';
 import 'package:cwt_starter_template/features/shop/screens/product_detail/product_detail.dart';
-import 'package:cwt_starter_template/utils/constants/colors.dart';
-import 'package:cwt_starter_template/utils/constants/sizes.dart';
-import 'package:cwt_starter_template/utils/helpers/exports.dart';
+import 'package:cwt_starter_template/core/constants/colors.dart';
+import 'package:cwt_starter_template/core/constants/sizes.dart';
+import 'package:cwt_starter_template/core/helpers/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';

@@ -1,4 +1,4 @@
-import 'package:cwt_starter_template/utils/constants/colors.dart';
+import 'package:cwt_starter_template/core/constants/colors.dart';
 import 'package:flutter/cupertino.dart';
 
 class ShadowStyle {

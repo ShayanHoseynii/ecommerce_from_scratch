@@ -2,7 +2,7 @@
 // import 'package:cwt_starter_template/features/dashboard/ecommerce/screens/home/home.dart';
 // import 'package:cwt_starter_template/personalization/screens/profile/profile_screen.dart';
 // import 'package:cwt_starter_template/personalization/screens/profile/re_authenticate_phone_otp_screen.dart';
-// import 'package:cwt_starter_template/routes/routes.dart';
+// import 'package:cwt_starter_template/core/routes/routes.dart';
 // import 'package:get/get_navigation/src/routes/get_route.dart';
 // import 'package:get/get_navigation/src/routes/transitions_type.dart';
 

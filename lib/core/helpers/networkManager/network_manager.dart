@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:cwt_starter_template/utils/helpers/networkManager/network_state.dart';
+import 'package:cwt_starter_template/core/helpers/networkManager/network_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/services.dart';

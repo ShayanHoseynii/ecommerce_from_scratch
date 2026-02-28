@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cwt_starter_template/data/repositories/products/product_repo.dart';
 import 'package:cwt_starter_template/features/shop/cubit/all_products/all_products_state.dart';
-import 'package:cwt_starter_template/features/models/product_model.dart';
+import 'package:cwt_starter_template/data/models/product_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AllProductsCubit extends Cubit<AllProductsState> {

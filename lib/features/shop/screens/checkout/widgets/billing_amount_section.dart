@@ -1,8 +1,8 @@
 import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_state.dart';
-import 'package:cwt_starter_template/utils/constants/sizes.dart';
-import 'package:cwt_starter_template/utils/helpers/exports.dart';
-import 'package:cwt_starter_template/utils/helpers/pricing_calculator.dart';
+import 'package:cwt_starter_template/core/constants/sizes.dart';
+import 'package:cwt_starter_template/core/helpers/exports.dart';
+import 'package:cwt_starter_template/core/helpers/pricing_calculator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

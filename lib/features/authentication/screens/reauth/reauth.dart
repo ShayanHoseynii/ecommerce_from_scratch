@@ -1,11 +1,11 @@
 import 'package:cwt_starter_template/common/widgets/appbar/appbar.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/user/user_cubit.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/user/user_state.dart';
-import 'package:cwt_starter_template/utils/constants/image_strings.dart';
-import 'package:cwt_starter_template/utils/constants/sizes.dart';
-import 'package:cwt_starter_template/utils/popups/full_screen_loader.dart';
-import 'package:cwt_starter_template/utils/popups/loaders.dart';
-import 'package:cwt_starter_template/utils/validators/validation.dart';
+import 'package:cwt_starter_template/core/constants/image_strings.dart';
+import 'package:cwt_starter_template/core/constants/sizes.dart';
+import 'package:cwt_starter_template/core/popups/full_screen_loader.dart';
+import 'package:cwt_starter_template/core/popups/loaders.dart';
+import 'package:cwt_starter_template/core/validators/validation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

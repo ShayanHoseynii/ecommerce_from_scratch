@@ -1,4 +1,4 @@
-import 'package:cwt_starter_template/features/models/address_model.dart';
+import 'package:cwt_starter_template/data/models/address_model.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class AddressState extends Equatable {

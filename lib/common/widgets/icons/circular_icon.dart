@@ -1,5 +1,5 @@
-import 'package:cwt_starter_template/utils/constants/colors.dart';
-import 'package:cwt_starter_template/utils/constants/sizes.dart';
+import 'package:cwt_starter_template/core/constants/colors.dart';
+import 'package:cwt_starter_template/core/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
 class CircularIcon extends StatelessWidget {
@@ -13,6 +13,9 @@ class CircularIcon extends StatelessWidget {
     this.color,
     this.backgroundColor,
     this.onPressed,
+    this.padding,
+    this.constraints,
+    this.visualDensity,
   });
 
   final bool dark;
@@ -21,6 +24,9 @@ class CircularIcon extends StatelessWidget {
   final Color? color;
   final Color? backgroundColor;
   final VoidCallback? onPressed;
+  final EdgeInsetsGeometry? padding;
+  final BoxConstraints? constraints;
+  final VisualDensity? visualDensity;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +45,9 @@ class CircularIcon extends StatelessWidget {
       child: IconButton(
         onPressed: onPressed,
         icon: Icon(icon, color: color, size: size),
+        padding: padding,
+        constraints: constraints,
+        visualDensity: visualDensity,
       ),
     );
   }

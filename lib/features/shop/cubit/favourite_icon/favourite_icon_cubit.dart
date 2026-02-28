@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:cwt_starter_template/features/shop/cubit/favourite_icon/favourite_icon_state.dart';
-import 'package:cwt_starter_template/utils/local_storage/storage_utility.dart';
+import 'package:cwt_starter_template/core/local_storage/storage_utility.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FavouriteProductsCubit extends Cubit<FavouriteProductsState> {

@@ -4,8 +4,8 @@ import 'package:cwt_starter_template/common/widgets/shimmer/shimmer.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/user/user_cubit.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/user/user_state.dart';
 import 'package:cwt_starter_template/features/shop/screens/cart/cart.dart';
-import 'package:cwt_starter_template/utils/constants/colors.dart';
-import 'package:cwt_starter_template/utils/constants/text_strings.dart';
+import 'package:cwt_starter_template/core/constants/colors.dart';
+import 'package:cwt_starter_template/core/constants/text_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -1,7 +1,7 @@
 
 
 
-import 'package:cwt_starter_template/utils/constants/enums.dart';
+import 'package:cwt_starter_template/core/constants/enums.dart';
 import 'package:flutter/material.dart';
 
 class TBrandTitleText extends StatelessWidget {

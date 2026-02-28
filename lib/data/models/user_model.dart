@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cwt_starter_template/utils/formatters/formatter.dart';
+import 'package:cwt_starter_template/core/formatters/formatter.dart';
 
 /// Model class representing user data.
 class UserModel {
@@ -11,7 +11,6 @@ class UserModel {
   final String email;
   String phoneNumber;
   String profilePicture;
-
 
   /// Constructor for UserModel.
   UserModel({
@@ -62,7 +61,15 @@ class UserModel {
   }
 
   /// Static function to create an empty user model.
-  static UserModel empty() => UserModel(id: '', firstName: '', lastName: '', username: '', email: '', phoneNumber: '', profilePicture: '');
+  static UserModel empty() => UserModel(
+    id: '',
+    firstName: '',
+    lastName: '',
+    username: '',
+    email: '',
+    phoneNumber: '',
+    profilePicture: '',
+  );
 
   /// Convert model to JSON structure for storing data in Firebase.
   Map<String, dynamic> toJson() {
@@ -77,7 +84,9 @@ class UserModel {
   }
 
   /// Factory method to create a UserModel from a Firebase document snapshot.
-  factory UserModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
+  factory UserModel.fromSnapshot(
+    DocumentSnapshot<Map<String, dynamic>> document,
+  ) {
     if (document.data() != null) {
       final data = document.data()!;
       return UserModel(

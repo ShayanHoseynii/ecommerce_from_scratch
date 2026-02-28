@@ -8,7 +8,7 @@ import 'package:cwt_starter_template/features/shop/cubit/all_products/all_produc
 import 'package:cwt_starter_template/features/shop/cubit/brands/brands_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/brands/brands_state.dart';
 import 'package:cwt_starter_template/features/shop/screens/brands/brand_products.dart';
-import 'package:cwt_starter_template/utils/constants/sizes.dart';
+import 'package:cwt_starter_template/core/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

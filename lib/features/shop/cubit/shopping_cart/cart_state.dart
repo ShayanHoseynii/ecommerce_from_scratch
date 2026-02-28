@@ -1,5 +1,5 @@
 
-import 'package:cwt_starter_template/features/models/cart_item_model.dart';
+import 'package:cwt_starter_template/data/models/cart_item_model.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class CartState extends Equatable {

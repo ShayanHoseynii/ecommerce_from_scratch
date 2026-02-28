@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:cwt_starter_template/data/repositories/authentication/auth_state.dart';
 import 'package:cwt_starter_template/data/repositories/authentication/authentication_repository.dart';
-import 'package:cwt_starter_template/utils/local_storage/storage_utility.dart';
+import 'package:cwt_starter_template/core/local_storage/storage_utility.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';

@@ -4,13 +4,13 @@ import 'package:cwt_starter_template/common/widgets/products/products_card/produ
 import 'package:cwt_starter_template/common/widgets/shimmer/boxes_shimmer.dart';
 import 'package:cwt_starter_template/common/widgets/shimmer/list_tile_shimmer.dart';
 import 'package:cwt_starter_template/common/widgets/texts/section_heading.dart';
-import 'package:cwt_starter_template/features/models/category_model.dart';
+import 'package:cwt_starter_template/data/models/category_model.dart';
 import 'package:cwt_starter_template/features/shop/cubit/brandShowcase/brand_showcase_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/brandShowcase/brand_showcase_state.dart';
 import 'package:cwt_starter_template/features/shop/cubit/product/product_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/product/product_state.dart';
 import 'package:cwt_starter_template/features/shop/screens/home/widgets/vertical_product_shimmer.dart';
-import 'package:cwt_starter_template/utils/constants/sizes.dart';
+import 'package:cwt_starter_template/core/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

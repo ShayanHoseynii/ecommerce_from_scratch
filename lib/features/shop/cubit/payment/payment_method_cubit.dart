@@ -1,7 +1,7 @@
-import 'package:cwt_starter_template/features/models/payment_model.dart';
+import 'package:cwt_starter_template/data/models/payment_model.dart';
 import 'package:cwt_starter_template/features/shop/cubit/payment/payment_method_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:cwt_starter_template/utils/constants/image_strings.dart';
+import 'package:cwt_starter_template/core/constants/image_strings.dart';
 
 class PaymentMethodCubit extends Cubit<PaymentMethodState> {
   PaymentMethodCubit()

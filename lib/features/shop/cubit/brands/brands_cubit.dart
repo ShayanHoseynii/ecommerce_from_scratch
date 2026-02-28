@@ -1,5 +1,5 @@
 import 'package:cwt_starter_template/data/repositories/brands/brands_repository.dart';
-import 'package:cwt_starter_template/features/models/brand_model.dart';
+import 'package:cwt_starter_template/data/models/brand_model.dart';
 import 'package:cwt_starter_template/features/shop/cubit/brands/brands_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

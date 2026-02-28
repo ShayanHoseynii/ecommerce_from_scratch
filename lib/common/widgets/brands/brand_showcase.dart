@@ -2,10 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cwt_starter_template/common/widgets/brands/brand_card.dart';
 import 'package:cwt_starter_template/common/widgets/containers/rounded_container.dart';
 import 'package:cwt_starter_template/common/widgets/shimmer/shimmer.dart';
-import 'package:cwt_starter_template/features/models/brand_model.dart';
-import 'package:cwt_starter_template/utils/constants/colors.dart';
-import 'package:cwt_starter_template/utils/constants/sizes.dart';
-import 'package:cwt_starter_template/utils/helpers/helper_functions.dart';
+import 'package:cwt_starter_template/data/models/brand_model.dart';
+import 'package:cwt_starter_template/core/constants/colors.dart';
+import 'package:cwt_starter_template/core/constants/sizes.dart';
+import 'package:cwt_starter_template/core/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 
 class TBrandShowcase extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:cwt_starter_template/common/widgets/containers/rounded_container.dart';
-import 'package:cwt_starter_template/utils/constants/colors.dart';
-import 'package:cwt_starter_template/utils/constants/sizes.dart';
-import 'package:cwt_starter_template/utils/helpers/exports.dart';
+import 'package:cwt_starter_template/core/constants/colors.dart';
+import 'package:cwt_starter_template/core/constants/sizes.dart';
+import 'package:cwt_starter_template/core/helpers/exports.dart';
 import 'package:flutter/material.dart';
 
 class TCouponCode extends StatelessWidget {

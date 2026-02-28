@@ -13,12 +13,12 @@ import 'package:cwt_starter_template/features/shop/cubit/wish_list/wish_list_cub
 import 'package:cwt_starter_template/features/shop/screens/home/home.dart';
 import 'package:cwt_starter_template/features/shop/screens/store/store.dart';
 import 'package:cwt_starter_template/features/shop/screens/wishlist/wishlist.dart';
-import 'package:cwt_starter_template/navigation/cubit/navigation_menu__cubit.dart';
-import 'package:cwt_starter_template/navigation/cubit/navigation_menu_state.dart';
+import 'package:cwt_starter_template/core/navigation/cubit/navigation_menu__cubit.dart';
+import 'package:cwt_starter_template/core/navigation/cubit/navigation_menu_state.dart';
 import 'package:cwt_starter_template/di/injection_container.dart';
-import 'package:cwt_starter_template/utils/constants/colors.dart';
-import 'package:cwt_starter_template/utils/helpers/helper_functions.dart';
-import 'package:cwt_starter_template/utils/popups/loaders.dart';
+import 'package:cwt_starter_template/core/constants/colors.dart';
+import 'package:cwt_starter_template/core/helpers/helper_functions.dart';
+import 'package:cwt_starter_template/core/popups/loaders.dart';
 import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_state.dart';
 import 'package:flutter/material.dart';

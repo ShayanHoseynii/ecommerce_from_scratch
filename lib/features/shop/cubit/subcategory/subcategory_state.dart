@@ -1,5 +1,5 @@
-import 'package:cwt_starter_template/features/models/category_model.dart';
-import 'package:cwt_starter_template/features/models/product_model.dart';
+import 'package:cwt_starter_template/data/models/category_model.dart';
+import 'package:cwt_starter_template/data/models/product_model.dart';
 import 'package:equatable/equatable.dart'; // Make sure to extend Equatable
 
 abstract class SubcategoryState extends Equatable {

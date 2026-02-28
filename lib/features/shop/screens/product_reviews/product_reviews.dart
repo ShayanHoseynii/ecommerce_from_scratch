@@ -2,7 +2,7 @@ import 'package:cwt_starter_template/common/widgets/appbar/appbar.dart';
 import 'package:cwt_starter_template/common/widgets/products/rating/rating_indicator.dart';
 import 'package:cwt_starter_template/features/shop/screens/product_reviews/widgets/overall_product_rating.dart';
 import 'package:cwt_starter_template/features/shop/screens/product_reviews/widgets/user_review_card.dart';
-import 'package:cwt_starter_template/utils/constants/sizes.dart';
+import 'package:cwt_starter_template/core/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
 class ProductReviewsScreen extends StatelessWidget {

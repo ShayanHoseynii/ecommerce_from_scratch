@@ -3,8 +3,8 @@ import 'package:cwt_starter_template/features/authentication/screens/onboarding/
 import 'package:cwt_starter_template/features/authentication/screens/onboarding/widgets/onboarding_next_button.dart';
 import 'package:cwt_starter_template/features/authentication/screens/onboarding/widgets/onboarding_page.dart';
 import 'package:cwt_starter_template/features/authentication/screens/onboarding/widgets/onboarding_skip.dart';
-import 'package:cwt_starter_template/utils/constants/image_strings.dart';
-import 'package:cwt_starter_template/utils/constants/text_strings.dart';
+import 'package:cwt_starter_template/core/constants/image_strings.dart';
+import 'package:cwt_starter_template/core/constants/text_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

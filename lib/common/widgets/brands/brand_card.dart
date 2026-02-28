@@ -1,11 +1,11 @@
 import 'package:cwt_starter_template/common/widgets/containers/rounded_container.dart';
 import 'package:cwt_starter_template/common/widgets/images/circular_image.dart';
 import 'package:cwt_starter_template/common/widgets/texts/brand_title_text_with_verifiedIcon.dart';
-import 'package:cwt_starter_template/features/models/brand_model.dart';
-import 'package:cwt_starter_template/utils/constants/colors.dart';
-import 'package:cwt_starter_template/utils/constants/enums.dart';
-import 'package:cwt_starter_template/utils/constants/sizes.dart';
-import 'package:cwt_starter_template/utils/helpers/helper_functions.dart';
+import 'package:cwt_starter_template/data/models/brand_model.dart';
+import 'package:cwt_starter_template/core/constants/colors.dart';
+import 'package:cwt_starter_template/core/constants/enums.dart';
+import 'package:cwt_starter_template/core/constants/sizes.dart';
+import 'package:cwt_starter_template/core/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 
 class BrandCard extends StatelessWidget {

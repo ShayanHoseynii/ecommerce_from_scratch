@@ -1,7 +1,7 @@
 
 
 
-import 'package:cwt_starter_template/features/models/brand_model.dart';
+import 'package:cwt_starter_template/data/models/brand_model.dart';
 import 'package:equatable/equatable.dart';
 
 class BrandsState extends Equatable{

@@ -1,6 +1,6 @@
 // lib/features/personalization/cubit/address_form/address_form_cubit.dart
 import 'package:cwt_starter_template/data/repositories/address/address_repository.dart'; // Assuming you have this
-import 'package:cwt_starter_template/features/models/address_model.dart';
+import 'package:cwt_starter_template/data/models/address_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'address_form_state.dart';
 

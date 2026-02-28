@@ -3,9 +3,9 @@ import 'package:cwt_starter_template/common/widgets/texts/section_heading.dart';
 import 'package:cwt_starter_template/features/shop/cubit/payment/payment_method_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/payment/payment_method_state.dart';
 import 'package:cwt_starter_template/features/shop/screens/checkout/widgets/payemnt_bottom_sheet.dart';
-import 'package:cwt_starter_template/utils/constants/colors.dart';
-import 'package:cwt_starter_template/utils/constants/sizes.dart';
-import 'package:cwt_starter_template/utils/helpers/exports.dart';
+import 'package:cwt_starter_template/core/constants/colors.dart';
+import 'package:cwt_starter_template/core/constants/sizes.dart';
+import 'package:cwt_starter_template/core/helpers/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

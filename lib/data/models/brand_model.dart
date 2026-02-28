@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cwt_starter_template/features/models/category_model.dart';
-import 'package:cwt_starter_template/utils/formatters/formatter.dart';
+import 'package:cwt_starter_template/data/models/category_model.dart';
+import 'package:cwt_starter_template/core/formatters/formatter.dart';
 
 class BrandModel {
   String id;
@@ -24,7 +24,7 @@ class BrandModel {
     this.brandCategory,
     this.thumbnails = const [],
   });
-    BrandModel copyWith({List<String>? thumbnails}) {
+  BrandModel copyWith({List<String>? thumbnails}) {
     return BrandModel(
       id: id,
       name: name,

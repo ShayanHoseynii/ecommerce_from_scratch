@@ -3,7 +3,7 @@ import 'package:cwt_starter_template/common/widgets/products/cart/cart_item.dart
 import 'package:cwt_starter_template/common/widgets/texts/product_price_text.dart';
 import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_state.dart';
-import 'package:cwt_starter_template/utils/constants/sizes.dart';
+import 'package:cwt_starter_template/core/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,31 +20,10 @@ class TCartItems extends StatelessWidget {
             itemCount: state.cartItems.length,
             itemBuilder: (context, index) {
               final currentItem = state.cartItems[index];
-              return Column(
-                children: [
-                  TCartItem(cartItem: currentItem),
-                  if (showAddRemoveButtons)
-                    const SizedBox(height: TSizes.spaceBtwItems),
-                  if (showAddRemoveButtons)
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            const SizedBox(width: 70),
-
-                            /// Add Remove Buttons
-                            TProductQuantityWithAddRemove(cartItem: currentItem,),
-                          ],
-                        ),
-                        TProductPriceText(price: (currentItem.price * currentItem.quantity).toString()),
-                      ],
-                    ),
-                ],
-              );
+              return Column(children: [TCartItem(cartItem: currentItem)]);
             },
             separatorBuilder: (BuildContext context, int index) {
-              return const SizedBox(height: TSizes.spaceBtwSections);
+              return const SizedBox(height: TSizes.spaceBtwItems);
             },
           );
         }

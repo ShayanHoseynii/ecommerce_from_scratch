@@ -1,5 +1,5 @@
-import 'package:cwt_starter_template/utils/constants/sizes.dart';
-import 'package:cwt_starter_template/utils/device/device_utility.dart';
+import 'package:cwt_starter_template/core/constants/sizes.dart';
+import 'package:cwt_starter_template/core/device/device_utility.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingPage extends StatelessWidget {

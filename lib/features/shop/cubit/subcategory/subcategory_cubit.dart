@@ -1,7 +1,7 @@
 import 'package:cwt_starter_template/data/repositories/categories/category_repository.dart';
 import 'package:cwt_starter_template/data/repositories/products/product_repo.dart';
-import 'package:cwt_starter_template/features/models/category_model.dart';
-import 'package:cwt_starter_template/features/models/product_model.dart';
+import 'package:cwt_starter_template/data/models/category_model.dart';
+import 'package:cwt_starter_template/data/models/product_model.dart';
 import 'package:cwt_starter_template/features/shop/cubit/subcategory/subcategory_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

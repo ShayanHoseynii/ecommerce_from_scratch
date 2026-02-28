@@ -8,9 +8,9 @@ import 'package:cwt_starter_template/features/personalization/screens/adresses/c
 import 'package:cwt_starter_template/features/personalization/screens/adresses/cubit/address_form_cubit.dart';
 import 'package:cwt_starter_template/features/personalization/screens/adresses/cubit/address_state.dart';
 import 'package:cwt_starter_template/features/personalization/screens/adresses/widgets/single_address.dart';
-import 'package:cwt_starter_template/utils/constants/colors.dart';
-import 'package:cwt_starter_template/utils/constants/sizes.dart';
-import 'package:cwt_starter_template/utils/helpers/helper_functions.dart';
+import 'package:cwt_starter_template/core/constants/colors.dart';
+import 'package:cwt_starter_template/core/constants/sizes.dart';
+import 'package:cwt_starter_template/core/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';

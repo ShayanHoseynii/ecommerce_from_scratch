@@ -1,13 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:cwt_starter_template/data/repositories/authentication/authentication_repository.dart';
 import 'package:cwt_starter_template/data/repositories/order/order_repository.dart';
-import 'package:cwt_starter_template/features/models/order_model.dart';
+import 'package:cwt_starter_template/data/models/order_model.dart';
 import 'package:cwt_starter_template/features/personalization/screens/adresses/cubit/address_cubit.dart';
 import 'package:cwt_starter_template/features/personalization/screens/adresses/cubit/address_state.dart';
 import 'package:cwt_starter_template/features/shop/cubit/payment/payment_method_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_state.dart';
-import 'package:cwt_starter_template/utils/constants/enums.dart';
+import 'package:cwt_starter_template/core/constants/enums.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 

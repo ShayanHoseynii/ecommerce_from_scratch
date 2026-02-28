@@ -1,6 +1,6 @@
-import 'package:cwt_starter_template/utils/constants/colors.dart' show TColors;
-import 'package:cwt_starter_template/utils/device/device_utility.dart';
-import 'package:cwt_starter_template/utils/helpers/helper_functions.dart';
+import 'package:cwt_starter_template/core/constants/colors.dart' show TColors;
+import 'package:cwt_starter_template/core/device/device_utility.dart';
+import 'package:cwt_starter_template/core/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 
 class TTabBar extends StatelessWidget implements PreferredSizeWidget {

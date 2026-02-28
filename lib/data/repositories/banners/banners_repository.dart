@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cwt_starter_template/features/models/banner_model.dart';
-import 'package:cwt_starter_template/utils/exceptions/firebase_auth_exceptions.dart';
-import 'package:cwt_starter_template/utils/exceptions/firebase_exceptions.dart';
-import 'package:cwt_starter_template/utils/exceptions/format_exceptions.dart';
-import 'package:cwt_starter_template/utils/exceptions/platform_exceptions.dart';
+import 'package:cwt_starter_template/data/models/banner_model.dart';
+import 'package:cwt_starter_template/core/exceptions/firebase_auth_exceptions.dart';
+import 'package:cwt_starter_template/core/exceptions/firebase_exceptions.dart';
+import 'package:cwt_starter_template/core/exceptions/format_exceptions.dart';
+import 'package:cwt_starter_template/core/exceptions/platform_exceptions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 

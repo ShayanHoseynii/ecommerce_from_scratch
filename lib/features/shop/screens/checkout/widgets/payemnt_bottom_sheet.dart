@@ -1,12 +1,12 @@
 import 'package:cwt_starter_template/common/widgets/texts/section_heading.dart';
-import 'package:cwt_starter_template/features/models/payment_model.dart';
+import 'package:cwt_starter_template/data/models/payment_model.dart';
 import 'package:cwt_starter_template/features/shop/cubit/payment/payment_method_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/payment/payment_method_state.dart';
 import 'package:cwt_starter_template/features/shop/screens/checkout/widgets/payment_list_tile.dart';
-import 'package:cwt_starter_template/utils/constants/sizes.dart';
+import 'package:cwt_starter_template/core/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:cwt_starter_template/utils/constants/image_strings.dart';
+import 'package:cwt_starter_template/core/constants/image_strings.dart';
 
 class PaymentSelectionSheet extends StatelessWidget {
   const PaymentSelectionSheet({super.key});

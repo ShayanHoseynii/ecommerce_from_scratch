@@ -4,7 +4,7 @@ import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_cubi
 import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_state.dart';
 import 'package:cwt_starter_template/features/shop/screens/cart/widgets/cart_items.dart';
 import 'package:cwt_starter_template/features/shop/screens/checkout/checkout.dart';
-import 'package:cwt_starter_template/utils/constants/sizes.dart';
+import 'package:cwt_starter_template/core/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';

@@ -32,9 +32,9 @@ import 'package:cwt_starter_template/features/shop/cubit/orders/cubit/order_cubi
 import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_cubit.dart';
 import 'package:cwt_starter_template/features/shop/screens/product_detail/cubit/variation_cubit.dart';
 
-import 'package:cwt_starter_template/utils/helpers/networkManager/network_manager.dart';
+import 'package:cwt_starter_template/core/helpers/networkManager/network_manager.dart';
 
-import 'package:cwt_starter_template/features/models/product_model.dart';
+import 'package:cwt_starter_template/data/models/product_model.dart';
 
 final sl = GetIt.instance;
 

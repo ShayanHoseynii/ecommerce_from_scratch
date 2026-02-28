@@ -2,7 +2,7 @@ import 'package:cwt_starter_template/data/models/user_model.dart';
 import 'package:cwt_starter_template/data/repositories/authentication/authentication_repository.dart';
 import 'package:cwt_starter_template/data/repositories/user/user_repository.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/login/login_state.dart';
-import 'package:cwt_starter_template/utils/helpers/networkManager/network_manager.dart';
+import 'package:cwt_starter_template/core/helpers/networkManager/network_manager.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_storage/get_storage.dart';

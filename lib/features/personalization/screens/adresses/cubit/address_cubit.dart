@@ -1,6 +1,6 @@
 // lib/features/personalization/cubit/address/address_cubit.dart
 import 'package:cwt_starter_template/data/repositories/address/address_repository.dart';
-import 'package:cwt_starter_template/features/models/address_model.dart';
+import 'package:cwt_starter_template/data/models/address_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'address_state.dart';
 

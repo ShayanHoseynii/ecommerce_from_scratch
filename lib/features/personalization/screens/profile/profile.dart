@@ -6,10 +6,10 @@ import 'package:cwt_starter_template/features/authentication/cubit/user/user_sta
 import 'package:cwt_starter_template/features/authentication/screens/reauth/reauth.dart';
 import 'package:cwt_starter_template/features/personalization/screens/profile/change_name.dart';
 import 'package:cwt_starter_template/features/personalization/screens/profile/widgets/profile_menu.dart';
-import 'package:cwt_starter_template/utils/constants/image_strings.dart';
-import 'package:cwt_starter_template/utils/constants/sizes.dart';
-import 'package:cwt_starter_template/utils/helpers/exports.dart';
-import 'package:cwt_starter_template/utils/popups/exports.dart';
+import 'package:cwt_starter_template/core/constants/image_strings.dart';
+import 'package:cwt_starter_template/core/constants/sizes.dart';
+import 'package:cwt_starter_template/core/helpers/exports.dart';
+import 'package:cwt_starter_template/core/popups/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';

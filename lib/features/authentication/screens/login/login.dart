@@ -2,13 +2,13 @@ import 'package:cwt_starter_template/common/styles/spacing_styles.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/login/login_cubit.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/login/login_state.dart';
 import 'package:cwt_starter_template/features/authentication/screens/signup/sign_up.dart';
-import 'package:cwt_starter_template/utils/constants/colors.dart';
-import 'package:cwt_starter_template/utils/constants/image_strings.dart';
-import 'package:cwt_starter_template/utils/constants/sizes.dart';
-import 'package:cwt_starter_template/utils/constants/text_strings.dart';
-import 'package:cwt_starter_template/utils/helpers/exports.dart';
-import 'package:cwt_starter_template/utils/popups/exports.dart';
-import 'package:cwt_starter_template/utils/validators/validation.dart';
+import 'package:cwt_starter_template/core/constants/colors.dart';
+import 'package:cwt_starter_template/core/constants/image_strings.dart';
+import 'package:cwt_starter_template/core/constants/sizes.dart';
+import 'package:cwt_starter_template/core/constants/text_strings.dart';
+import 'package:cwt_starter_template/core/helpers/exports.dart';
+import 'package:cwt_starter_template/core/popups/exports.dart';
+import 'package:cwt_starter_template/core/validators/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
@@ -53,6 +53,9 @@ class _LoginScreenState extends State<LoginScreen> {
               'Logging you in...',
               TImages.docerAnimation,
             );
+          } else if (state.status == LoginStatus.success) {
+            if (!context.mounted) return;
+            TFullScreenLoader.stopLoading(context);
           } else if (state.status == LoginStatus.failure) {
             // Check if the widget is still mounted before showing the loader/snackbar
             if (!context.mounted) return;

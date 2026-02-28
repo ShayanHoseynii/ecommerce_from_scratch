@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:cwt_starter_template/data/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cwt_starter_template/utils/exceptions/firebase_exceptions.dart';
-import 'package:cwt_starter_template/utils/exceptions/format_exceptions.dart';
-import 'package:cwt_starter_template/utils/exceptions/platform_exceptions.dart';
+import 'package:cwt_starter_template/core/exceptions/firebase_exceptions.dart';
+import 'package:cwt_starter_template/core/exceptions/format_exceptions.dart';
+import 'package:cwt_starter_template/core/exceptions/platform_exceptions.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';

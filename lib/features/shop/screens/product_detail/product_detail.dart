@@ -1,5 +1,5 @@
 import 'package:cwt_starter_template/common/widgets/texts/section_heading.dart';
-import 'package:cwt_starter_template/features/models/product_model.dart';
+import 'package:cwt_starter_template/data/models/product_model.dart';
 import 'package:cwt_starter_template/features/shop/screens/product_detail/cubit/cart_quntity_cubit.dart';
 import 'package:cwt_starter_template/features/shop/screens/product_detail/cubit/variation_cubit.dart';
 import 'package:cwt_starter_template/features/shop/screens/product_detail/cubit/variation_state.dart';
@@ -9,7 +9,7 @@ import 'package:cwt_starter_template/features/shop/screens/product_detail/widget
 import 'package:cwt_starter_template/features/shop/screens/product_detail/widgets/product_detail_image_slider.dart';
 import 'package:cwt_starter_template/features/shop/screens/product_detail/widgets/product_meta_data.dart';
 import 'package:cwt_starter_template/features/shop/screens/product_detail/widgets/rating_share_widget.dart';
-import 'package:cwt_starter_template/utils/constants/sizes.dart';
+import 'package:cwt_starter_template/core/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';

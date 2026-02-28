@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cwt_starter_template/features/models/address_model.dart';
-import 'package:cwt_starter_template/features/models/cart_item_model.dart';
-import 'package:cwt_starter_template/utils/constants/enums.dart';
-import 'package:cwt_starter_template/utils/helpers/exports.dart';
+import 'package:cwt_starter_template/data/models/address_model.dart';
+import 'package:cwt_starter_template/data/models/cart_item_model.dart';
+import 'package:cwt_starter_template/core/constants/enums.dart';
+import 'package:cwt_starter_template/core/helpers/exports.dart';
 
 class OrderModel {
   final String id;

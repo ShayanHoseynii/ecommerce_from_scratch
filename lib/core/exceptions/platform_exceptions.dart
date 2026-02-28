@@ -1,13 +1,23 @@
-/// Exception class for handling various platform-related errors.
 class TPlatformException implements Exception {
   final String code;
-
   TPlatformException(this.code);
 
   String get message {
-    switch (code) {
-      case 'INVALID_LOGIN_CREDENTIALS':
+    final c = code.toLowerCase();
+
+    switch (c) {
+      case 'invalid_login_credentials':
         return 'Invalid login credentials. Please double-check your information.';
+
+      // Google Sign-In common codes
+      case 'sign_in_canceled':
+        return 'Sign-in was cancelled.';
+      case 'network_error':
+        return 'Network error. Please check your internet connection.';
+      case 'sign_in_failed':
+        return 'Sign-in failed. Please try again.';
+
+      // Firebase / platform-ish codes you already had (normalize to lowercase)
       case 'too-many-requests':
         return 'Too many requests. Please try again later.';
       case 'invalid-argument':
@@ -22,8 +32,6 @@ class TPlatformException implements Exception {
         return 'The Firebase session cookie has expired. Please sign in again.';
       case 'uid-already-exists':
         return 'The provided user ID is already in use by another user.';
-      case 'sign_in_failed':
-        return 'Sign-in failed. Please try again.';
       case 'network-request-failed':
         return 'Network request failed. Please check your internet connection.';
       case 'internal-error':
@@ -34,9 +42,8 @@ class TPlatformException implements Exception {
         return 'Invalid verification ID. Please request a new verification code.';
       case 'quota-exceeded':
         return 'Quota exceeded. Please try again later.';
-    // Add more cases as needed...
       default:
-        return 'An unexpected platform error occurred. Please try again.';
+        return 'Platform error ($code). Please try again.';
     }
   }
 }

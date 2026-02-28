@@ -1,4 +1,4 @@
-import 'package:cwt_starter_template/features/models/payment_model.dart';
+import 'package:cwt_starter_template/data/models/payment_model.dart';
 import 'package:equatable/equatable.dart';
 
 // Your state just needs to hold the selected payment method.

@@ -1,6 +1,6 @@
 import 'package:cwt_starter_template/common/widgets/layout/grid_layout.dart';
 import 'package:cwt_starter_template/common/widgets/shimmer/shimmer.dart';
-import 'package:cwt_starter_template/utils/constants/sizes.dart';
+import 'package:cwt_starter_template/core/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
 class TVerticalProductShimmer extends StatelessWidget {

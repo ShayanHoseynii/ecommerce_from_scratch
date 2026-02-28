@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cwt_starter_template/features/models/product_attribute_model.dart';
-import 'package:cwt_starter_template/features/models/brand_model.dart';
-import 'package:cwt_starter_template/features/models/product_variation_model.dart';
-import 'package:cwt_starter_template/utils/constants/enums.dart';
-import 'package:cwt_starter_template/utils/formatters/formatter.dart';
+import 'package:cwt_starter_template/data/models/product_attribute_model.dart';
+import 'package:cwt_starter_template/data/models/brand_model.dart';
+import 'package:cwt_starter_template/data/models/product_variation_model.dart';
+import 'package:cwt_starter_template/core/constants/enums.dart';
+import 'package:cwt_starter_template/core/formatters/formatter.dart';
 
 class ProductModel {
   String id;

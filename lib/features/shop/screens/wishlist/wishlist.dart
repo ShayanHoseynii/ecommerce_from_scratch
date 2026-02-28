@@ -5,9 +5,9 @@ import 'package:cwt_starter_template/common/widgets/products/products_card/produ
 import 'package:cwt_starter_template/features/shop/cubit/wish_list/wish_list_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/wish_list/wish_list_state.dart';
 import 'package:cwt_starter_template/features/shop/screens/home/widgets/vertical_product_shimmer.dart';
-import 'package:cwt_starter_template/navigation/cubit/navigation_menu__cubit.dart';
-import 'package:cwt_starter_template/utils/constants/sizes.dart';
-import 'package:cwt_starter_template/utils/helpers/exports.dart';
+import 'package:cwt_starter_template/core/navigation/cubit/navigation_menu__cubit.dart';
+import 'package:cwt_starter_template/core/constants/sizes.dart';
+import 'package:cwt_starter_template/core/helpers/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';

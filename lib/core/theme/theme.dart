@@ -1,4 +1,4 @@
-import 'package:cwt_starter_template/utils/theme/widget_themes/chip_theme.dart';
+import 'package:cwt_starter_template/core/theme/widget_themes/chip_theme.dart';
 import 'package:flutter/material.dart';
 
 import 'widget_themes/appbar_theme.dart';

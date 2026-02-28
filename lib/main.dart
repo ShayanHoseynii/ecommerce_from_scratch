@@ -9,16 +9,16 @@ import 'package:cwt_starter_template/features/shop/cubit/favourite_icon/favourit
 import 'package:cwt_starter_template/features/shop/cubit/product/product_cubit.dart';
 import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_cubit.dart';
 import 'package:cwt_starter_template/simple_bloc_observer.dart';
-import 'package:cwt_starter_template/utils/helpers/exports.dart';
-import 'package:cwt_starter_template/utils/local_storage/storage_utility.dart';
+import 'package:cwt_starter_template/core/helpers/exports.dart';
+import 'package:cwt_starter_template/core/local_storage/storage_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:cwt_starter_template/di/injection_container.dart';
-import 'routes/app_router.dart';
-import 'utils/theme/theme.dart';
+import 'core/routes/app_router.dart';
+import 'core/theme/theme.dart';
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -87,6 +87,7 @@ class MyApp extends StatelessWidget {
                       break;
 
                     case AuthStatus.authenticated:
+                    case AuthStatus.emailVerification:
                       navigator.pushNamedAndRemoveUntil(
                         '/navbar',
                         (Route<dynamic> route) => false,
@@ -104,6 +105,10 @@ class MyApp extends StatelessWidget {
                 switch (state.status) {
                   case AuthStatus.authenticated:
                   case AuthStatus.emailVerification:
+                    sl<FavouriteProductsCubit>().initFavourites();
+                    sl<CartCubit>().loadCartFromStorage();
+                    sl<AddressCubit>().fetchUserAddresses();
+                    break;
                   case AuthStatus.unauthenticated:
                     sl<FavouriteProductsCubit>().initFavourites();
                     sl<CartCubit>().loadCartFromStorage();

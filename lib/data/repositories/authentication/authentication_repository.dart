@@ -1,6 +1,6 @@
-import 'package:cwt_starter_template/utils/exceptions/exports.dart';
-import 'package:cwt_starter_template/utils/local_storage/storage_utility.dart';
-import 'package:cwt_starter_template/utils/local_storage/storage_utility.dart';
+import 'package:cwt_starter_template/core/exceptions/exports.dart';
+import 'package:cwt_starter_template/core/local_storage/storage_utility.dart';
+import 'package:cwt_starter_template/core/local_storage/storage_utility.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';

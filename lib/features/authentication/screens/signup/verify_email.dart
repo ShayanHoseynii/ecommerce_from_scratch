@@ -5,10 +5,10 @@ import 'package:cwt_starter_template/data/repositories/authentication/auth_cubit
 import 'package:cwt_starter_template/di/injection_container.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/email/email_verification_state.dart';
 import 'package:cwt_starter_template/features/authentication/cubit/email/email_verificatoin_cubit.dart';
-import 'package:cwt_starter_template/utils/constants/image_strings.dart';
-import 'package:cwt_starter_template/utils/constants/sizes.dart';
-import 'package:cwt_starter_template/utils/device/device_utility.dart';
-import 'package:cwt_starter_template/utils/popups/exports.dart';
+import 'package:cwt_starter_template/core/constants/image_strings.dart';
+import 'package:cwt_starter_template/core/constants/sizes.dart';
+import 'package:cwt_starter_template/core/device/device_utility.dart';
+import 'package:cwt_starter_template/core/popups/exports.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

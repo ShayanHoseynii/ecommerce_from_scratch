@@ -12,13 +12,13 @@ import 'package:cwt_starter_template/features/shop/screens/cart/widgets/cart_ite
 import 'package:cwt_starter_template/features/shop/screens/checkout/widgets/billing_address_section.dart';
 import 'package:cwt_starter_template/features/shop/screens/checkout/widgets/billing_amount_section.dart';
 import 'package:cwt_starter_template/features/shop/screens/checkout/widgets/billing_payment_section.dart';
-import 'package:cwt_starter_template/navigation/cubit/navigation_menu__cubit.dart';
-import 'package:cwt_starter_template/navigation/navigation_menu.dart';
+import 'package:cwt_starter_template/core/navigation/cubit/navigation_menu__cubit.dart';
+import 'package:cwt_starter_template/core/navigation/navigation_menu.dart';
 import 'package:cwt_starter_template/di/injection_container.dart';
-import 'package:cwt_starter_template/utils/constants/image_strings.dart';
-import 'package:cwt_starter_template/utils/constants/sizes.dart';
-import 'package:cwt_starter_template/utils/helpers/pricing_calculator.dart';
-import 'package:cwt_starter_template/utils/popups/exports.dart';
+import 'package:cwt_starter_template/core/constants/image_strings.dart';
+import 'package:cwt_starter_template/core/constants/sizes.dart';
+import 'package:cwt_starter_template/core/helpers/pricing_calculator.dart';
+import 'package:cwt_starter_template/core/popups/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

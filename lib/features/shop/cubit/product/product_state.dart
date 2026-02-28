@@ -1,6 +1,6 @@
 
 
-import 'package:cwt_starter_template/features/models/product_model.dart';
+import 'package:cwt_starter_template/data/models/product_model.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class ProductState extends Equatable{

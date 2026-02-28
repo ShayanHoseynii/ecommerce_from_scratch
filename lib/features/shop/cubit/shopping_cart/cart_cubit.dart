@@ -2,11 +2,11 @@
 import 'dart:convert';
 
 import 'package:cwt_starter_template/features/shop/cubit/shopping_cart/cart_state.dart';
-import 'package:cwt_starter_template/utils/local_storage/storage_utility.dart';
+import 'package:cwt_starter_template/core/local_storage/storage_utility.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:cwt_starter_template/features/models/product_model.dart';
-import 'package:cwt_starter_template/features/models/product_variation_model.dart';
-import 'package:cwt_starter_template/features/models/cart_item_model.dart';
+import 'package:cwt_starter_template/data/models/product_model.dart';
+import 'package:cwt_starter_template/data/models/product_variation_model.dart';
+import 'package:cwt_starter_template/data/models/cart_item_model.dart';
 
 class CartCubit extends Cubit<CartState> {
   CartCubit() : super(CartInitial()) {
@@ -170,6 +170,29 @@ class CartCubit extends Cubit<CartState> {
         items.removeAt(index);
         _updateCartState(items);
       }
+    } catch (e) {
+      emit(CartError(e.toString()));
+    }
+  }
+
+  void removeItem(String cartId) {
+    try {
+      final items = List<CartItemModel>.from(_currentState.cartItems);
+      final index = items.indexWhere((item) => item.varitaionId == cartId);
+      if (index == -1) return;
+
+      final removedTitle = items[index].title;
+      items.removeAt(index);
+
+      emit(
+        CartMessage(
+          type: 'success',
+          title: 'Removed from cart',
+          message: removedTitle,
+        ),
+      );
+
+      _updateCartState(items);
     } catch (e) {
       emit(CartError(e.toString()));
     }
